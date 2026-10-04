@@ -32,7 +32,7 @@ export default function AnatomyPage() {
           {/* 3D Viewport Module using iframe */}
           <section style={{ flex: 1, width: '100%', position: 'relative', overflow: 'hidden' }}>
             <iframe
-              src="https://human-atlas-seven.vercel.app"
+              src={`${import.meta.env.BASE_URL}human-atlas/index.html`}
               style={{
                 width: '100%',
                 height: '100%',
