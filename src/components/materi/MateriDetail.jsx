@@ -1,6 +1,7 @@
 import { useState, useEffect, useRef } from 'react'
 import { Link, useParams } from 'react-router-dom'
 import materiDataRaw from '../../data/materiData.json'
+import InteractiveDiagram from '../visual/InteractiveDiagram'
 
 const allModules = materiDataRaw.modules
 const glossary = materiDataRaw.glossary || []
@@ -111,11 +112,13 @@ export default function MateriDetail() {
         return (
           <figure key={index} className="materi-content-image">
             <div style={{ backgroundColor: '#ffffff', borderRadius: 'var(--radius-lg)', padding: '1rem', margin: '1rem 0' }}>
-              <img src={contentBlock.src} alt={contentBlock.caption || 'Ilustrasi'} style={{ width: '100%', display: 'block' }} />
+              <img src={contentBlock.src.startsWith('http') ? contentBlock.src : `${import.meta.env.BASE_URL}${contentBlock.src.replace(/^\//, '')}`} alt={contentBlock.caption || 'Ilustrasi'} loading="lazy" style={{ width: '100%', display: 'block' }} />
             </div>
             {contentBlock.caption && <figcaption style={{ fontSize: '0.85rem', color: 'var(--color-on-surface-variant)', textAlign: 'center', marginTop: '0.5rem' }}>{contentBlock.caption}</figcaption>}
           </figure>
         )
+      case 'interactiveImage':
+        return <InteractiveDiagram key={index} diagram={contentBlock} />
       case 'video':
         return (
           <div key={index} className="materi-content-video" style={{ position: 'relative', paddingBottom: '56.25%', height: 0, overflow: 'hidden', borderRadius: 'var(--radius-lg)', margin: '1.5rem 0' }}>
