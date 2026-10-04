@@ -1,0 +1,823 @@
+<!DOCTYPE html>
+
+<html lang="id"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>BioSMA - Dashboard Analitik & Progres Belajar Biologi SMA</title>
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@600;700;800&family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@100..900&family=Plus+Jakarta+Sans:wght@100..900&display=swap" rel="stylesheet"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+    tailwind.config = {
+      darkMode: "class",
+      theme: {
+        extend: {
+          "colors": {
+            "inverse-surface": "#233144",
+            "tertiary": "#00404c",
+            "surface-tint": "#226a53",
+            "secondary-fixed-dim": "#9dd2bb",
+            "on-secondary": "#ffffff",
+            "secondary-fixed": "#b8eed7",
+            "on-error-container": "#93000a",
+            "on-background": "#0d1c2f",
+            "tertiary-fixed-dim": "#4cd7f6",
+            "surface-container-high": "#dde9ff",
+            "primary-fixed-dim": "#8ed5b9",
+            "on-error": "#ffffff",
+            "outline": "#6f7974",
+            "primary": "#004331",
+            "surface-container-low": "#eff4ff",
+            "tertiary-container": "#005969",
+            "on-tertiary-fixed-variant": "#004e5c",
+            "on-primary-container": "#8cd2b6",
+            "surface-container": "#e6eeff",
+            "on-primary-fixed": "#002117",
+            "primary-container": "#0d5c46",
+            "primary-fixed": "#aaf1d4",
+            "secondary-container": "#b5ebd4",
+            "inverse-on-surface": "#ebf1ff",
+            "on-tertiary-fixed": "#001f26",
+            "inverse-primary": "#8ed5b9",
+            "on-surface-variant": "#3f4944",
+            "on-secondary-fixed-variant": "#1b4f3e",
+            "on-tertiary": "#ffffff",
+            "on-primary": "#ffffff",
+            "surface-bright": "#f8f9ff",
+            "error": "#ba1a1a",
+            "surface-variant": "#d5e3fd",
+            "on-secondary-fixed-variant": "#1b4f3e",
+            "surface": "#f8f9ff",
+            "error-container": "#ffdad6",
+            "on-tertiary-container": "#48d4f3",
+            "secondary": "#356855",
+            "outline-variant": "#bfc9c2",
+            "surface-dim": "#ccdbf4",
+            "on-surface": "#0d1c2f",
+            "background": "#f8f9ff",
+            "surface-container-lowest": "#ffffff",
+            "surface-container-highest": "#d5e3fd",
+            "on-secondary-container": "#3a6c5a",
+            "on-primary-fixed-variant": "#00513d",
+            "tertiary-fixed": "#acedff"
+          },
+          "borderRadius": {
+            "DEFAULT": "0.25rem",
+            "lg": "0.5rem",
+            "xl": "0.75rem",
+            "full": "9999px"
+          },
+          "spacing": {
+            "space-sm": "0.5rem",
+            "gutter-sm": "1rem",
+            "space-xl": "2.5rem",
+            "margin-mobile": "1rem",
+            "space-xs": "0.25rem",
+            "space-lg": "1.5rem",
+            "margin": "2rem",
+            "space-md": "1rem",
+            "gutter": "1.5rem"
+          },
+          "fontFamily": {
+            "label-md": ["Inter"],
+            "label-lg": ["Inter"],
+            "title-md": ["Plus Jakarta Sans"],
+            "display-mobile": ["Plus Jakarta Sans"],
+            "headline-lg": ["Plus Jakarta Sans"],
+            "body-sm": ["Inter"],
+            "headline-lg-mobile": ["Plus Jakarta Sans"],
+            "display": ["Plus Jakarta Sans"],
+            "headline-sm": ["Plus Jakarta Sans"],
+            "body-lg": ["Inter"],
+            "headline-md": ["Plus Jakarta Sans"],
+            "label-sm": ["Inter"],
+            "body-md": ["Inter"]
+          },
+          "fontSize": {
+            "label-md": ["12px", { "lineHeight": "16px", "fontWeight": "600" }],
+            "label-lg": ["14px", { "lineHeight": "20px", "fontWeight": "600" }],
+            "title-md": ["18px", { "lineHeight": "24px", "fontWeight": "600" }],
+            "display-mobile": ["32px", { "lineHeight": "40px", "fontWeight": "800" }],
+            "headline-lg": ["32px", { "lineHeight": "40px", "fontWeight": "700" }],
+            "body-sm": ["12px", { "lineHeight": "18px", "fontWeight": "400" }],
+            "headline-lg-mobile": ["26px", { "lineHeight": "34px", "fontWeight": "700" }],
+            "display": ["48px", { "lineHeight": "56px", "fontWeight": "800" }],
+            "headline-sm": ["20px", { "lineHeight": "28px", "fontWeight": "600" }],
+            "body-lg": ["16px", { "lineHeight": "26px", "fontWeight": "400" }],
+            "headline-md": ["24px", { "lineHeight": "32px", "fontWeight": "600" }],
+            "label-sm": ["11px", { "lineHeight": "14px", "fontWeight": "500" }],
+            "body-md": ["14px", { "lineHeight": "22px", "fontWeight": "400" }]
+          }
+        }
+      }
+    }
+  </script>
+<style>
+    .material-symbols-outlined {
+      font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+      display: inline-block;
+      vertical-align: middle;
+      line-height: 1;
+    }
+    .custom-emerald-shadow {
+      box-shadow: 0 1px 3px 0 rgba(13, 92, 70, 0.04), 0 1px 2px -1px rgba(13, 92, 70, 0.04);
+    }
+    .custom-emerald-hover-shadow:hover {
+      box-shadow: 0 10px 15px -3px rgba(13, 92, 70, 0.08), 0 4px 6px -4px rgba(13, 92, 70, 0.04);
+    }
+  </style>
+</head>
+<body class="bg-background text-on-surface min-h-screen antialiased flex flex-col font-body-md text-body-md selection:bg-secondary-container selection:text-on-secondary-container">
+<!-- Fixed Left Sidebar (SideNavBar Component Blueprint) -->
+<aside class="fixed top-0 left-0 h-screen w-64 flex flex-col justify-between bg-surface-container-lowest dark:bg-inverse-surface border-r border-outline-variant/30 dark:border-outline/20 shadow-sm dark:shadow-none z-50">
+<div class="p-4 flex flex-col gap-6">
+<!-- App Brand Logo & Identity -->
+<div class="flex items-center gap-3 px-2 pt-2">
+<div class="w-10 h-10 rounded-xl bg-primary-container text-on-primary flex items-center justify-center shadow-md">
+<span class="material-symbols-outlined text-[24px]" style="font-variation-settings: 'FILL' 1;">biotech</span>
+</div>
+<div class="flex flex-col">
+<span class="text-headline-md font-headline-md font-extrabold text-primary dark:text-inverse-primary tracking-tight">BioSMA</span>
+<span class="text-label-sm font-label-sm text-on-surface-variant font-medium">Kurikulum Merdeka Kelas XI</span>
+</div>
+</div>
+<!-- Main Navigation Tabs -->
+<nav aria-label="Menu Utama" class="flex flex-col gap-1.5">
+<!-- 1. Materi -->
+<a class="flex items-center gap-3 px-4 py-3 rounded-lg text-on-surface-variant dark:text-surface-variant hover:bg-surface-container-low dark:hover:bg-inverse-surface hover:text-on-surface transition-colors duration-150 active:scale-[0.98]" href="#materi">
+<span class="material-symbols-outlined text-outline">menu_book</span>
+<span class="text-label-lg font-label-lg">Materi</span>
+</a>
+<!-- 2. Laboratorium -->
+<a class="flex items-center gap-3 px-4 py-3 rounded-lg text-on-surface-variant dark:text-surface-variant hover:bg-surface-container-low dark:hover:bg-inverse-surface hover:text-on-surface transition-colors duration-150 active:scale-[0.98]" href="#laboratorium">
+<span class="material-symbols-outlined text-outline">science</span>
+<span class="text-label-lg font-label-lg">Laboratorium</span>
+</a>
+<!-- 3. Anatomi 3D -->
+<a class="flex items-center gap-3 px-4 py-3 rounded-lg text-on-surface-variant dark:text-surface-variant hover:bg-surface-container-low dark:hover:bg-inverse-surface hover:text-on-surface transition-colors duration-150 active:scale-[0.98]" href="#anatomi-3d">
+<span class="material-symbols-outlined text-outline">view_in_ar</span>
+<span class="text-label-lg font-label-lg">Anatomi 3D</span>
+</a>
+<!-- 4. Kuis -->
+<a class="flex items-center gap-3 px-4 py-3 rounded-lg text-on-surface-variant dark:text-surface-variant hover:bg-surface-container-low dark:hover:bg-inverse-surface hover:text-on-surface transition-colors duration-150 active:scale-[0.98]" href="#kuis">
+<span class="material-symbols-outlined text-outline">quiz</span>
+<span class="text-label-lg font-label-lg">Kuis</span>
+</a>
+<!-- 5. Progress (ACTIVE STATE MATCHING PAGE INTENT) -->
+<a class="flex items-center gap-3 px-4 py-3 rounded-lg bg-secondary-container dark:bg-primary-container text-on-secondary-container dark:text-on-primary-container font-semibold transition-colors active:scale-[0.98] shadow-sm" href="#progress">
+<span class="material-symbols-outlined text-primary-container" style="font-variation-settings: 'FILL' 1;">analytics</span>
+<span class="text-label-lg font-label-lg">Progress</span>
+</a>
+</nav>
+<!-- Quick Practical CTA -->
+<div class="px-2 pt-2">
+<a class="flex items-center justify-center gap-2 w-full py-2.5 px-4 rounded-lg bg-primary-container hover:bg-primary text-on-primary text-label-md font-label-md transition-colors shadow-sm active:scale-95" href="#praktikum">
+<span class="material-symbols-outlined text-[18px]">play_circle</span>
+<span>Mulai Praktikum</span>
+</a>
+</div>
+</div>
+<!-- Sidebar Footer: Utilities and Profile -->
+<div class="p-4 border-t border-outline-variant/30 dark:border-outline/20 flex flex-col gap-3">
+<div class="flex flex-col gap-1">
+<a class="flex items-center gap-3 px-3 py-2 rounded-lg text-on-surface-variant hover:bg-surface-container-low transition-colors text-label-md font-label-md" href="#bantuan">
+<span class="material-symbols-outlined text-[20px]">help_outline</span>
+<span>Bantuan</span>
+</a>
+<a class="flex items-center gap-3 px-3 py-2 rounded-lg text-on-surface-variant hover:bg-surface-container-low transition-colors text-label-md font-label-md" href="#pengaturan">
+<span class="material-symbols-outlined text-[20px]">settings</span>
+<span>Pengaturan</span>
+</a>
+</div>
+<!-- Active Student Badge -->
+<div class="p-3 bg-surface-container-low rounded-xl flex items-center gap-3 border border-outline-variant/20">
+<div class="w-9 h-9 rounded-full bg-secondary-container text-on-secondary-container flex items-center justify-center font-bold text-label-md">
+          R
+        </div>
+<div class="flex flex-col min-w-0">
+<p class="text-label-md font-label-md text-on-surface truncate">Raditya Putra</p>
+<span class="text-label-sm font-label-sm text-on-surface-variant truncate">XI MIPA 2</span>
+</div>
+</div>
+</div>
+</aside>
+<!-- Main Canvas Wrapper -->
+<div class="ml-64 flex flex-col min-h-screen">
+<!-- Sticky Top Navbar (TopNavBar Blueprint) -->
+<header class="sticky top-0 z-40 w-full bg-surface dark:bg-inverse-surface border-b border-outline-variant/30 dark:border-outline/20 shadow-sm dark:shadow-none">
+<div class="flex justify-between items-center h-16 px-8 max-w-full">
+<!-- Search and Quick Category Filters -->
+<div class="flex items-center gap-6 flex-1 max-w-2xl">
+<div class="relative w-full max-w-md">
+<span class="material-symbols-outlined absolute left-3.5 top-1/2 -translate-y-1/2 text-outline text-[20px]">search</span>
+<input class="w-full pl-10 pr-4 py-2 bg-surface-container-lowest border border-outline-variant/60 rounded-lg text-body-md font-body-md text-on-surface placeholder:text-outline focus:outline-none focus:border-primary-container focus:ring-2 focus:ring-tertiary-fixed-dim/40 transition-all" placeholder="Cari materi sel, genetika, organ tubuh..." type="text"/>
+</div>
+<!-- Quick Filter Badges -->
+<div class="hidden xl:flex items-center gap-2">
+<button class="px-3 py-1 rounded-full bg-secondary-container/50 border border-secondary text-primary text-label-sm font-label-sm hover:bg-secondary-container transition-colors">
+              Biologi Sel
+            </button>
+<button class="px-3 py-1 rounded-full bg-surface-container-lowest border border-outline-variant/40 text-on-surface-variant text-label-sm font-label-sm hover:border-secondary transition-colors">
+              Sistem Organ
+            </button>
+<button class="px-3 py-1 rounded-full bg-surface-container-lowest border border-outline-variant/40 text-on-surface-variant text-label-sm font-label-sm hover:border-secondary transition-colors">
+              Ekologi
+            </button>
+</div>
+</div>
+<!-- Trailing Actions & Student Profile Badge -->
+<div class="flex items-center gap-4">
+<!-- Contextual Navigation Links from Blueprint -->
+<nav class="hidden lg:flex items-center gap-5 mr-2">
+<a class="text-primary dark:text-inverse-primary font-bold border-b-2 border-primary dark:border-inverse-primary pb-1 text-label-md font-label-md" href="#semester-ganjil">
+              Semester Ganjil
+            </a>
+<a class="text-on-surface-variant dark:text-surface-variant hover:text-on-surface dark:hover:text-inverse-on-surface transition-colors pb-1 text-label-md font-label-md" href="#panduan-lab">
+              Panduan Lab
+            </a>
+</nav>
+<!-- Notification & Bookmark Buttons -->
+<button aria-label="Lihat Notifikasi" class="w-9 h-9 rounded-lg flex items-center justify-center text-on-surface-variant hover:bg-surface-container-high/60 transition-colors active:scale-95" title="Notifikasi">
+<span class="material-symbols-outlined text-[22px]">notifications</span>
+</button>
+<button aria-label="Materi Tersimpan" class="w-9 h-9 rounded-lg flex items-center justify-center text-on-surface-variant hover:bg-surface-container-high/60 transition-colors active:scale-95" title="Materi Tersimpan">
+<span class="material-symbols-outlined text-[22px]">bookmark</span>
+</button>
+<!-- Primary Report Action Button -->
+<button class="flex items-center gap-2 px-3.5 py-2 rounded-lg bg-primary-container hover:bg-primary text-on-primary text-label-md font-label-md shadow-sm transition-all active:scale-95">
+<span class="material-symbols-outlined text-[18px]">download</span>
+<span>Unduh Rapor</span>
+</button>
+<!-- Profile Avatar with high-contrast indicator -->
+<div class="flex items-center gap-2 pl-2 border-l border-outline-variant/40">
+<div class="relative">
+<div class="w-9 h-9 rounded-full bg-primary-container text-on-primary flex items-center justify-center font-bold text-label-md border-2 border-surface-container-lowest shadow-sm">
+                RP
+              </div>
+<span class="absolute bottom-0 right-0 w-2.5 h-2.5 bg-emerald-500 rounded-full border-2 border-surface-container-lowest"></span>
+</div>
+<div class="hidden 2xl:flex flex-col text-left">
+<span class="text-label-md font-label-md text-on-surface">Raditya</span>
+<span class="text-label-sm font-label-sm text-on-surface-variant">Siswa Aktif</span>
+</div>
+</div>
+</div>
+</div>
+</header>
+<!-- Main Content Canvas -->
+<main class="flex-1 p-8 max-w-[1440px] mx-auto w-full space-y-6">
+<!-- SECTION 1: Welcome Header Banner -->
+<section class="relative overflow-hidden rounded-2xl bg-gradient-to-r from-primary to-primary-container text-on-primary p-7 shadow-md">
+<!-- Abstract Botanical Background Motif -->
+<div class="absolute -right-8 -bottom-8 opacity-10 pointer-events-none">
+<span class="material-symbols-outlined text-[280px]">eco</span>
+</div>
+<div class="absolute right-64 -top-12 opacity-10 pointer-events-none">
+<span class="material-symbols-outlined text-[200px]">strikethrough_s</span>
+</div>
+<div class="relative z-10 flex flex-col md:flex-row md:items-center justify-between gap-6">
+<div class="space-y-2 max-w-2xl">
+<div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-primary-fixed/20 text-primary-fixed border border-primary-fixed/30 text-label-sm font-label-sm">
+<span class="material-symbols-outlined text-[16px]">verified</span>
+<span>Kurikulum Merdeka 2024/2025 • Fase F</span>
+</div>
+<h1 class="text-headline-lg font-headline-lg font-bold tracking-tight text-surface-container-lowest">
+              Statistik & Progres Belajar Biologi
+            </h1>
+<p class="text-body-md font-body-md text-surface-container-high/90">
+              Pertahankan ketekunan belajarmu, Raditya! Kamu telah menyelesaikan modul transport membran dan siap untuk praktikum osmosis mandiri.
+            </p>
+</div>
+<!-- Streak & Target Completion Highlights -->
+<div class="flex items-center gap-4 bg-surface-container-lowest/10 backdrop-blur-md p-4 rounded-xl border border-surface-container-lowest/20 shrink-0">
+<div class="flex items-center gap-3 pr-4 border-r border-surface-container-lowest/20">
+<div class="w-12 h-12 rounded-xl bg-amber-400/20 text-amber-300 flex items-center justify-center">
+<span class="material-symbols-outlined text-[28px]" style="font-variation-settings: 'FILL' 1;">local_fire_department</span>
+</div>
+<div>
+<div class="text-headline-md font-headline-md font-extrabold text-surface-container-lowest">12 Hari</div>
+<div class="text-label-sm font-label-sm text-surface-container-high">Streak Belajar Aktif</div>
+</div>
+</div>
+<div class="flex items-center gap-3 pl-2">
+<div class="w-12 h-12 rounded-xl bg-tertiary-fixed-dim/20 text-tertiary-fixed-dim flex items-center justify-center">
+<span class="material-symbols-outlined text-[28px]">donut_large</span>
+</div>
+<div>
+<div class="text-headline-md font-headline-md font-extrabold text-surface-container-lowest">78%</div>
+<div class="text-label-sm font-label-sm text-surface-container-high">Target Semester Selesai</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- SECTION 2: Dedicated Data Management Toolbar (MANDATORY REQUIREMENT) -->
+<!-- Component ID: DataExportImportBar -->
+<section class="bg-surface-container-lowest rounded-xl p-4 border border-outline-variant/30 custom-emerald-shadow flex flex-col md:flex-row items-center justify-between gap-4">
+<div class="flex items-center gap-3">
+<div class="w-9 h-9 rounded-lg bg-surface-container-low text-primary flex items-center justify-center">
+<span class="material-symbols-outlined text-[20px]">sync</span>
+</div>
+<div>
+<span class="text-label-sm font-label-sm text-on-surface-variant block uppercase tracking-wider">Sinkronisasi Basis Data Siswa</span>
+<p class="text-body-md font-body-md font-semibold text-on-surface flex items-center gap-2">
+<span>Terakhir disinkronkan: Hari ini, 10:45 WIB</span>
+<span class="inline-block w-2 h-2 rounded-full bg-emerald-500 animate-pulse" title="Sistem Aktif"></span>
+</p>
+</div>
+</div>
+<!-- Accessible JSON Import / Export Action Cluster -->
+<div class="flex items-center flex-wrap gap-3 w-full md:w-auto">
+<!-- Hidden JSON File Input Trigger -->
+<input accept=".json" class="hidden" id="json-import-input" onchange="handleFileImport(event)" type="file"/>
+<!-- Import Button -->
+<button aria-label="Import Data Progres Siswa (.json)" class="flex-1 md:flex-none inline-flex items-center justify-center gap-2 px-4 py-2.5 rounded-lg border-2 border-primary-container text-primary-container font-semibold text-label-md font-label-md hover:bg-secondary-container/20 transition-all active:scale-[0.98] focus:ring-2 focus:ring-tertiary-fixed-dim focus:outline-none" onclick="document.getElementById('json-import-input').click()" title="Muat file catatan progres .json lokal" type="button">
+<span class="material-symbols-outlined text-[20px]">upload_file</span>
+<span>Import Data (.json)</span>
+</button>
+<!-- Export Button (Dark Emerald Accessible Surface) -->
+<button aria-label="Export Data Progres Siswa ke format JSON" class="flex-1 md:flex-none inline-flex items-center justify-center gap-2 px-4 py-2.5 rounded-lg bg-primary-container hover:bg-primary text-on-primary font-semibold text-label-md font-label-md shadow-sm transition-all active:scale-[0.98] focus:ring-2 focus:ring-tertiary-fixed-dim focus:outline-none" onclick="handleFileExport()" title="Unduh backup data lengkap nilai dan progres belajar dalam format JSON" type="button">
+<span class="material-symbols-outlined text-[20px]">file_download</span>
+<span>Export Data</span>
+<span class="ml-1 px-1.5 py-0.5 rounded text-[10px] font-bold bg-white/20 text-white tracking-wide uppercase">.json</span>
+</button>
+</div>
+</section>
+<!-- SECTION 3: Metric KPI Cards Row -->
+<!-- Component ID: ProgressStatsCard Grid -->
+<section class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5">
+<!-- KPI 1: Bab Selesai -->
+<div class="bg-surface-container-lowest rounded-xl p-5 border border-outline-variant/30 custom-emerald-shadow custom-emerald-hover-shadow transition-all relative overflow-hidden">
+<div class="w-full h-1 bg-primary-container absolute top-0 left-0"></div>
+<div class="flex items-start justify-between">
+<div>
+<p class="text-label-sm font-label-sm text-on-surface-variant font-medium">Modul Bab Selesai</p>
+<h2 class="text-headline-md font-headline-md font-bold text-on-surface mt-1">14 / 18 Bab</h2>
+</div>
+<div class="w-10 h-10 rounded-lg bg-secondary-container text-on-secondary-container flex items-center justify-center">
+<span class="material-symbols-outlined text-[22px]">auto_stories</span>
+</div>
+</div>
+<div class="mt-4 flex items-center gap-2">
+<div class="w-full bg-surface-container rounded-full h-2">
+<div class="bg-primary-container h-2 rounded-full" style="width: 77.7%;"></div>
+</div>
+<span class="text-label-sm font-label-sm font-bold text-primary">78%</span>
+</div>
+<p class="text-label-sm font-label-sm text-on-surface-variant mt-2 flex items-center gap-1">
+<span class="material-symbols-outlined text-[16px] text-emerald-600">arrow_upward</span>
+<span class="text-emerald-700 font-semibold">+2 Bab</span> bulan ini
+          </p>
+</div>
+<!-- KPI 2: Rata-rata Kuis -->
+<div class="bg-surface-container-lowest rounded-xl p-5 border border-outline-variant/30 custom-emerald-shadow custom-emerald-hover-shadow transition-all relative overflow-hidden">
+<div class="w-full h-1 bg-tertiary-fixed-dim absolute top-0 left-0"></div>
+<div class="flex items-start justify-between">
+<div>
+<p class="text-label-sm font-label-sm text-on-surface-variant font-medium">Rata-rata Kuis Formatif</p>
+<h2 class="text-headline-md font-headline-md font-bold text-on-surface mt-1">88.5 <span class="text-label-md font-label-md text-on-surface-variant font-normal">/ 100</span></h2>
+</div>
+<div class="w-10 h-10 rounded-lg bg-tertiary-fixed/30 text-tertiary-container flex items-center justify-center">
+<span class="material-symbols-outlined text-[22px]">school</span>
+</div>
+</div>
+<div class="mt-4 flex items-center gap-2">
+<span class="inline-flex items-center gap-1 px-2 py-0.5 rounded-full bg-emerald-50 border border-emerald-200 text-emerald-800 text-label-sm font-label-sm font-semibold">
+              Kategori: A (Sangat Baik)
+            </span>
+</div>
+<p class="text-label-sm font-label-sm text-on-surface-variant mt-2 flex items-center gap-1">
+<span class="material-symbols-outlined text-[16px] text-emerald-600">trending_up</span>
+<span class="text-emerald-700 font-semibold">+4.2 pts</span> dari evaluasi awal
+          </p>
+</div>
+<!-- KPI 3: Jam Praktikum Lab Virtual -->
+<div class="bg-surface-container-lowest rounded-xl p-5 border border-outline-variant/30 custom-emerald-shadow custom-emerald-hover-shadow transition-all relative overflow-hidden">
+<div class="w-full h-1 bg-amber-500 absolute top-0 left-0"></div>
+<div class="flex items-start justify-between">
+<div>
+<p class="text-label-sm font-label-sm text-on-surface-variant font-medium">Praktikum Lab Virtual</p>
+<h2 class="text-headline-md font-headline-md font-bold text-on-surface mt-1">18.4 Jam</h2>
+</div>
+<div class="w-10 h-10 rounded-lg bg-amber-100 text-amber-900 flex items-center justify-center">
+<span class="material-symbols-outlined text-[22px]">science</span>
+</div>
+</div>
+<div class="mt-4 flex items-center gap-2">
+<div class="w-full bg-surface-container rounded-full h-2">
+<div class="bg-amber-600 h-2 rounded-full" style="width: 92%;"></div>
+</div>
+<span class="text-label-sm font-label-sm font-bold text-amber-800">92%</span>
+</div>
+<p class="text-label-sm font-label-sm text-on-surface-variant mt-2 flex items-center gap-1">
+<span class="material-symbols-outlined text-[16px] text-primary">check_circle</span>
+            6 dari 7 Laporan Terverifikasi Guru
+          </p>
+</div>
+<!-- KPI 4: Model Anatomi Dikuasai -->
+<div class="bg-surface-container-lowest rounded-xl p-5 border border-outline-variant/30 custom-emerald-shadow custom-emerald-hover-shadow transition-all relative overflow-hidden">
+<div class="w-full h-1 bg-cyan-600 absolute top-0 left-0"></div>
+<div class="flex items-start justify-between">
+<div>
+<p class="text-label-sm font-label-sm text-on-surface-variant font-medium">Model Anatomi Dikuasai</p>
+<h2 class="text-headline-md font-headline-md font-bold text-on-surface mt-1">24 Model</h2>
+</div>
+<div class="w-10 h-10 rounded-lg bg-cyan-100 text-cyan-900 flex items-center justify-center">
+<span class="material-symbols-outlined text-[22px]">view_in_ar</span>
+</div>
+</div>
+<div class="mt-4 flex items-center gap-2">
+<span class="inline-flex items-center gap-1 px-2 py-0.5 rounded-full bg-cyan-50 border border-cyan-200 text-cyan-800 text-label-sm font-label-sm font-semibold">
+              Disseksi 3D: Interaktif
+            </span>
+</div>
+<p class="text-label-sm font-label-sm text-on-surface-variant mt-2 flex items-center gap-1">
+<span class="material-symbols-outlined text-[16px] text-cyan-700">insights</span>
+            8 organ tumbuhan • 16 organ hewan
+          </p>
+</div>
+</section>
+<!-- SECTION 4: Visual Analytics & Charts Section (Modular Dashboard) -->
+<!-- Component ID: BiologyTopicChart Grid -->
+<section class="grid grid-cols-1 lg:grid-cols-12 gap-6">
+<!-- Chart 1: SVG Bar Chart - Distribusi Jam Belajar per Topik (8 Columns) -->
+<div class="lg:col-span-8 bg-surface-container-lowest rounded-xl p-6 border border-outline-variant/30 custom-emerald-shadow flex flex-col justify-between">
+<div>
+<div class="flex flex-col sm:flex-row sm:items-center justify-between pb-4 border-b border-outline-variant/20 gap-2">
+<div>
+<h3 class="text-title-md font-title-md font-bold text-on-surface">Distribusi Waktu Belajar & Penguasaan Materi</h3>
+<p class="text-body-sm font-body-sm text-on-surface-variant">Perbandingan jam belajar mandiri dan skor evaluasi modul semester ini</p>
+</div>
+<div class="flex items-center gap-4 text-label-sm font-label-sm">
+<span class="flex items-center gap-1.5 text-on-surface-variant">
+<span class="w-3 h-3 rounded-sm bg-primary-container"></span> Jam Belajar
+                </span>
+<span class="flex items-center gap-1.5 text-on-surface-variant">
+<span class="w-3 h-3 rounded-sm bg-secondary-fixed-dim"></span> Penguasaan (%)
+                </span>
+</div>
+</div>
+<!-- SVG Responsive Bar Graphic -->
+<div class="pt-6 pb-2">
+<svg aria-label="Grafik Batang Waktu Belajar" class="w-full h-64 overflow-visible" viewbox="0 0 700 240">
+<!-- Grid Lines -->
+<line stroke="#E2E8F0" stroke-dasharray="4 4" x1="40" x2="680" y1="20" y2="20"></line>
+<line stroke="#E2E8F0" stroke-dasharray="4 4" x1="40" x2="680" y1="70" y2="70"></line>
+<line stroke="#E2E8F0" stroke-dasharray="4 4" x1="40" x2="680" y1="120" y2="120"></line>
+<line stroke="#E2E8F0" stroke-dasharray="4 4" x1="40" x2="680" y1="170" y2="170"></line>
+<line stroke="#CBD5E1" stroke-width="1.5" x1="40" x2="680" y1="210" y2="210"></line>
+<!-- Left Y-Axis Labels -->
+<text class="fill-slate-400 text-[10px] font-sans" text-anchor="end" x="30" y="24">20 Jam</text>
+<text class="fill-slate-400 text-[10px] font-sans" text-anchor="end" x="30" y="74">15 Jam</text>
+<text class="fill-slate-400 text-[10px] font-sans" text-anchor="end" x="30" y="124">10 Jam</text>
+<text class="fill-slate-400 text-[10px] font-sans" text-anchor="end" x="30" y="174">5 Jam</text>
+<text class="fill-slate-400 text-[10px] font-sans" text-anchor="end" x="30" y="214">0</text>
+<!-- TOPIC 1: Biologi Sel -->
+<g class="cursor-pointer group">
+<!-- Bar 1: Jam Belajar (16 Jam = height 152) -->
+<rect class="fill-primary-container group-hover:fill-primary transition-colors" height="152" rx="4" width="34" x="85" y="58"></rect>
+<!-- Bar 2: Skor Penguasaan (88% = height 133) -->
+<rect class="fill-secondary-fixed-dim group-hover:opacity-90 transition-opacity" height="133" rx="4" width="34" x="125" y="77"></rect>
+<text class="fill-slate-700 font-semibold text-[11px]" text-anchor="middle" x="122" y="230">Biologi Sel</text>
+<!-- Tooltip Value hover mockup -->
+<text class="fill-primary text-[10px] font-bold opacity-0 group-hover:opacity-100 transition-opacity" text-anchor="middle" x="102" y="50">16j</text>
+<text class="fill-secondary text-[10px] font-bold opacity-0 group-hover:opacity-100 transition-opacity" text-anchor="middle" x="142" y="69">88%</text>
+</g>
+<!-- TOPIC 2: Genetika & Hereditas -->
+<g class="cursor-pointer group">
+<rect class="fill-primary-container group-hover:fill-primary transition-colors" height="122" rx="4" width="34" x="235" y="88"></rect>
+<rect class="fill-secondary-fixed-dim group-hover:opacity-90 transition-opacity" height="114" rx="4" width="34" x="275" y="96"></rect>
+<text class="fill-slate-700 font-semibold text-[11px]" text-anchor="middle" x="272" y="230">Genetika & Hereditas</text>
+<text class="fill-primary text-[10px] font-bold opacity-0 group-hover:opacity-100 transition-opacity" text-anchor="middle" x="252" y="80">12.5j</text>
+<text class="fill-secondary text-[10px] font-bold opacity-0 group-hover:opacity-100 transition-opacity" text-anchor="middle" x="292" y="88">76%</text>
+</g>
+<!-- TOPIC 3: Sistem Pencernaan -->
+<g class="cursor-pointer group">
+<rect class="fill-primary-container group-hover:fill-primary transition-colors" height="168" rx="4" width="34" x="385" y="42"></rect>
+<rect class="fill-secondary-fixed-dim group-hover:opacity-90 transition-opacity" height="158" rx="4" width="34" x="425" y="52"></rect>
+<text class="fill-slate-700 font-semibold text-[11px]" text-anchor="middle" x="422" y="230">Sistem Pencernaan</text>
+<text class="fill-primary text-[10px] font-bold opacity-0 group-hover:opacity-100 transition-opacity" text-anchor="middle" x="402" y="34">17.8j</text>
+<text class="fill-secondary text-[10px] font-bold opacity-0 group-hover:opacity-100 transition-opacity" text-anchor="middle" x="442" y="44">94%</text>
+</g>
+<!-- TOPIC 4: Ekologi & Keanekaragaman -->
+<g class="cursor-pointer group">
+<rect class="fill-primary-container group-hover:fill-primary transition-colors" height="96" rx="4" width="34" x="535" y="114"></rect>
+<rect class="fill-secondary-fixed-dim group-hover:opacity-90 transition-opacity" height="128" rx="4" width="34" x="575" y="82"></rect>
+<text class="fill-slate-700 font-semibold text-[11px]" text-anchor="middle" x="572" y="230">Ekologi & Biodiversitas</text>
+<text class="fill-primary text-[10px] font-bold opacity-0 group-hover:opacity-100 transition-opacity" text-anchor="middle" x="552" y="106">9.5j</text>
+<text class="fill-secondary text-[10px] font-bold opacity-0 group-hover:opacity-100 transition-opacity" text-anchor="middle" x="592" y="74">85%</text>
+</g>
+</svg>
+</div>
+</div>
+<div class="mt-4 pt-3 border-t border-outline-variant/20 flex flex-wrap items-center justify-between gap-3 text-label-sm font-label-sm text-on-surface-variant">
+<span class="flex items-center gap-1.5">
+<span class="material-symbols-outlined text-[16px] text-tertiary-container">tips_and_updates</span>
+              Fokus Rekomendasi: Pendalaman materi <strong>Hukum Mendel II & Polimeri</strong> pada bab Genetika.
+            </span>
+<a class="text-primary hover:underline font-semibold flex items-center gap-1" href="#analisis-lengkap">
+              Lihat Analisis Bab Detail
+              <span class="material-symbols-outlined text-[14px]">arrow_forward</span>
+</a>
+</div>
+</div>
+<!-- Chart 2: SVG Donut Chart - Tingkat Pemahaman per Topik (4 Columns) -->
+<div class="lg:col-span-4 bg-surface-container-lowest rounded-xl p-6 border border-outline-variant/30 custom-emerald-shadow flex flex-col justify-between">
+<div>
+<div class="flex items-center justify-between pb-3 border-b border-outline-variant/20">
+<h3 class="text-title-md font-title-md font-bold text-on-surface">Tingkat Pemahaman</h3>
+<span class="material-symbols-outlined text-outline" title="Kalkulasi dari kuis dan praktikum">help_outline</span>
+</div>
+<!-- SVG Radial/Donut Chart -->
+<div class="relative flex items-center justify-center my-6">
+<svg class="w-48 h-48 -rotate-90" viewbox="0 0 200 200">
+<!-- Background Base Circle -->
+<circle cx="100" cy="100" fill="none" r="75" stroke="#EFF4FF" stroke-width="22"></circle>
+<!-- Segment 1: Sangat Paham (55%) - #0D5C46 -->
+<!-- Circumference = 2 * PI * 75 = 471.24. 55% = 259.18 -->
+<circle cx="100" cy="100" fill="none" r="75" stroke="#0D5C46" stroke-dasharray="259.18 471.24" stroke-dashoffset="0" stroke-width="22"></circle>
+<!-- Segment 2: Cukup Paham (30%) - #356855 -->
+<!-- 30% = 141.37. Offset = -259.18 -->
+<circle cx="100" cy="100" fill="none" r="75" stroke="#4cd7f6" stroke-dasharray="141.37 471.24" stroke-dashoffset="-259.18" stroke-width="22"></circle>
+<!-- Segment 3: Perlu Remedial (15%) - #F43F5E -->
+<!-- 15% = 70.69. Offset = -(259.18 + 141.37) = -400.55 -->
+<circle cx="100" cy="100" fill="none" r="75" stroke="#F43F5E" stroke-dasharray="70.69 471.24" stroke-dashoffset="-400.55" stroke-width="22"></circle>
+</svg>
+<!-- Center Metric Text -->
+<div class="absolute inset-0 flex flex-col items-center justify-center text-center">
+<span class="text-display-mobile font-display-mobile font-extrabold text-on-surface leading-tight">85%</span>
+<span class="text-label-sm font-label-sm text-on-surface-variant font-semibold">Tuntas SKM</span>
+</div>
+</div>
+<!-- Accessible Legend List -->
+<div class="space-y-2.5">
+<div class="flex items-center justify-between text-body-sm font-body-sm">
+<div class="flex items-center gap-2">
+<span class="w-3 h-3 rounded-full bg-primary-container"></span>
+<span class="text-on-surface font-medium">Sangat Menguasai (>85)</span>
+</div>
+<span class="font-bold text-on-surface">55%</span>
+</div>
+<div class="flex items-center justify-between text-body-sm font-body-sm">
+<div class="flex items-center gap-2">
+<span class="w-3 h-3 rounded-full bg-tertiary-fixed-dim"></span>
+<span class="text-on-surface font-medium">Cukup Menguasai (75-84)</span>
+</div>
+<span class="font-bold text-on-surface">30%</span>
+</div>
+<div class="flex items-center justify-between text-body-sm font-body-sm">
+<div class="flex items-center gap-2">
+<span class="w-3 h-3 rounded-full bg-rose-500"></span>
+<span class="text-on-surface font-medium">Perlu Pengulangan (<75)</span>
+</div>
+<span class="font-bold text-rose-700">15%</span>
+</div>
+</div>
+</div>
+<div class="mt-5 pt-3 border-t border-outline-variant/20">
+<button class="w-full py-2 px-3 rounded-lg border border-outline-variant/40 hover:bg-surface-container-low text-primary text-label-md font-label-md font-semibold transition-colors flex items-center justify-center gap-1.5">
+<span class="material-symbols-outlined text-[18px]">replay</span>
+<span>Jadwalkan Remedial Kuis</span>
+</button>
+</div>
+</div>
+</section>
+<!-- SECTION 5: Interactive Modular Cards (Bento Bottom Grid) -->
+<section class="grid grid-cols-1 lg:grid-cols-12 gap-6">
+<!-- Card A: Lanjutkan Pembelajaran (7 Columns) -->
+<div class="lg:col-span-7 bg-surface-container-lowest rounded-xl p-6 border border-outline-variant/30 custom-emerald-shadow flex flex-col justify-between relative overflow-hidden">
+<div class="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3 pb-4 border-b border-outline-variant/20">
+<div>
+<span class="px-2.5 py-0.5 rounded-full bg-secondary-container text-on-secondary-container font-semibold text-label-sm font-label-sm">
+                Sesi Belajar Terakhir
+              </span>
+<h3 class="text-headline-sm font-headline-sm font-bold text-on-surface mt-1.5">
+                Struktur Sel Hewan & Tumbuhan
+              </h3>
+</div>
+<span class="text-label-sm font-label-sm text-outline flex items-center gap-1">
+<span class="material-symbols-outlined text-[16px]">schedule</span>
+              Kemarin, 19:30
+            </span>
+</div>
+<div class="my-5 flex flex-col md:flex-row gap-5 items-center">
+<!-- Simulated Specimen 3D Canvas Preview -->
+<div class="w-full md:w-44 h-36 rounded-xl bg-surface-container-low border border-outline-variant/40 relative flex flex-col items-center justify-center p-3 text-center shrink-0 group overflow-hidden">
+<div class="w-16 h-16 rounded-full bg-primary-fixed/30 border border-primary-container/30 flex items-center justify-center text-primary group-hover:scale-110 transition-transform">
+<span class="material-symbols-outlined text-[36px]">view_in_ar</span>
+</div>
+<span class="text-label-sm font-label-sm font-bold text-primary mt-2">Model 3D Aktif</span>
+<span class="text-[10px] text-outline">Organel: Mitokondria</span>
+<div class="absolute inset-0 bg-primary-container/10 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
+<span class="px-2 py-1 bg-surface-container-lowest rounded text-primary font-bold text-[10px] shadow">Putar Model</span>
+</div>
+</div>
+<!-- Lesson Context & Progress -->
+<div class="space-y-3 flex-1">
+<p class="text-body-md font-body-md text-on-surface-variant">
+                Kamu sedang mempelajari perbedaan dinding sel, membran plasma, dan perbandingan kloroplas dengan vakuola sentral. Progres modul ini mencapai <strong>65%</strong>.
+              </p>
+<div>
+<div class="flex justify-between text-label-sm font-label-sm text-on-surface-variant mb-1">
+<span>Modul Bab 2 • Bagian 3 dari 5</span>
+<span class="font-bold text-primary">65% Rampung</span>
+</div>
+<div class="w-full bg-surface-container-high rounded-full h-2">
+<div class="bg-primary-container h-2 rounded-full" style="width: 65%;"></div>
+</div>
+</div>
+</div>
+</div>
+<!-- Direct CTA Button -->
+<div class="flex items-center justify-between pt-3 border-t border-outline-variant/20">
+<span class="text-label-sm font-label-sm text-on-surface-variant">Modul Interaktif AR • Kurikulum Nasional</span>
+<a class="inline-flex items-center gap-2 px-5 py-2.5 rounded-lg bg-primary-container hover:bg-primary text-on-primary font-semibold text-label-md font-label-md transition-all active:scale-95 shadow-sm" href="#anatomi-3d">
+<span class="material-symbols-outlined text-[20px]">3d_rotation</span>
+<span>Buka Anatomi 3D</span>
+</a>
+</div>
+</div>
+<!-- Card B: Jadwal Praktikum Virtual & Kuis Mendatang (5 Columns) -->
+<div class="lg:col-span-5 bg-surface-container-lowest rounded-xl p-6 border border-outline-variant/30 custom-emerald-shadow flex flex-col justify-between">
+<div>
+<div class="flex items-center justify-between pb-3 border-b border-outline-variant/20">
+<h3 class="text-title-md font-title-md font-bold text-on-surface">Jadwal & Agenda Praktikum</h3>
+<span class="text-label-sm font-label-sm font-semibold text-primary">3 Tugas Aktif</span>
+</div>
+<!-- Agenda List Items -->
+<div class="mt-4 space-y-3">
+<!-- Item 1: Virtual Lab Praktikum Osmosis -->
+<div class="p-3.5 rounded-lg bg-surface-container-lowest border border-outline-variant/30 hover:border-primary-container transition-colors flex items-center justify-between gap-3">
+<div class="flex items-center gap-3">
+<div class="w-10 h-10 rounded-lg bg-primary-fixed/40 text-primary flex items-center justify-center shrink-0">
+<span class="material-symbols-outlined text-[20px]">science</span>
+</div>
+<div>
+<h4 class="text-label-md font-label-md text-on-surface font-bold">Praktikum Difusi & Osmosis</h4>
+<p class="text-label-sm font-label-sm text-on-surface-variant">Batas: Besok, 23:59 WIB • Lab Virtual</p>
+</div>
+</div>
+<div class="flex flex-col items-end gap-1">
+<span class="px-2 py-0.5 rounded text-[10px] font-bold bg-amber-100 text-amber-900 border border-amber-200">
+                    Sedang
+                  </span>
+<a class="text-primary hover:underline text-label-sm font-label-sm font-semibold" href="#lab">Mulai</a>
+</div>
+</div>
+<!-- Item 2: Kuis Genetika -->
+<div class="p-3.5 rounded-lg bg-surface-container-lowest border border-outline-variant/30 hover:border-primary-container transition-colors flex items-center justify-between gap-3">
+<div class="flex items-center gap-3">
+<div class="w-10 h-10 rounded-lg bg-cyan-100 text-cyan-900 flex items-center justify-center shrink-0">
+<span class="material-symbols-outlined text-[20px]">quiz</span>
+</div>
+<div>
+<h4 class="text-label-md font-label-md text-on-surface font-bold">Kuis: Persilangan Dihibrid</h4>
+<p class="text-label-sm font-label-sm text-on-surface-variant">Kamis, 14 Nov • 15 Butir Soal</p>
+</div>
+</div>
+<div class="flex flex-col items-end gap-1">
+<span class="px-2 py-0.5 rounded text-[10px] font-bold bg-rose-100 text-rose-900 border border-rose-200">
+                    Tinggi
+                  </span>
+<a class="text-primary hover:underline text-label-sm font-label-sm font-semibold" href="#kuis">Siap</a>
+</div>
+</div>
+<!-- Item 3: Uji Enzim Katalase -->
+<div class="p-3.5 rounded-lg bg-surface-container-lowest border border-outline-variant/30 hover:border-primary-container transition-colors flex items-center justify-between gap-3">
+<div class="flex items-center gap-3">
+<div class="w-10 h-10 rounded-lg bg-surface-container text-on-surface-variant flex items-center justify-center shrink-0">
+<span class="material-symbols-outlined text-[20px]">assignment</span>
+</div>
+<div>
+<h4 class="text-label-md font-label-md text-on-surface font-bold">Review Laporan: Enzim Katalase</h4>
+<p class="text-label-sm font-label-sm text-on-surface-variant">Jumat, 15 Nov • Koreksi Mandiri</p>
+</div>
+</div>
+<div class="flex flex-col items-end gap-1">
+<span class="px-2 py-0.5 rounded text-[10px] font-bold bg-emerald-100 text-emerald-900 border border-emerald-200">
+                    Mudah
+                  </span>
+<a class="text-primary hover:underline text-label-sm font-label-sm font-semibold" href="#laporan">Baca</a>
+</div>
+</div>
+</div>
+</div>
+<div class="mt-4 pt-3 border-t border-outline-variant/20 flex items-center justify-between">
+<span class="text-label-sm font-label-sm text-on-surface-variant">Sinkron dengan Google Calendar</span>
+<button class="text-primary hover:text-primary-container text-label-sm font-label-sm font-bold flex items-center gap-1">
+<span>Buka Kalender Akademik</span>
+<span class="material-symbols-outlined text-[14px]">chevron_right</span>
+</button>
+</div>
+</div>
+</section>
+</main>
+<!-- Footer Copyright & Accreditation -->
+<footer class="p-8 border-t border-outline-variant/20 bg-surface text-center text-label-sm font-label-sm text-on-surface-variant">
+<div class="max-w-[1440px] mx-auto flex flex-col sm:flex-row items-center justify-between gap-4">
+<p>© 2024 BioSMA Indonesia • Modul Biologi Digital Berstandar Kurikulum Merdeka Kemendikbudristek RI.</p>
+<div class="flex items-center gap-6">
+<a class="hover:text-primary transition-colors" href="#privasi">Kebijakan Privasi</a>
+<a class="hover:text-primary transition-colors" href="#syarat">Ketentuan Layanan</a>
+<a class="hover:text-primary transition-colors" href="#kontak">Kontak Guru Pengampu</a>
+</div>
+</div>
+</footer>
+</div>
+<!-- Interactive JSON Import/Export Toast Notification & Script -->
+<div class="fixed bottom-6 right-6 z-50 transform translate-y-24 opacity-0 transition-all duration-300 pointer-events-none" id="toast-notification">
+<div class="bg-inverse-surface text-inverse-on-surface px-4 py-3 rounded-lg shadow-xl flex items-center gap-3 border border-outline-variant/30">
+<span class="material-symbols-outlined text-primary-fixed-dim" id="toast-icon">check_circle</span>
+<div>
+<p class="text-label-md font-label-md font-bold" id="toast-title">Berhasil</p>
+<p class="text-label-sm font-label-sm text-inverse-on-surface/80" id="toast-message">Data progres berhasil diekspor.</p>
+</div>
+</div>
+</div>
+<script>
+    // Sample state data to export/import
+    const biologyStudentData = {
+      namaSiswa: "Raditya Putra",
+      kelas: "XI MIPA 2",
+      kurikulum: "Kurikulum Merdeka - Fase F",
+      tanggalSinkronisasi: new Date().toISOString(),
+      statistik: {
+        babSelesai: 14,
+        totalBab: 18,
+        rataRataKuis: 88.5,
+        jamPraktikum: 18.4,
+        modelAnatomiDikuasai: 24,
+        streakHari: 12
+      },
+      capaianBab: [
+        { bab: "Biologi Sel", jam: 16, skor: 88, status: "Tuntas" },
+        { bab: "Genetika & Hereditas", jam: 12.5, skor: 76, status: "Tuntas Sebagian" },
+        { bab: "Sistem Pencernaan", jam: 17.8, skor: 94, status: "Tuntas" },
+        { bab: "Ekologi & Keanekaragaman", jam: 9.5, skor: 85, status: "Tuntas" }
+      ]
+    };
+
+    function showToast(title, message, isSuccess = true) {
+      const toast = document.getElementById('toast-notification');
+      const toastTitle = document.getElementById('toast-title');
+      const toastMessage = document.getElementById('toast-message');
+      const toastIcon = document.getElementById('toast-icon');
+
+      toastTitle.textContent = title;
+      toastMessage.textContent = message;
+      toastIcon.textContent = isSuccess ? 'check_circle' : 'error';
+      toastIcon.className = isSuccess ? 'material-symbols-outlined text-primary-fixed-dim' : 'material-symbols-outlined text-rose-400';
+
+      toast.classList.remove('translate-y-24', 'opacity-0');
+      toast.classList.add('translate-y-0', 'opacity-100');
+
+      setTimeout(() => {
+        toast.classList.add('translate-y-24', 'opacity-0');
+        toast.classList.remove('translate-y-0', 'opacity-100');
+      }, 3500);
+    }
+
+    function handleFileExport() {
+      try {
+        const dataStr = "data:text/json;charset=utf-8," + encodeURIComponent(JSON.stringify(biologyStudentData, null, 2));
+        const downloadAnchor = document.createElement('a');
+        downloadAnchor.setAttribute("href", dataStr);
+        downloadAnchor.setAttribute("download", `BioSMA_Progress_Raditya_${new Date().toISOString().slice(0, 10)}.json`);
+        document.body.appendChild(downloadAnchor);
+        downloadAnchor.click();
+        downloadAnchor.remove();
+
+        showToast("Ekspor Berhasil", "Berkas data progres (.json) telah diunduh ke perangkat Anda.");
+      } catch (err) {
+        showToast("Gagal Ekspor", "Terjadi kesalahan teknis saat membuat berkas JSON.", false);
+      }
+    }
+
+    function handleFileImport(event) {
+      const file = event.target.files[0];
+      if (!file) return;
+
+      if (!file.name.endsWith('.json')) {
+        showToast("Format Tidak Valid", "Harap pilih berkas dengan format .json yang valid.", false);
+        return;
+      }
+
+      const reader = new FileReader();
+      reader.onload = function(e) {
+        try {
+          const parsed = JSON.parse(e.target.result);
+          console.log("Loaded student data:", parsed);
+          showToast("Impor Berhasil", `Data progres ${parsed.namaSiswa || 'Siswa'} berhasil diverifikasi dan disinkronkan.`);
+        } catch (err) {
+          showToast("Format Rusak", "Berkas JSON tidak valid atau struktur data tidak sesuai skema BioSMA.", false);
+        }
+      };
+      reader.readAsText(file);
+      // Reset input
+      event.target.value = '';
+    }
+  </script>
+</body></html>

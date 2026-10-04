@@ -1,0 +1,75 @@
+{
+  "quizzes": [
+    {
+      "id": "quiz-sel",
+      "title": "Evaluasi Formatif: Biologi Sel & Struktur Organel",
+      "topic": "Biologi Sel",
+      "moduleId": "mod-1",
+      "passingGrade": 75,
+      "timeLimitMinutes": 10,
+      "description": "Uji penguasaan konsep membran plasma, transportasi zat, struktur organel endomembran, dan metabolisme seluler Fase F.",
+      "questions": [
+        {
+          "id": "q1",
+          "question": "Model mosaik cair (Fluid Mosaic Model) menggambarkan membran sel tersusun atas lapisan ganda fosfolipid. Bagian kepala fosfolipid bersifat...",
+          "options": [
+            "Hidrofobik (menolak air) dan menghadap ke bagian dalam membran",
+            "Hidrofilik (suka air) dan menghadap ke lingkungan akuatik luar serta sitoplasma",
+            "Lipofilik dan tidak bermuatan listrik",
+            "Non-polar dan berfungsi sebagai insulator listrik sel"
+          ],
+          "correctIndex": 1,
+          "explanation": "Kepala fosfolipid mengandung gugus fosfat bermuatan yang bersifat hidrofilik (polar), sehingga berorientasi ke arah luar menghadap cairan ekstraseluler dan sitosol yang berbasis air."
+        },
+        {
+          "id": "q2",
+          "question": "Organel sel berikut yang memiliki membran ganda, memiliki materi genetik (DNA sirkular) sendiri, dan berperan utama menghasilkan adenosin trifosfat (ATP) melalui fosforilasi oksidatif adalah...",
+          "options": [
+            "Kompleks Golgi",
+            "Lisosom",
+            "Mitokondria",
+            "Retikulum Endoplasma Kasar"
+          ],
+          "correctIndex": 2,
+          "explanation": "Mitokondria adalah organel semi-otonom bermembran ganda dengan krista internal tempat berlangsungnya rantai transpor elektron yang memproduksi sebagian besar ATP sel."
+        },
+        {
+          "id": "q3",
+          "question": "Seorang siswa merendam sel darah merah (eritrosit) ke dalam larutan garam hipertonik (NaCl 5%). Peristiwa yang akan terjadi pada sel tersebut adalah...",
+          "options": [
+            "Air masuk ke dalam sel hingga sel mengalami lisis (pecah)",
+            "Air keluar dari sel secara osmosis sehingga sel mengalami krenasi (mengkerut)",
+            "Tidak terjadi perpindahan molekul air karena larutan berada pada kesetimbangan dinamis",
+            "Sel membentuk dinding sel baru untuk menahan tekanan turgor"
+          ],
+          "correctIndex": 1,
+          "explanation": "Pada larutan hipertonik, potensial air ekstraseluler lebih rendah daripada sitoplasma eritrosit, menyebabkan air keluar secara osmosis dan sel mengalami krenasi (pengerutan)."
+        },
+        {
+          "id": "q4",
+          "question": "Struktur sel yang hanya ditemukan pada sel tumbuhan dan TIDAK dimiliki oleh sel hewan tingkat tinggi adalah...",
+          "options": [
+            "Sentrosom dan Lisosom",
+            "Dinding sel dari selulosa, kloroplas, dan vakuola sentral yang besar",
+            "Membran plasma dan ribosom 80S",
+            "Mitokondria dan peroksisom"
+          ],
+          "correctIndex": 1,
+          "explanation": "Sel tumbuhan memiliki dinding sel selulosa kaku untuk kekuatan mekanis, kloroplas untuk fotosintesis, dan vakuola sentral besar untuk penyimpanan cadangan makanan dan tekanan turgor."
+        },
+        {
+          "id": "q5",
+          "question": "Sintesis protein sekretori yang ditujukan untuk diekspor ke luar sel dirakit oleh ribosom yang menempel pada permukaan...",
+          "options": [
+            "Retikulum Endoplasma Halus (REH)",
+            "Retikulum Endoplasma Kasar (REK)",
+            "Sentriol",
+            "Mikrotubulus"
+          ],
+          "correctIndex": 1,
+          "explanation": "Retikulum Endoplasma Kasar (REK) memiliki ribosom pada permukaannya yang menyintesis protein sekretori dan protein membran yang selanjutnya diproses di Kompleks Golgi."
+        }
+      ]
+    }
+  ]
+}
