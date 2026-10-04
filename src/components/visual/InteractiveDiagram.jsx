@@ -1,4 +1,6 @@
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useRef } from 'react'
+import { TransformWrapper, TransformComponent } from 'react-zoom-pan-pinch'
+import './InteractiveDiagram.css'
 import './InteractiveDiagram.css'
 
 export default function InteractiveDiagram({ diagram }) {
@@ -13,15 +15,6 @@ export default function InteractiveDiagram({ diagram }) {
   const [score, setScore] = useState(0)
   const [isIdentifyFinished, setIsIdentifyFinished] = useState(false)
   const [feedback, setFeedback] = useState(null) // { status: 'correct'|'incorrect', message: '' }
-
-  useEffect(() => {
-    if (mode === 'identify') {
-      startIdentifyQuiz()
-    } else {
-      setActivePartId(null)
-      setFeedback(null)
-    }
-  }, [mode, diagram])
 
   const startIdentifyQuiz = () => {
     const parts = [...diagram.parts]
@@ -39,6 +32,15 @@ export default function InteractiveDiagram({ diagram }) {
     setFeedback(null)
     setActivePartId(null)
   }
+
+  useEffect(() => {
+    if (mode === 'identify') {
+      startIdentifyQuiz()
+    } else {
+      setActivePartId(null)
+      setFeedback(null)
+    }
+  }, [mode, diagram])
 
   const activePart = diagram.parts.find(p => p.id === activePartId)
   const currentTarget = questions[currentQuestionIndex]
@@ -86,7 +88,7 @@ export default function InteractiveDiagram({ diagram }) {
         setScore(s => s + 1)
       }
     }
-  }, [feedback, mode])
+  }, [feedback, mode, hasFailedCurrent])
 
   const handleNextQuestion = () => {
     setFeedback(null)
@@ -128,49 +130,83 @@ export default function InteractiveDiagram({ diagram }) {
       <div className="diagram-layout">
         {/* Left: Diagram Area */}
         <div className="diagram-visual-area">
-          <div className="diagram-wrapper">
-            <img 
-              src={diagram.src.startsWith('http') ? diagram.src : `${import.meta.env.BASE_URL}${diagram.src.replace(/^\//, '')}`}
-              alt={diagram.title} 
-              className="diagram-image"
-              loading="lazy"
-              onError={(e) => {
-                e.target.onerror = null;
-                e.target.style.display = 'none';
-                e.target.parentElement.classList.add('image-error');
-              }}
-            />
-            
-            {/* Hotspots */}
-            {diagram.parts.map((part, idx) => {
-              const isTargetActive = activePartId === part.id;
-              let hotspotClass = 'diagram-hotspot';
-              
-              if (isTargetActive) hotspotClass += ' active';
-              if (mode === 'identify' && isTargetActive) {
-                if (feedback?.status === 'correct') hotspotClass += ' correct';
-                if (feedback?.status === 'incorrect') hotspotClass += ' incorrect';
-              }
-
-              return (
-                <button
-                  key={part.id}
-                  type="button"
-                  className={hotspotClass}
-                  style={{ left: `${part.hotspot.x}%`, top: `${part.hotspot.y}%` }}
-                  onClick={() => handleHotspotClick(part.id)}
-                  aria-label={mode === 'explore' ? `Pilih bagian ${part.label}` : 'Pilih area ini'}
-                >
-                  {mode === 'explore' ? (
-                    <span className="hotspot-number">{idx + 1}</span>
-                  ) : (
-                    <span className="hotspot-number">?</span>
-                  )}
-                  {mode === 'explore' && <span className="hotspot-label-tooltip">{part.label}</span>}
-                </button>
-              );
-            })}
+          <div className="diagram-controls-hint">
+            <span className="material-symbols-outlined">pinch</span> Gunakan dua jari / scroll untuk zoom & geser
           </div>
+          <TransformWrapper
+            initialScale={1}
+            minScale={0.5}
+            maxScale={4}
+            centerOnInit={true}
+            wheel={{ step: 0.1 }}
+          >
+            {({ zoomIn, zoomOut, resetTransform, ...rest }) => (
+              <>
+                <div className="zoom-controls">
+                  <button onClick={() => zoomIn()} title="Zoom In" aria-label="Zoom In">
+                    <span className="material-symbols-outlined">zoom_in</span>
+                  </button>
+                  <button onClick={() => zoomOut()} title="Zoom Out" aria-label="Zoom Out">
+                    <span className="material-symbols-outlined">zoom_out</span>
+                  </button>
+                  <button onClick={() => resetTransform()} title="Reset Zoom" aria-label="Reset Zoom">
+                    <span className="material-symbols-outlined">restart_alt</span>
+                  </button>
+                </div>
+                
+                <TransformComponent wrapperClass="diagram-transform-wrapper">
+                  <div className="diagram-wrapper">
+                    <img 
+                      src={diagram.src.startsWith('http') ? diagram.src : `${import.meta.env.BASE_URL}${diagram.src.replace(/^\//, '')}`}
+                      alt={diagram.title} 
+                      className="diagram-image"
+                      loading="lazy"
+                      onError={(e) => {
+                        e.target.onerror = null;
+                        e.target.style.display = 'none';
+                        e.target.parentElement.classList.add('image-error');
+                      }}
+                    />
+                    
+                    {/* Hotspots */}
+                    {diagram.parts.map((part, idx) => {
+                      const isTargetActive = activePartId === part.id;
+                      let hotspotClass = 'diagram-hotspot';
+                      
+                      if (isTargetActive) hotspotClass += ' active';
+                      if (mode === 'identify' && isTargetActive) {
+                        if (feedback?.status === 'correct') hotspotClass += ' correct';
+                        if (feedback?.status === 'incorrect') hotspotClass += ' incorrect';
+                      }
+
+                      return (
+                        <button
+                          key={part.id}
+                          type="button"
+                          className={hotspotClass}
+                          style={{ left: `${part.hotspot.x}%`, top: `${part.hotspot.y}%` }}
+                          onClick={(e) => {
+                            // Mencegah panning trigger onClick
+                            e.stopPropagation();
+                            handleHotspotClick(part.id);
+                          }}
+                          onPointerDown={(e) => e.stopPropagation()} // Supaya bisa di-klik tanpa geser
+                          aria-label={mode === 'explore' ? `Pilih bagian ${part.label}` : 'Pilih area ini'}
+                        >
+                          {mode === 'explore' ? (
+                            <span className="hotspot-number">{idx + 1}</span>
+                          ) : (
+                            <span className="hotspot-number">?</span>
+                          )}
+                          {mode === 'explore' && <span className="hotspot-label-tooltip">{part.label}</span>}
+                        </button>
+                      );
+                    })}
+                  </div>
+                </TransformComponent>
+              </>
+            )}
+          </TransformWrapper>
           {diagram.caption && mode === 'explore' && <div className="diagram-caption">{diagram.caption}</div>}
         </div>
 

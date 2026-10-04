@@ -25,7 +25,7 @@
             },
             {
               "type": "interactiveImage",
-              "src": "https://upload.wikimedia.org/wikipedia/commons/thumb/d/da/Cell_membrane_detailed_diagram_id.svg/800px-Cell_membrane_detailed_diagram_id.svg.png",
+              "src": "/images/diagrams/sel/membran-sel.svg",
               "title": "Struktur Membran Sel",
               "caption": "Diagram interaktif Model Mosaik Cair (Fluid Mosaic Model)",
               "description": "Klik pada titik-titik penanda untuk mempelajari komponen membran sel secara lebih detail.",
@@ -506,7 +506,7 @@
             },
             {
               "type": "interactiveImage",
-              "src": "https://upload.wikimedia.org/wikipedia/commons/thumb/e/e5/Diagram_of_the_human_heart_%28cropped%29.svg/800px-Diagram_of_the_human_heart_%28cropped%29.svg.png",
+              "src": "/images/diagrams/sistem-organ/anatomi-jantung.svg",
               "title": "Anatomi Jantung Manusia",
               "caption": "Struktur internal jantung manusia",
               "description": "Jantung memompa darah ke seluruh tubuh. Klik area penanda untuk mengenali ruang dan katupnya.",
@@ -588,7 +588,7 @@
             },
             {
               "type": "interactiveImage",
-              "src": "https://upload.wikimedia.org/wikipedia/commons/thumb/e/e8/Respiratory_system_complete_en.svg/600px-Respiratory_system_complete_en.svg.png",
+              "src": "/images/diagrams/sistem-organ/sistem-pernapasan.svg",
               "title": "Sistem Pernapasan Manusia",
               "caption": "Struktur paru-paru dan saluran udara",
               "description": "Sistem ini memfasilitasi masuknya oksigen dan pengeluaran karbon dioksida.",

@@ -4,7 +4,7 @@ export default function LabSimulation() {
   // Konsentrasi garam NaCl dalam % (fisiologis isotonik = 0.9%)
   const [concentration, setConcentration] = useState(0.9)
   const [cellType, setCellType] = useState('animal') // 'animal' (eritrosit) atau 'plant' (sel tumbuhan)
-  const [isSimulating, setIsSimulating] = useState(true)
+  const [isSimulating] = useState(true)
 
   // Status osmosis berdasarkan rentang konsentrasi
   const tonicity = useMemo(() => {
