@@ -24,6 +24,11 @@
               "text": "Membran sel (membran plasma) adalah struktur tipis, fleksibel, dan semi-permeabel yang membungkus seluruh isi sel. Tebalnya hanya 7–8 nanometer, namun memiliki peran vital dalam mengatur lalu lintas zat masuk dan keluar sel."
             },
             {
+              "type": "image",
+              "src": "https://upload.wikimedia.org/wikipedia/commons/thumb/d/da/Cell_membrane_detailed_diagram_id.svg/800px-Cell_membrane_detailed_diagram_id.svg.png",
+              "caption": "Struktur Membran Plasma (Model Mosaik Cair)"
+            },
+            {
               "type": "keypoint",
               "text": "Model Mosaik Cair (Fluid Mosaic Model) dikemukakan oleh S.J. Singer dan G.L. Nicolson (1972). Model ini menggambarkan membran sebagai 'lautan' fosfolipid cair dengan 'pulau-pulau' protein yang tersebar dan bergerak bebas di permukaannya."
             },
@@ -542,6 +547,28 @@
           ]
         }
       ]
+    }
+  ],
+  "glossary": [
+    {
+      "term": "Fosfolipid Bilayer",
+      "definition": "Lapisan ganda fosfolipid yang merupakan komponen struktural utama membran plasma."
+    },
+    {
+      "term": "Protein Integral",
+      "definition": "Protein yang menembus ke dalam lapisan ganda fosfolipid; sering berfungsi sebagai saluran (channel)."
+    },
+    {
+      "term": "Glikoprotein",
+      "definition": "Protein dengan rantai karbohidrat pendek yang menempel; berperan dalam pengenalan antar sel."
+    },
+    {
+      "term": "Mitokondria",
+      "definition": "Organel seluler tempat terjadinya respirasi sel aerob, menghasilkan ATP."
+    },
+    {
+      "term": "ATP",
+      "definition": "Adenosin Trifosfat; molekul utama penyimpan dan pembawa energi dalam sel."
     }
   ]
 }

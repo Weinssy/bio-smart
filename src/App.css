@@ -5,3 +5,54 @@
   display: flex;
   flex-direction: column;
 }
+
+/* ============================================================
+   PRINT STYLES
+   ============================================================ */
+@media print {
+  /* Hide UI elements not needed for printing */
+  .app-sidebar,
+  .header-inner,
+  .materi-subtopic-nav,
+  .materi-breadcrumb,
+  .materi-content-actions,
+  .welcome-banner,
+  .footer-inner {
+    display: none !important;
+  }
+
+  /* Reset layout constraints */
+  .main-wrapper {
+    margin: 0 !important;
+    padding: 0 !important;
+  }
+  
+  .dashboard-main {
+    padding: 0 !important;
+  }
+
+  .materi-detail-layout {
+    display: block !important;
+  }
+
+  .materi-content-area {
+    box-shadow: none !important;
+    border: none !important;
+    max-height: none !important;
+    overflow: visible !important;
+    padding: 0 !important;
+  }
+
+  /* Ensure background and colors are readable */
+  body, .dashboard-layout, .main-wrapper, .materi-content-area {
+    background: white !important;
+    color: black !important;
+  }
+
+  .materi-content-paragraph,
+  .materi-content-list,
+  .materi-content-heading,
+  .materi-content-title {
+    color: black !important;
+  }
+}

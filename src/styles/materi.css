@@ -393,6 +393,21 @@
   color: var(--color-primary-container);
 }
 
+/* Glossary Tooltip */
+.glossary-term {
+  border-bottom: 1.5px dotted var(--color-primary);
+  cursor: help;
+  position: relative;
+  font-weight: 600;
+  color: var(--color-on-surface);
+  transition: all 0.2s ease;
+}
+
+.glossary-term:hover {
+  color: var(--color-primary);
+  background-color: rgba(170, 241, 212, 0.2);
+}
+
 /* Keypoint callout */
 .materi-keypoint {
   display: flex;

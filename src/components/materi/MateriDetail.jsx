@@ -3,6 +3,34 @@ import { Link, useParams } from 'react-router-dom'
 import materiDataRaw from '../../data/materiData.json'
 
 const allModules = materiDataRaw.modules
+const glossary = materiDataRaw.glossary || []
+
+function TooltipText({ text }) {
+  if (!glossary.length) return <>{text}</>
+
+  // Buat regex untuk mencari kata-kata glossary (case insensitive, whole word)
+  // Urutkan kata dari yang terpanjang agar frasa panjang terdeteksi lebih dulu
+  const terms = glossary.map(g => g.term).sort((a, b) => b.length - a.length)
+  const regex = new RegExp(`\\b(${terms.join('|')})\\b`, 'gi')
+  
+  const parts = text.split(regex)
+
+  return (
+    <>
+      {parts.map((part, i) => {
+        const foundItem = glossary.find(g => g.term.toLowerCase() === part.toLowerCase())
+        if (foundItem) {
+          return (
+            <span key={i} className="glossary-term" title={foundItem.definition}>
+              {part}
+            </span>
+          )
+        }
+        return <span key={i}>{part}</span>
+      })}
+    </>
+  )
+}
 
 export default function MateriDetail() {
   const { moduleId } = useParams()
@@ -48,7 +76,7 @@ export default function MateriDetail() {
       case 'paragraph':
         return (
           <p key={index} className="materi-content-paragraph">
-            {contentBlock.text}
+            <TooltipText text={contentBlock.text} />
           </p>
         )
       case 'keypoint':
@@ -59,7 +87,7 @@ export default function MateriDetail() {
             </div>
             <div>
               <strong className="materi-keypoint-label">Poin Kunci</strong>
-              <p>{contentBlock.text}</p>
+              <p><TooltipText text={contentBlock.text} /></p>
             </div>
           </div>
         )
@@ -67,14 +95,33 @@ export default function MateriDetail() {
         return (
           <div key={index} className="materi-highlight">
             <span className="material-symbols-outlined materi-highlight-icon">auto_awesome</span>
-            <p>{contentBlock.text}</p>
+            <p><TooltipText text={contentBlock.text} /></p>
+          </div>
+        )
+      case 'image':
+        return (
+          <figure key={index} className="materi-content-image">
+            <img src={contentBlock.src} alt={contentBlock.caption || 'Ilustrasi'} style={{ width: '100%', borderRadius: 'var(--radius-lg)', margin: '1rem 0' }} />
+            {contentBlock.caption && <figcaption style={{ fontSize: '0.85rem', color: 'var(--color-on-surface-variant)', textAlign: 'center', marginTop: '0.5rem' }}>{contentBlock.caption}</figcaption>}
+          </figure>
+        )
+      case 'video':
+        return (
+          <div key={index} className="materi-content-video" style={{ position: 'relative', paddingBottom: '56.25%', height: 0, overflow: 'hidden', borderRadius: 'var(--radius-lg)', margin: '1.5rem 0' }}>
+            <iframe
+              src={contentBlock.src}
+              style={{ position: 'absolute', top: 0, left: 0, width: '100%', height: '100%', border: 0 }}
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+              allowFullScreen
+              title={contentBlock.caption || 'Video Pembelajaran'}
+            />
           </div>
         )
       case 'list':
         return (
           <ul key={index} className="materi-content-list">
             {(contentBlock.items || []).map((item, i) => (
-              <li key={i} dangerouslySetInnerHTML={{ __html: item }} />
+              <li key={i}><TooltipText text={item} /></li>
             ))}
           </ul>
         )
