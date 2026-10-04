@@ -1,74 +1,98 @@
-import { useState, useEffect, useRef } from 'react'
+import { useState, useEffect, useMemo } from 'react'
 import { TransformWrapper, TransformComponent } from 'react-zoom-pan-pinch'
-import './InteractiveDiagram.css'
+import { resolveAsset, validateDiagramData } from '../../utils/assetResolver'
 import './InteractiveDiagram.css'
 
 export default function InteractiveDiagram({ diagram }) {
   const [activePartId, setActivePartId] = useState(null)
-  
-  // Mode: 'explore' | 'identify'
-  const [mode, setMode] = useState('explore')
+  const [mode, setMode] = useState('explore') // 'explore' | 'identify'
+  const [imageError, setImageError] = useState(false)
+
+  // Validate diagram in development
+  useEffect(() => {
+    if (diagram) {
+      validateDiagramData(diagram)
+    }
+  }, [diagram])
+
+  const parts = useMemo(() => {
+    return Array.isArray(diagram?.parts) ? diagram.parts : []
+  }, [diagram])
 
   // Identify Mode State
   const [questions, setQuestions] = useState([])
   const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0)
   const [score, setScore] = useState(0)
+  const [hasFailedCurrent, setHasFailedCurrent] = useState(false)
   const [isIdentifyFinished, setIsIdentifyFinished] = useState(false)
-  const [feedback, setFeedback] = useState(null) // { status: 'correct'|'incorrect', message: '' }
+  const [feedback, setFeedback] = useState(null) // { status: 'correct' | 'incorrect', message: string }
 
   const startIdentifyQuiz = () => {
-    const parts = [...diagram.parts]
-    // Shuffle parts
-    for (let i = parts.length - 1; i > 0; i--) {
-      const j = Math.floor(Math.random() * (i + 1));
-      [parts[i], parts[j]] = [parts[j], parts[i]];
+    if (parts.length === 0) {
+      setQuestions([])
+      setCurrentQuestionIndex(0)
+      setScore(0)
+      setHasFailedCurrent(false)
+      setIsIdentifyFinished(false)
+      setFeedback(null)
+      setActivePartId(null)
+      return
     }
-    // Take up to 5 questions
-    const selectedQuestions = parts.slice(0, 5)
+
+    const shuffled = [...parts]
+    for (let i = shuffled.length - 1; i > 0; i--) {
+      const j = Math.floor(Math.random() * (i + 1));
+      [shuffled[i], shuffled[j]] = [shuffled[j], shuffled[i]];
+    }
+
+    const selectedQuestions = shuffled.slice(0, 5)
     setQuestions(selectedQuestions)
     setCurrentQuestionIndex(0)
     setScore(0)
+    setHasFailedCurrent(false)
     setIsIdentifyFinished(false)
     setFeedback(null)
     setActivePartId(null)
   }
 
-  useEffect(() => {
-    if (mode === 'identify') {
+  // Handle mode changes cleanly without side-effect cascades
+  const handleSwitchMode = (newMode) => {
+    setMode(newMode)
+    setActivePartId(null)
+    setFeedback(null)
+    if (newMode === 'identify') {
       startIdentifyQuiz()
-    } else {
-      setActivePartId(null)
-      setFeedback(null)
     }
-  }, [mode, diagram])
+  }
 
-  const activePart = diagram.parts.find(p => p.id === activePartId)
+  const activePart = parts.find(p => p.id === activePartId)
   const currentTarget = questions[currentQuestionIndex]
 
   const handleHotspotClick = (partId) => {
     if (mode === 'explore') {
       setActivePartId(partId)
-    } else if (mode === 'identify') {
-      // Disable clicking if already answered correctly or finished
-      if (feedback?.status === 'correct' || isIdentifyFinished) return
+      return
+    }
+
+    if (mode === 'identify') {
+      // Disable interaction if already correct or finished or no target
+      if (feedback?.status === 'correct' || isIdentifyFinished || !currentTarget) {
+        return
+      }
 
       setActivePartId(partId)
-      
+
       if (partId === currentTarget.id) {
+        // Point awarded only if user didn't fail on previous attempt for this question
+        if (!hasFailedCurrent) {
+          setScore(s => s + 1)
+        }
         setFeedback({
           status: 'correct',
-          message: currentTarget.function || currentTarget.description
+          message: currentTarget.function || currentTarget.description || 'Jawaban kamu tepat!'
         })
-        // Increment score only on first try if we want strict scoring, 
-        // but here simple scoring: they get the point if they click it, 
-        // wait, if they click wrong first, they shouldn't get the point?
-        // The spec says: "Jawaban salah: Coba perhatikan kembali... Jangan langsung memberikan jawaban".
-        // It implies they can try again. But does it give a point? 
-        // Let's implement strict scoring: they get 1 point if they haven't failed this question yet.
-        // We need a state for `hasAttempted`.
-        // To keep it simple, we just give 1 point if they find it. Wait, if they just guess 5 times they get 100%.
-        // Let's use a `hasFailedCurrent` state.
       } else {
+        setHasFailedCurrent(true)
         setFeedback({
           status: 'incorrect',
           message: 'Coba perhatikan kembali posisi bagian tersebut.'
@@ -77,23 +101,11 @@ export default function InteractiveDiagram({ diagram }) {
     }
   }
 
-  // Handle score awarding
-  const [hasFailedCurrent, setHasFailedCurrent] = useState(false)
-
-  useEffect(() => {
-    if (mode === 'identify') {
-      if (feedback?.status === 'incorrect') {
-        setHasFailedCurrent(true)
-      } else if (feedback?.status === 'correct' && !hasFailedCurrent) {
-        setScore(s => s + 1)
-      }
-    }
-  }, [feedback, mode, hasFailedCurrent])
-
   const handleNextQuestion = () => {
     setFeedback(null)
     setActivePartId(null)
     setHasFailedCurrent(false)
+
     if (currentQuestionIndex < questions.length - 1) {
       setCurrentQuestionIndex(i => i + 1)
     } else {
@@ -101,25 +113,33 @@ export default function InteractiveDiagram({ diagram }) {
     }
   }
 
+  const imageSrc = resolveAsset(diagram?.src)
+
   return (
     <div className="interactive-diagram-container">
       <div className="diagram-header">
         <div className="diagram-header-top">
           <div className="diagram-header-text">
-            <h3 className="diagram-title">{diagram.title}</h3>
-            {diagram.description && mode === 'explore' && <p className="diagram-desc">{diagram.description}</p>}
-            {mode === 'identify' && <p className="diagram-desc">Uji pemahamanmu dengan mengenali bagian diagram.</p>}
+            <h3 className="diagram-title">{diagram?.title || 'Diagram Interaktif'}</h3>
+            {diagram?.description && mode === 'explore' && (
+              <p className="diagram-desc">{diagram.description}</p>
+            )}
+            {mode === 'identify' && (
+              <p className="diagram-desc">Uji pemahamanmu dengan mengenali bagian diagram.</p>
+            )}
           </div>
           <div className="diagram-mode-switch">
-            <button 
+            <button
+              type="button"
               className={`mode-btn ${mode === 'explore' ? 'active' : ''}`}
-              onClick={() => setMode('explore')}
+              onClick={() => handleSwitchMode('explore')}
             >
               Eksplorasi
             </button>
-            <button 
+            <button
+              type="button"
               className={`mode-btn ${mode === 'identify' ? 'active' : ''}`}
-              onClick={() => setMode('identify')}
+              onClick={() => handleSwitchMode('identify')}
             >
               Kenali Bagian
             </button>
@@ -128,11 +148,12 @@ export default function InteractiveDiagram({ diagram }) {
       </div>
 
       <div className="diagram-layout">
-        {/* Left: Diagram Area */}
+        {/* Visual / Image Area */}
         <div className="diagram-visual-area">
           <div className="diagram-controls-hint">
             <span className="material-symbols-outlined">pinch</span> Gunakan dua jari / scroll untuk zoom & geser
           </div>
+
           <TransformWrapper
             initialScale={1}
             minScale={0.5}
@@ -140,77 +161,91 @@ export default function InteractiveDiagram({ diagram }) {
             centerOnInit={true}
             wheel={{ step: 0.1 }}
           >
-            {({ zoomIn, zoomOut, resetTransform, ...rest }) => (
+            {({ zoomIn, zoomOut, resetTransform }) => (
               <>
                 <div className="zoom-controls">
-                  <button onClick={() => zoomIn()} title="Zoom In" aria-label="Zoom In">
+                  <button type="button" onClick={() => zoomIn()} title="Perbesar (Zoom In)" aria-label="Perbesar Diagram">
                     <span className="material-symbols-outlined">zoom_in</span>
                   </button>
-                  <button onClick={() => zoomOut()} title="Zoom Out" aria-label="Zoom Out">
+                  <button type="button" onClick={() => zoomOut()} title="Perkecil (Zoom Out)" aria-label="Perkecil Diagram">
                     <span className="material-symbols-outlined">zoom_out</span>
                   </button>
-                  <button onClick={() => resetTransform()} title="Reset Zoom" aria-label="Reset Zoom">
+                  <button type="button" onClick={() => resetTransform()} title="Kembalikan Tampilan (Reset)" aria-label="Reset Posisi Diagram">
                     <span className="material-symbols-outlined">restart_alt</span>
                   </button>
                 </div>
-                
+
                 <TransformComponent wrapperClass="diagram-transform-wrapper">
                   <div className="diagram-wrapper">
-                    <img 
-                      src={diagram.src.startsWith('http') ? diagram.src : `${import.meta.env.BASE_URL}${diagram.src.replace(/^\//, '')}`}
-                      alt={diagram.title} 
-                      className="diagram-image"
-                      loading="lazy"
-                      onError={(e) => {
-                        e.target.onerror = null;
-                        e.target.style.display = 'none';
-                        e.target.parentElement.classList.add('image-error');
-                      }}
-                    />
-                    
-                    {/* Hotspots */}
-                    {diagram.parts.map((part, idx) => {
-                      const isTargetActive = activePartId === part.id;
-                      let hotspotClass = 'diagram-hotspot';
-                      
-                      if (isTargetActive) hotspotClass += ' active';
+                    {imageError ? (
+                      <div className="diagram-fallback">
+                        <span className="material-symbols-outlined fallback-icon">broken_image</span>
+                        <p>Diagram visual tidak dapat dimuat</p>
+                      </div>
+                    ) : (
+                      <img
+                        src={imageSrc}
+                        alt={diagram?.title || 'Diagram visual'}
+                        className="diagram-image"
+                        loading="lazy"
+                        onError={() => setImageError(true)}
+                      />
+                    )}
+
+                    {/* Hotspot Markers */}
+                    {!imageError && parts.map((part, idx) => {
+                      const isTargetActive = activePartId === part.id
+                      let hotspotClass = 'diagram-hotspot'
+
+                      if (isTargetActive) hotspotClass += ' active'
                       if (mode === 'identify' && isTargetActive) {
-                        if (feedback?.status === 'correct') hotspotClass += ' correct';
-                        if (feedback?.status === 'incorrect') hotspotClass += ' incorrect';
+                        if (feedback?.status === 'correct') hotspotClass += ' correct'
+                        if (feedback?.status === 'incorrect') hotspotClass += ' incorrect'
                       }
+
+                      const xCoord = Math.max(0, Math.min(100, part.hotspot?.x ?? 50))
+                      const yCoord = Math.max(0, Math.min(100, part.hotspot?.y ?? 50))
 
                       return (
                         <button
-                          key={part.id}
+                          key={part.id || idx}
                           type="button"
                           className={hotspotClass}
-                          style={{ left: `${part.hotspot.x}%`, top: `${part.hotspot.y}%` }}
+                          style={{ left: `${xCoord}%`, top: `${yCoord}%` }}
                           onClick={(e) => {
-                            // Mencegah panning trigger onClick
-                            e.stopPropagation();
-                            handleHotspotClick(part.id);
+                            e.stopPropagation()
+                            handleHotspotClick(part.id)
                           }}
-                          onPointerDown={(e) => e.stopPropagation()} // Supaya bisa di-klik tanpa geser
-                          aria-label={mode === 'explore' ? `Pilih bagian ${part.label}` : 'Pilih area ini'}
+                          onPointerDown={(e) => e.stopPropagation()}
+                          aria-label={
+                            mode === 'explore'
+                              ? `Pilih bagian ${part.label}`
+                              : `Pilih area nomor ${idx + 1}`
+                          }
                         >
                           {mode === 'explore' ? (
                             <span className="hotspot-number">{idx + 1}</span>
                           ) : (
                             <span className="hotspot-number">?</span>
                           )}
-                          {mode === 'explore' && <span className="hotspot-label-tooltip">{part.label}</span>}
+                          {mode === 'explore' && (
+                            <span className="hotspot-label-tooltip">{part.label}</span>
+                          )}
                         </button>
-                      );
+                      )
                     })}
                   </div>
                 </TransformComponent>
               </>
             )}
           </TransformWrapper>
-          {diagram.caption && mode === 'explore' && <div className="diagram-caption">{diagram.caption}</div>}
+
+          {diagram?.caption && mode === 'explore' && (
+            <div className="diagram-caption">{diagram.caption}</div>
+          )}
         </div>
 
-        {/* Right: Info Panel Area */}
+        {/* Right: Info / Quiz Panel Area */}
         <div className="diagram-info-area">
           {mode === 'explore' ? (
             activePart ? (
@@ -233,7 +268,11 @@ export default function InteractiveDiagram({ diagram }) {
                     </div>
                   )}
                 </div>
-                <button className="btn-reset-selection" onClick={() => setActivePartId(null)}>
+                <button
+                  type="button"
+                  className="btn-reset-selection"
+                  onClick={() => setActivePartId(null)}
+                >
                   Tutup Detail
                 </button>
               </div>
@@ -241,23 +280,41 @@ export default function InteractiveDiagram({ diagram }) {
               <div className="info-panel empty-panel">
                 <span className="material-symbols-outlined empty-icon">ads_click</span>
                 <p>Klik salah satu penanda pada diagram untuk melihat detail struktur dan fungsinya.</p>
-                
-                <div className="legend-list">
-                  <strong>Daftar Bagian:</strong>
-                  <ul>
-                    {diagram.parts.map((part, idx) => (
-                      <li key={part.id} onClick={() => setActivePartId(part.id)} className="legend-item">
-                        <span className="legend-number">{idx + 1}</span> {part.label}
-                      </li>
-                    ))}
-                  </ul>
-                </div>
+
+                {parts.length > 0 && (
+                  <div className="legend-list">
+                    <strong>Daftar Bagian:</strong>
+                    <ul>
+                      {parts.map((part, idx) => (
+                        <li
+                          key={part.id || idx}
+                          onClick={() => setActivePartId(part.id)}
+                          className="legend-item"
+                        >
+                          <span className="legend-number">{idx + 1}</span> {part.label}
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
+                )}
               </div>
             )
           ) : (
             /* Identify Mode Panel */
             <div className="info-panel identify-panel">
-              {isIdentifyFinished ? (
+              {questions.length === 0 ? (
+                <div className="identify-empty">
+                  <span className="material-symbols-outlined">info</span>
+                  <p>Tidak ada bagian interaktif yang tersedia untuk kuis ini.</p>
+                  <button
+                    type="button"
+                    className="btn-secondary"
+                    onClick={() => handleSwitchMode('explore')}
+                  >
+                    Kembali ke Eksplorasi
+                  </button>
+                </div>
+              ) : isIdentifyFinished ? (
                 <div className="identify-result">
                   <div className="result-icon">
                     <span className="material-symbols-outlined">
@@ -266,11 +323,24 @@ export default function InteractiveDiagram({ diagram }) {
                   </div>
                   <h4 className="result-title">Selesai!</h4>
                   <div className="result-score">
-                    Skor: <span>{score} / {questions.length}</span> ({Math.round(score/questions.length * 100)}%)
+                    Skor: <span>{score} / {questions.length}</span> (
+                    {Math.round((score / questions.length) * 100)}%)
                   </div>
                   <div className="result-actions">
-                    <button className="btn-primary" onClick={startIdentifyQuiz}>Ulangi Kuis</button>
-                    <button className="btn-secondary" onClick={() => setMode('explore')}>Pelajari Lagi</button>
+                    <button
+                      type="button"
+                      className="btn-primary"
+                      onClick={startIdentifyQuiz}
+                    >
+                      Ulangi Kuis
+                    </button>
+                    <button
+                      type="button"
+                      className="btn-secondary"
+                      onClick={() => handleSwitchMode('explore')}
+                    >
+                      Pelajari Lagi
+                    </button>
                   </div>
                 </div>
               ) : (
@@ -281,7 +351,7 @@ export default function InteractiveDiagram({ diagram }) {
                   <h4 className="question-title">Kenali Bagian</h4>
                   <p className="question-instruction">Bagian manakah yang disebut:</p>
                   <div className="question-target">"{currentTarget?.label}"</div>
-                  
+
                   {feedback ? (
                     <div className={`feedback-card ${feedback.status}`}>
                       <div className="feedback-header">
@@ -291,16 +361,20 @@ export default function InteractiveDiagram({ diagram }) {
                         <strong>{feedback.status === 'correct' ? 'Benar!' : 'Belum tepat.'}</strong>
                       </div>
                       <p className="feedback-message">{feedback.message}</p>
-                      
+
                       {feedback.status === 'correct' && (
-                        <button className="btn-next" onClick={handleNextQuestion}>
+                        <button
+                          type="button"
+                          className="btn-next"
+                          onClick={handleNextQuestion}
+                        >
                           Lanjut
                         </button>
                       )}
                     </div>
                   ) : (
                     <div className="question-waiting">
-                      Klik penanda yang menurutmu benar pada diagram.
+                      Klik penanda (?) yang menurutmu benar pada diagram.
                     </div>
                   )}
                 </div>

@@ -2,6 +2,7 @@ import { useState, useEffect, useRef } from 'react'
 import { Link, useParams } from 'react-router-dom'
 import materiDataRaw from '../../data/materiData.json'
 import InteractiveDiagram from '../visual/InteractiveDiagram'
+import { resolveAsset } from '../../utils/assetResolver'
 
 const allModules = materiDataRaw.modules
 const glossary = materiDataRaw.glossary || []
@@ -112,7 +113,21 @@ export default function MateriDetail() {
         return (
           <figure key={index} className="materi-content-image">
             <div style={{ backgroundColor: '#ffffff', borderRadius: 'var(--radius-lg)', padding: '1rem', margin: '1rem 0' }}>
-              <img src={contentBlock.src.startsWith('http') ? contentBlock.src : `${import.meta.env.BASE_URL}${contentBlock.src.replace(/^\//, '')}`} alt={contentBlock.caption || 'Ilustrasi'} loading="lazy" style={{ width: '100%', display: 'block' }} />
+              <img
+                src={resolveAsset(contentBlock.src)}
+                alt={contentBlock.caption || 'Ilustrasi'}
+                loading="lazy"
+                style={{ width: '100%', display: 'block' }}
+                onError={(e) => {
+                  e.currentTarget.style.display = 'none';
+                  if (e.currentTarget.parentElement) {
+                    const fallback = document.createElement('div');
+                    fallback.className = 'diagram-fallback';
+                    fallback.innerHTML = '<span class="material-symbols-outlined fallback-icon">broken_image</span><p>Gambar tidak dapat dimuat</p>';
+                    e.currentTarget.parentElement.appendChild(fallback);
+                  }
+                }}
+              />
             </div>
             {contentBlock.caption && <figcaption style={{ fontSize: '0.85rem', color: 'var(--color-on-surface-variant)', textAlign: 'center', marginTop: '0.5rem' }}>{contentBlock.caption}</figcaption>}
           </figure>

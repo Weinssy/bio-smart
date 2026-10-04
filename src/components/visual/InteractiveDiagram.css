@@ -591,3 +591,59 @@
   color: var(--color-primary);
   border: 1px solid var(--color-primary);
 }
+
+/* Fallback & Empty State */
+.diagram-fallback {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 3rem 1.5rem;
+  background-color: var(--color-surface-container-low);
+  border: 1px dashed var(--color-outline);
+  border-radius: var(--radius-md);
+  color: var(--color-on-surface-variant);
+  text-align: center;
+  gap: 0.75rem;
+  width: 100%;
+  min-height: 280px;
+}
+
+.diagram-fallback .fallback-icon {
+  font-size: 3rem;
+  color: var(--color-error, #ba1a1a);
+}
+
+.identify-empty {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  gap: 1rem;
+  padding: 2rem 1rem;
+  color: var(--color-on-surface-variant);
+}
+
+.identify-empty span {
+  font-size: 2.5rem;
+  color: var(--color-primary);
+}
+
+/* Accessibility Focus States */
+.diagram-hotspot:focus-visible {
+  outline: 3px solid var(--color-tertiary, #006877);
+  outline-offset: 3px;
+  z-index: 30;
+}
+
+.mode-btn:focus-visible,
+.zoom-controls button:focus-visible,
+.btn-next:focus-visible,
+.btn-primary:focus-visible,
+.btn-secondary:focus-visible,
+.btn-reset-selection:focus-visible {
+  outline: 2px solid var(--color-primary);
+  outline-offset: 2px;
+}
+

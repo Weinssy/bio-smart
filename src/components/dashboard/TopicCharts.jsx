@@ -19,7 +19,7 @@ export default function TopicCharts() {
   // Hitung tingkat pemahaman
   const highMasteryCount = displayModules.filter((m) => (m.masteryPercent || 0) >= 85).length
   const medMasteryCount = displayModules.filter((m) => (m.masteryPercent || 0) >= 75 && (m.masteryPercent || 0) < 85).length
-  const lowMasteryCount = displayModules.filter((m) => (m.masteryPercent || 0) < 75).length
+  const _lowMasteryCount = displayModules.filter((m) => (m.masteryPercent || 0) < 75).length
   const total = displayModules.length || 1
 
   const highPct = Math.round((highMasteryCount / total) * 100)
