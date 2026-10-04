@@ -6,27 +6,36 @@ const allModules = materiDataRaw.modules
 const glossary = materiDataRaw.glossary || []
 
 function TooltipText({ text }) {
-  if (!glossary.length) return <>{text}</>
-
-  // Buat regex untuk mencari kata-kata glossary (case insensitive, whole word)
-  // Urutkan kata dari yang terpanjang agar frasa panjang terdeteksi lebih dulu
-  const terms = glossary.map(g => g.term).sort((a, b) => b.length - a.length)
-  const regex = new RegExp(`\\b(${terms.join('|')})\\b`, 'gi')
-  
-  const parts = text.split(regex)
+  // Parse bold **text** first
+  const boldParts = text.split(/(\*\*.*?\*\*)/g);
 
   return (
     <>
-      {parts.map((part, i) => {
-        const foundItem = glossary.find(g => g.term.toLowerCase() === part.toLowerCase())
-        if (foundItem) {
-          return (
-            <span key={i} className="glossary-term" title={foundItem.definition}>
-              {part}
-            </span>
-          )
+      {boldParts.map((bPart, bIdx) => {
+        const isBold = bPart.startsWith('**') && bPart.endsWith('**');
+        let contentToParse = isBold ? bPart.slice(2, -2) : bPart;
+
+        if (!glossary.length) {
+          return isBold ? <strong key={bIdx}>{contentToParse}</strong> : <span key={bIdx}>{contentToParse}</span>;
         }
-        return <span key={i}>{part}</span>
+
+        const terms = glossary.map(g => g.term).sort((a, b) => b.length - a.length);
+        const regex = new RegExp(`\\b(${terms.join('|')})\\b`, 'gi');
+        const parts = contentToParse.split(regex);
+
+        const parsedContent = parts.map((part, i) => {
+          const foundItem = glossary.find(g => g.term.toLowerCase() === part.toLowerCase());
+          if (foundItem) {
+            return (
+              <span key={i} className="glossary-term" title={foundItem.definition}>
+                {part}
+              </span>
+            );
+          }
+          return <span key={i}>{part}</span>;
+        });
+
+        return isBold ? <strong key={bIdx}>{parsedContent}</strong> : <span key={bIdx}>{parsedContent}</span>;
       })}
     </>
   )
@@ -101,7 +110,9 @@ export default function MateriDetail() {
       case 'image':
         return (
           <figure key={index} className="materi-content-image">
-            <img src={contentBlock.src} alt={contentBlock.caption || 'Ilustrasi'} style={{ width: '100%', borderRadius: 'var(--radius-lg)', margin: '1rem 0' }} />
+            <div style={{ backgroundColor: '#ffffff', borderRadius: 'var(--radius-lg)', padding: '1rem', margin: '1rem 0' }}>
+              <img src={contentBlock.src} alt={contentBlock.caption || 'Ilustrasi'} style={{ width: '100%', display: 'block' }} />
+            </div>
             {contentBlock.caption && <figcaption style={{ fontSize: '0.85rem', color: 'var(--color-on-surface-variant)', textAlign: 'center', marginTop: '0.5rem' }}>{contentBlock.caption}</figcaption>}
           </figure>
         )

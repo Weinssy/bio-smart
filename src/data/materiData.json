@@ -7,7 +7,7 @@
       "color": "#0d5c46",
       "gradient": "linear-gradient(135deg, #004331 0%, #0d5c46 100%)",
       "description": "Memahami unit terkecil kehidupan: struktur, fungsi, dan interaksi antar komponen seluler.",
-      "totalSubtopics": 5,
+      "totalSubtopics": 6,
       "estimatedHours": 16,
       "subtopics": [
         {
@@ -196,6 +196,38 @@
               "text": "Meskipun lebih sederhana, prokariot memiliki keragaman metabolik luar biasa dan menghuni hampir semua habitat di Bumi, termasuk lingkungan ekstrem (extremofil)."
             }
           ]
+        },
+        {
+          "id": "sub-1-6",
+          "title": "Pembelahan Sel (Mitosis & Meiosis)",
+          "icon": "splitscreen",
+          "content": [
+            {
+              "type": "heading",
+              "text": "Siklus dan Pembelahan Sel"
+            },
+            {
+              "type": "paragraph",
+              "text": "Sel memperbanyak diri melalui proses pembelahan. Pembelahan sel sangat penting untuk pertumbuhan, perbaikan jaringan, dan reproduksi."
+            },
+            {
+              "type": "image",
+              "src": "https://upload.wikimedia.org/wikipedia/commons/thumb/c/ca/Mitosis_diagram.jpg/800px-Mitosis_diagram.jpg",
+              "caption": "Diagram Tahapan Mitosis"
+            },
+            {
+              "type": "list",
+              "items": [
+                "**Mitosis** — Pembelahan sel somatik (tubuh) yang menghasilkan 2 sel anak identik dengan induknya (diploid/2n). Berfungsi untuk pertumbuhan dan regenerasi.",
+                "**Tahapan Mitosis** — Profase (kromosom memadat), Metafase (kromosom berjajar di tengah), Anafase (kromatid tertarik ke kutub berlawanan), Telofase (membran inti terbentuk kembali).",
+                "**Meiosis** — Pembelahan sel gamet (kelamin) yang menghasilkan 4 sel anak dengan setengah jumlah kromosom induknya (haploid/n). Berfungsi untuk pembentukan sperma dan ovum (gametogenesis)."
+              ]
+            },
+            {
+              "type": "highlight",
+              "text": "Perbedaan utama: Mitosis terjadi 1 kali pembelahan menghasilkan 2 sel diploid, sedangkan Meiosis terjadi 2 kali pembelahan (Meiosis I dan II) menghasilkan 4 sel haploid yang bervariasi secara genetik."
+            }
+          ]
         }
       ]
     },
@@ -315,12 +347,12 @@
     },
     {
       "id": "mod-3",
-      "title": "Sistem Pencernaan",
-      "icon": "gastroenterology",
+      "title": "Sistem Anatomi Tubuh",
+      "icon": "accessibility_new",
       "color": "#c2410c",
       "gradient": "linear-gradient(135deg, #9a3412 0%, #c2410c 100%)",
-      "description": "Mempelajari organ-organ saluran pencernaan manusia dan proses pemecahan makanan.",
-      "totalSubtopics": 4,
+      "description": "Mempelajari organ-organ vital pada anatomi manusia seperti sistem pencernaan, peredaran darah, pernafasan, reproduksi, dan nutrisi.",
+      "totalSubtopics": 8,
       "estimatedHours": 17.8,
       "subtopics": [
         {
@@ -416,6 +448,122 @@
                 "**Konstipasi** — Feses keras dan sulit dikeluarkan; sering karena kurang serat dan asupan air.",
                 "**Kanker Kolorektal** — Pertumbuhan sel abnormal di usus besar; faktor risiko: diet tinggi lemak, rendah serat, riwayat keluarga."
               ]
+            }
+          ]
+        },
+        {
+          "id": "sub-3-5",
+          "title": "Sistem Peredaran Darah",
+          "icon": "bloodtype",
+          "content": [
+            {
+              "type": "heading",
+              "text": "Kardiovaskular Manusia"
+            },
+            {
+              "type": "image",
+              "src": "https://upload.wikimedia.org/wikipedia/commons/thumb/e/e5/Diagram_of_the_human_heart_%28cropped%29.svg/800px-Diagram_of_the_human_heart_%28cropped%29.svg.png",
+              "caption": "Anatomi Jantung Manusia"
+            },
+            {
+              "type": "paragraph",
+              "text": "Sistem peredaran darah terdiri dari jantung, pembuluh darah (arteri, vena, kapiler), dan darah. Fungsinya mendistribusikan oksigen, nutrisi, dan hormon ke seluruh sel tubuh."
+            },
+            {
+              "type": "list",
+              "items": [
+                "**Jantung** — Memiliki 4 ruang: 2 serambi (atrium) di atas untuk menerima darah, dan 2 bilik (ventrikel) di bawah untuk memompa darah.",
+                "**Peredaran Darah Besar (Sistemik)** — Jantung (bilik kiri) → Seluruh tubuh → Jantung (serambi kanan). Membawa darah kaya oksigen.",
+                "**Peredaran Darah Kecil (Pulmonal)** — Jantung (bilik kanan) → Paru-paru → Jantung (serambi kiri). Membawa darah kaya karbon dioksida untuk ditukar dengan oksigen."
+              ]
+            }
+          ]
+        },
+        {
+          "id": "sub-3-6",
+          "title": "Sistem Pernafasan (Respirasi)",
+          "icon": "air",
+          "content": [
+            {
+              "type": "heading",
+              "text": "Respirasi Manusia"
+            },
+            {
+              "type": "image",
+              "src": "https://upload.wikimedia.org/wikipedia/commons/thumb/e/e8/Respiratory_system_complete_en.svg/600px-Respiratory_system_complete_en.svg.png",
+              "caption": "Organ Sistem Pernafasan Manusia"
+            },
+            {
+              "type": "paragraph",
+              "text": "Sistem pernafasan bertanggung jawab untuk pertukaran gas (oksigen masuk, karbon dioksida keluar) guna mendukung respirasi seluler."
+            },
+            {
+              "type": "list",
+              "items": [
+                "**Jalur Pernafasan** — Hidung → Faring → Laring → Trakea → Bronkus → Bronkiolus → Alveolus.",
+                "**Alveolus** — Kantung udara kecil di paru-paru yang dikelilingi kapiler darah; tempat terjadinya difusi O₂ dan CO₂.",
+                "**Mekanisme Pernafasan** — Pernafasan dada (otot antartulang rusuk) dan pernafasan perut (otot diafragma)."
+              ]
+            }
+          ]
+        },
+        {
+          "id": "sub-3-7",
+          "title": "Sistem Reproduksi",
+          "icon": "family_restroom",
+          "content": [
+            {
+              "type": "heading",
+              "text": "Reproduksi Manusia"
+            },
+            {
+              "type": "paragraph",
+              "text": "Sistem reproduksi berfungsi untuk mempertahankan kelestarian spesies melalui fertilisasi sel gamet jantan dan betina."
+            },
+            {
+              "type": "image",
+              "src": "https://upload.wikimedia.org/wikipedia/commons/thumb/4/4e/Sperm-egg.jpg/800px-Sperm-egg.jpg",
+              "caption": "Fertilisasi Sperma dan Ovum"
+            },
+            {
+              "type": "list",
+              "items": [
+                "**Reproduksi Pria** — Testis memproduksi sperma dan hormon testosteron. Saluran pengeluaran meliputi epididimis, vas deferens, vesikula seminalis, dan uretra.",
+                "**Reproduksi Wanita** — Ovarium memproduksi sel telur (ovum), estrogen, dan progesteron. Tuba fallopi adalah tempat terjadinya fertilisasi. Uterus (rahim) adalah tempat implantasi dan perkembangan janin.",
+                "**Siklus Menstruasi** — Perubahan berkala pada dinding rahim dan ovarium wanita akibat fluktuasi hormon (FSH, LH, Estrogen, Progesteron)."
+              ]
+            }
+          ]
+        },
+        {
+          "id": "sub-3-8",
+          "title": "Nutrisi: Vitamin, Mineral & Protein",
+          "icon": "nutrition",
+          "content": [
+            {
+              "type": "heading",
+              "text": "Makronutrien dan Mikronutrien"
+            },
+            {
+              "type": "paragraph",
+              "text": "Tubuh membutuhkan berbagai nutrisi untuk menjalankan metabolisme dan membangun sel-sel baru."
+            },
+            {
+              "type": "image",
+              "src": "https://upload.wikimedia.org/wikipedia/commons/thumb/e/e6/Food_Pyramid.jpg/600px-Food_Pyramid.jpg",
+              "caption": "Piramida Makanan Seimbang"
+            },
+            {
+              "type": "list",
+              "items": [
+                "**Protein** — Polimer asam amino. Berfungsi sebagai zat pembangun (otot, membran sel), enzim, dan antibodi. Contoh: daging, telur, kedelai.",
+                "**Vitamin** — Senyawa organik yang dibutuhkan dalam jumlah kecil. Terdiri dari vitamin larut air (B, C) dan larut lemak (A, D, E, K).",
+                "**Mineral** — Senyawa anorganik penunjang fungsi fisiologis. Contoh: Kalsium (tulang & gigi), Zat Besi (hemoglobin darah), Yodium (hormon tiroid)."
+              ]
+            },
+            {
+              "type": "highlight",
+              "text": "Defisiensi nutrisi dapat menyebabkan penyakit spesifik. Kekurangan vitamin C (skorbut), kekurangan zat besi (anemia), kekurangan protein kronis (kwashiorkor)."
             }
           ]
         }
@@ -569,6 +717,22 @@
     {
       "term": "ATP",
       "definition": "Adenosin Trifosfat; molekul utama penyimpan dan pembawa energi dalam sel."
+    },
+    {
+      "term": "Mitosis",
+      "definition": "Pembelahan sel somatik yang menghasilkan dua sel diploid identik."
+    },
+    {
+      "term": "Meiosis",
+      "definition": "Pembelahan sel kelamin (gamet) yang menghasilkan empat sel haploid tak identik."
+    },
+    {
+      "term": "Alveolus",
+      "definition": "Kantung udara kecil di paru-paru tempat terjadinya pertukaran gas."
+    },
+    {
+      "term": "Hemoglobin",
+      "definition": "Protein dalam sel darah merah yang mengikat dan membawa oksigen."
     }
   ]
 }

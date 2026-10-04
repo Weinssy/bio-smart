@@ -28,9 +28,16 @@ export default function Header() {
             <button 
               className="search-bar" 
               onClick={() => setIsPaletteOpen(true)}
-              style={{ cursor: 'pointer', textAlign: 'left', display: 'flex', alignItems: 'center', justifyContent: 'space-between', width: '100%', maxWidth: '400px' }}
+              style={{ 
+                cursor: 'pointer', textAlign: 'left', display: 'flex', alignItems: 'center', 
+                justifyContent: 'space-between', width: '100%', maxWidth: '400px',
+                backgroundColor: 'var(--color-surface-container-lowest)',
+                border: '1px solid rgba(191, 201, 194, 0.6)',
+                borderRadius: 'var(--radius-md)',
+                padding: '0.55rem 1rem 0.55rem 2.6rem'
+              }}
             >
-              <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', color: 'var(--color-on-surface-variant)' }}>
+              <div style={{ display: 'flex', alignItems: 'center', color: 'var(--color-on-surface-variant)' }}>
                 <span className="material-symbols-outlined search-icon">search</span>
                 <span style={{ fontSize: '0.9rem' }}>Cari materi...</span>
               </div>
