@@ -1,0 +1,547 @@
+{
+  "modules": [
+    {
+      "id": "mod-1",
+      "title": "Biologi Sel",
+      "icon": "cell_tower",
+      "color": "#0d5c46",
+      "gradient": "linear-gradient(135deg, #004331 0%, #0d5c46 100%)",
+      "description": "Memahami unit terkecil kehidupan: struktur, fungsi, dan interaksi antar komponen seluler.",
+      "totalSubtopics": 5,
+      "estimatedHours": 16,
+      "subtopics": [
+        {
+          "id": "sub-1-1",
+          "title": "Membran Sel & Model Mosaik Cair",
+          "icon": "layers",
+          "content": [
+            {
+              "type": "heading",
+              "text": "Struktur Membran Plasma"
+            },
+            {
+              "type": "paragraph",
+              "text": "Membran sel (membran plasma) adalah struktur tipis, fleksibel, dan semi-permeabel yang membungkus seluruh isi sel. Tebalnya hanya 7–8 nanometer, namun memiliki peran vital dalam mengatur lalu lintas zat masuk dan keluar sel."
+            },
+            {
+              "type": "keypoint",
+              "text": "Model Mosaik Cair (Fluid Mosaic Model) dikemukakan oleh S.J. Singer dan G.L. Nicolson (1972). Model ini menggambarkan membran sebagai 'lautan' fosfolipid cair dengan 'pulau-pulau' protein yang tersebar dan bergerak bebas di permukaannya."
+            },
+            {
+              "type": "heading",
+              "text": "Komponen Utama Membran"
+            },
+            {
+              "type": "list",
+              "items": [
+                "**Fosfolipid Bilayer** — Dua lapisan fosfolipid dengan kepala hidrofilik (suka air) menghadap keluar dan ekor hidrofobik (takut air) menghadap ke dalam. Struktur ini menciptakan penghalang selektif.",
+                "**Protein Integral (Transmembran)** — Menembus seluruh ketebalan membran; berfungsi sebagai channel ion, transporter, dan reseptor sinyal.",
+                "**Protein Perifer** — Menempel di permukaan luar atau dalam membran; berperan dalam pensinyalan sel dan sebagai enzim.",
+                "**Kolesterol** — Menyisip di antara fosfolipid pada sel hewan; menstabilkan fluiditas membran agar tidak terlalu kaku di suhu rendah atau terlalu cair di suhu tinggi.",
+                "**Glikoprotein & Glikolipid** — Rantai karbohidrat pada permukaan luar membran yang berfungsi sebagai penanda identitas sel (cell recognition) dan berperan dalam komunikasi antar-sel."
+              ]
+            },
+            {
+              "type": "highlight",
+              "text": "Fluiditas membran dipengaruhi oleh: (1) komposisi asam lemak — semakin banyak ikatan rangkap (tak jenuh), semakin cair; (2) kadar kolesterol; dan (3) suhu lingkungan."
+            }
+          ]
+        },
+        {
+          "id": "sub-1-2",
+          "title": "Organel Sel & Fungsinya",
+          "icon": "hub",
+          "content": [
+            {
+              "type": "heading",
+              "text": "Organel Bermembran Ganda"
+            },
+            {
+              "type": "paragraph",
+              "text": "Organel bermembran ganda memiliki dua lapis membran dan umumnya bersifat semi-otonom karena memiliki DNA dan ribosom sendiri."
+            },
+            {
+              "type": "list",
+              "items": [
+                "**Nukleus** — Pusat kendali sel yang menyimpan materi genetik (DNA) dalam bentuk kromatin. Diselubungi selubung nukleus (nuclear envelope) bermembran ganda dengan pori nukleus untuk transportasi RNA.",
+                "**Mitokondria** — 'Pembangkit listrik sel'. Menghasilkan ATP melalui respirasi seluler (fosforilasi oksidatif) di membran dalam (krista). Memiliki DNA sirkular sendiri.",
+                "**Kloroplas** — Hanya pada sel tumbuhan dan alga. Tempat fotosintesis berlangsung. Mengandung pigmen klorofil dalam tilakoid (grana). Juga memiliki DNA sendiri."
+              ]
+            },
+            {
+              "type": "heading",
+              "text": "Sistem Endomembran"
+            },
+            {
+              "type": "list",
+              "items": [
+                "**Retikulum Endoplasma Kasar (REK)** — Ditaburi ribosom; menyintesis protein sekretori dan protein membran.",
+                "**Retikulum Endoplasma Halus (REH)** — Tanpa ribosom; menyintesis lipid, metabolisme karbohidrat, dan detoksifikasi obat/racun.",
+                "**Aparatus Golgi** — Menerima, memodifikasi, mengemas, dan mendistribusikan protein dan lipid dari RE ke tujuan akhir (lisosom, membran, atau sekresi).",
+                "**Lisosom** — Kantung berisi enzim hidrolitik (pH asam ~5) untuk pencernaan intraseluler dan autofagi.",
+                "**Vakuola** — Pada sel tumbuhan, vakuola sentral sangat besar untuk menyimpan air, ion, nutrisi, dan menjaga tekanan turgor."
+              ]
+            },
+            {
+              "type": "keypoint",
+              "text": "Teori Endosimbiotik (Lynn Margulis, 1967): Mitokondria dan kloroplas berasal dari bakteri purba yang 'ditelan' oleh sel eukariot awal dan berkembang menjadi hubungan simbiosis mutualisme. Buktinya: keduanya memiliki DNA sirkular, ribosom 70S, dan bereproduksi melalui pembelahan biner."
+            }
+          ]
+        },
+        {
+          "id": "sub-1-3",
+          "title": "Transport Membran",
+          "icon": "swap_horiz",
+          "content": [
+            {
+              "type": "heading",
+              "text": "Transport Pasif (Tanpa Energi ATP)"
+            },
+            {
+              "type": "list",
+              "items": [
+                "**Difusi Sederhana** — Pergerakan molekul kecil non-polar (O₂, CO₂) dari konsentrasi tinggi ke rendah melalui fosfolipid bilayer.",
+                "**Osmosis** — Difusi air melalui membran semi-permeabel dari larutan hipotonik ke hipertonik.",
+                "**Difusi Terfasilitasi** — Molekul polar atau ion bergerak melalui protein channel atau protein carrier tanpa energi."
+              ]
+            },
+            {
+              "type": "heading",
+              "text": "Transport Aktif (Memerlukan Energi ATP)"
+            },
+            {
+              "type": "list",
+              "items": [
+                "**Pompa Na⁺/K⁺-ATPase** — Memompa 3 Na⁺ keluar dan 2 K⁺ masuk per siklus; menjaga potensial membran sel saraf.",
+                "**Endositosis** — Sel 'menelan' zat dari luar: fagositosis (partikel padat), pinositosis (cairan), endositosis yang dimediasi reseptor.",
+                "**Eksositosis** — Vesikel melebur dengan membran untuk melepaskan isi ke luar sel (sekresi hormon, neurotransmitter)."
+              ]
+            },
+            {
+              "type": "highlight",
+              "text": "Dalam larutan hipertonik, sel hewan mengalami krenasi (mengkerut), sedangkan sel tumbuhan mengalami plasmolisis (membran terlepas dari dinding sel). Dalam larutan hipotonik, sel hewan dapat lisis, sedangkan sel tumbuhan menjadi turgid (kaku) karena dilindungi dinding sel."
+            }
+          ]
+        },
+        {
+          "id": "sub-1-4",
+          "title": "Metabolisme Seluler: Respirasi & Fotosintesis",
+          "icon": "bolt",
+          "content": [
+            {
+              "type": "heading",
+              "text": "Respirasi Seluler Aerob"
+            },
+            {
+              "type": "paragraph",
+              "text": "Respirasi seluler adalah proses pembongkaran glukosa untuk menghasilkan energi (ATP). Persamaan umum: C₆H₁₂O₆ + 6O₂ → 6CO₂ + 6H₂O + ~36-38 ATP."
+            },
+            {
+              "type": "list",
+              "items": [
+                "**Glikolisis** (Sitoplasma) — Glukosa dipecah menjadi 2 piruvat + 2 ATP + 2 NADH.",
+                "**Dekarboksilasi Oksidatif** (Matriks Mitokondria) — Piruvat → Asetil-KoA + CO₂ + NADH.",
+                "**Siklus Krebs** (Matriks Mitokondria) — Asetil-KoA dioksidasi penuh → CO₂ + 3 NADH + 1 FADH₂ + 1 GTP per siklus.",
+                "**Rantai Transpor Elektron** (Membran Dalam/Krista) — NADH dan FADH₂ menyumbangkan elektron; gradien proton mendorong ATP sintase menghasilkan ~34 ATP."
+              ]
+            },
+            {
+              "type": "heading",
+              "text": "Fotosintesis"
+            },
+            {
+              "type": "paragraph",
+              "text": "Fotosintesis adalah proses konversi energi cahaya menjadi energi kimia (glukosa). Persamaan umum: 6CO₂ + 6H₂O + cahaya → C₆H₁₂O₆ + 6O₂."
+            },
+            {
+              "type": "list",
+              "items": [
+                "**Reaksi Terang** (Membran Tilakoid) — Cahaya diserap klorofil; H₂O difotolisis → O₂ + ATP + NADPH.",
+                "**Siklus Calvin** (Stroma Kloroplas) — CO₂ difiksasi oleh RuBisCO; menggunakan ATP dan NADPH dari reaksi terang untuk menghasilkan G3P (gliseraldehida-3-fosfat) yang menjadi bahan baku glukosa."
+              ]
+            }
+          ]
+        },
+        {
+          "id": "sub-1-5",
+          "title": "Perbedaan Sel Prokariot & Eukariot",
+          "icon": "compare",
+          "content": [
+            {
+              "type": "heading",
+              "text": "Sel Prokariot vs Sel Eukariot"
+            },
+            {
+              "type": "paragraph",
+              "text": "Perbedaan fundamental antara kedua jenis sel ini terletak pada ada/tidaknya membran inti dan tingkat organisasi organel intraseluler."
+            },
+            {
+              "type": "list",
+              "items": [
+                "**Nukleus** — Prokariot: tidak bermembran inti (nukleoid). Eukariot: bermembran inti sejati.",
+                "**DNA** — Prokariot: sirkuler, tanpa histon. Eukariot: linear, terbungkus histon (kromatin).",
+                "**Ribosom** — Prokariot: 70S (50S + 30S). Eukariot: 80S (60S + 40S); juga memiliki 70S di mitokondria & kloroplas.",
+                "**Organel Bermembran** — Prokariot: tidak ada. Eukariot: ada (mitokondria, RE, Golgi, lisosom, dll.).",
+                "**Ukuran** — Prokariot: 0,1–5 μm. Eukariot: 10–100 μm.",
+                "**Contoh** — Prokariot: Bakteri (Escherichia coli), Archaea. Eukariot: Sel hewan, sel tumbuhan, jamur, protista."
+              ]
+            },
+            {
+              "type": "keypoint",
+              "text": "Meskipun lebih sederhana, prokariot memiliki keragaman metabolik luar biasa dan menghuni hampir semua habitat di Bumi, termasuk lingkungan ekstrem (extremofil)."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "mod-2",
+      "title": "Genetika & Hereditas",
+      "icon": "genetics",
+      "color": "#7c3aed",
+      "gradient": "linear-gradient(135deg, #5b21b6 0%, #7c3aed 100%)",
+      "description": "Mempelajari mekanisme pewarisan sifat, hukum Mendel, dan ekspresi gen.",
+      "totalSubtopics": 4,
+      "estimatedHours": 12.5,
+      "subtopics": [
+        {
+          "id": "sub-2-1",
+          "title": "Hukum Mendel & Persilangan Monohibrid",
+          "icon": "genetics",
+          "content": [
+            {
+              "type": "heading",
+              "text": "Gregor Mendel — Bapak Genetika"
+            },
+            {
+              "type": "paragraph",
+              "text": "Gregor Johann Mendel (1822–1884) adalah seorang biarawan Austria yang melakukan percobaan persilangan tanaman kacang ercis (Pisum sativum) selama 8 tahun. Dari 10.000+ tanaman, ia menemukan pola pewarisan sifat yang kini dikenal sebagai Hukum Mendel."
+            },
+            {
+              "type": "keypoint",
+              "text": "Hukum I Mendel (Hukum Segregasi): Pada pembentukan gamet, dua alel untuk setiap gen terpisah (bersegregasi) sehingga setiap gamet hanya membawa satu alel. Contoh: Bb → gamet B dan gamet b."
+            },
+            {
+              "type": "heading",
+              "text": "Persilangan Monohibrid"
+            },
+            {
+              "type": "paragraph",
+              "text": "Persilangan monohibrid melibatkan satu pasang sifat beda. Contoh klasik: P (Parental) = BB (bunga ungu) × bb (bunga putih). F₁: semua Bb (ungu, heterozigot). F₂: rasio fenotipe 3 ungu : 1 putih (rasio genotipe 1 BB : 2 Bb : 1 bb)."
+            },
+            {
+              "type": "highlight",
+              "text": "Istilah penting: Homozigot (BB atau bb), Heterozigot (Bb), Dominan (sifat yang muncul pada heterozigot), Resesif (sifat yang tertutupi), Fenotipe (penampakan luar), Genotipe (susunan gen)."
+            }
+          ]
+        },
+        {
+          "id": "sub-2-2",
+          "title": "Persilangan Dihibrid & Hukum II Mendel",
+          "icon": "grid_view",
+          "content": [
+            {
+              "type": "heading",
+              "text": "Hukum II Mendel (Asortasi Bebas)"
+            },
+            {
+              "type": "keypoint",
+              "text": "Hukum II Mendel (Independent Assortment): Gen-gen pada kromosom yang berbeda akan memilah secara bebas dan independen saat pembentukan gamet. Berlaku jika gen-gen terletak pada kromosom yang berbeda (tidak berangkai)."
+            },
+            {
+              "type": "paragraph",
+              "text": "Contoh: BbKk × BbKk (B = bulat, b = keriput; K = kuning, k = hijau). Gamet yang terbentuk: BK, Bk, bK, bk. Rasio fenotipe F₂: 9 bulat kuning : 3 bulat hijau : 3 keriput kuning : 1 keriput hijau."
+            },
+            {
+              "type": "list",
+              "items": [
+                "**Papan Punnett** — Alat bantu visual untuk memetakan semua kemungkinan kombinasi gamet dan menghitung probabilitas genotipe/fenotipe keturunan.",
+                "**Testcross** — Persilangan individu dominan (tidak diketahui genotipenya, B_ ) dengan individu homozigot resesif (bb) untuk menentukan genotipe induk dominan.",
+                "**Back Cross** — Persilangan keturunan F₁ dengan salah satu induk parental."
+              ]
+            }
+          ]
+        },
+        {
+          "id": "sub-2-3",
+          "title": "Pola Pewarisan Non-Mendel",
+          "icon": "polyline",
+          "content": [
+            {
+              "type": "heading",
+              "text": "Deviasi dari Rasio Mendel"
+            },
+            {
+              "type": "list",
+              "items": [
+                "**Dominansi Tak Lengkap** — Heterozigot menunjukkan fenotipe campuran (intermediet). Contoh: Bunga Mirabilis jalapa — Merah (MM) × Putih (mm) → F₁ Pink (Mm). Rasio F₂: 1 Merah : 2 Pink : 1 Putih.",
+                "**Kodominansi** — Kedua alel diekspresikan bersamaan tanpa bercampur. Contoh: Golongan darah MN, bulu sapi roan (merah + putih).",
+                "**Alel Ganda** — Satu gen memiliki lebih dari 2 alel dalam populasi. Contoh: Golongan darah ABO (alel Iᴬ, Iᴮ, i).",
+                "**Epistasis** — Satu gen menutupi ekspresi gen lain. Contoh: warna bulu pada tikus (gen agouti ditutupi oleh gen albino).",
+                "**Gen Tertaut Kromosom Seks** — Gen pada kromosom X/Y. Contoh: buta warna dan hemofilia (X-linked recessive)."
+              ]
+            }
+          ]
+        },
+        {
+          "id": "sub-2-4",
+          "title": "Mutasi & Kelainan Genetik",
+          "icon": "warning",
+          "content": [
+            {
+              "type": "heading",
+              "text": "Jenis-Jenis Mutasi"
+            },
+            {
+              "type": "list",
+              "items": [
+                "**Mutasi Gen (Titik)** — Perubahan pada urutan basa DNA: substitusi, insersi, delesi. Contoh: Anemia sel sabit — substitusi satu basa pada gen hemoglobin β.",
+                "**Mutasi Kromosom** — Perubahan jumlah atau struktur kromosom: delesi, duplikasi, inversi, translokasi. Contoh: Sindrom Cri-du-chat (delesi kromosom 5p).",
+                "**Aneuploidi** — Kelebihan/kekurangan kromosom: Sindrom Down (trisomi 21), Sindrom Turner (45, X0), Sindrom Klinefelter (47, XXY)."
+              ]
+            },
+            {
+              "type": "highlight",
+              "text": "Mutasi dapat bersifat spontan (kesalahan replikasi DNA) atau terinduksi oleh mutagen seperti radiasi UV, sinar-X, dan senyawa kimia tertentu (benzena, formaldehida)."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "mod-3",
+      "title": "Sistem Pencernaan",
+      "icon": "gastroenterology",
+      "color": "#c2410c",
+      "gradient": "linear-gradient(135deg, #9a3412 0%, #c2410c 100%)",
+      "description": "Mempelajari organ-organ saluran pencernaan manusia dan proses pemecahan makanan.",
+      "totalSubtopics": 4,
+      "estimatedHours": 17.8,
+      "subtopics": [
+        {
+          "id": "sub-3-1",
+          "title": "Anatomi Saluran Pencernaan",
+          "icon": "emoji_food_beverage",
+          "content": [
+            {
+              "type": "heading",
+              "text": "Saluran Pencernaan (Alimentary Canal)"
+            },
+            {
+              "type": "paragraph",
+              "text": "Saluran pencernaan manusia merupakan tabung kontinu sepanjang ±9 meter dari mulut hingga anus, yang secara berurutan terdiri dari:"
+            },
+            {
+              "type": "list",
+              "items": [
+                "**Rongga Mulut** — Pencernaan mekanis (pengunyahan) dan kimiawi (amilase saliva/ptialin memecah pati menjadi maltosa).",
+                "**Faring & Esofagus** — Menyalurkan bolus dari mulut ke lambung melalui gerak peristaltik.",
+                "**Lambung** — pH 1,5–2 (sangat asam). HCl mengaktifkan pepsinogen → pepsin (memecah protein). Dinding lambung dilindungi lapisan mukus.",
+                "**Usus Halus** — Terdiri dari duodenum, jejunum, ileum. Pusat pencernaan kimiawi dan penyerapan nutrisi utama. Memiliki vili dan mikrovili (brush border) untuk memperluas permukaan absorpsi.",
+                "**Usus Besar (Kolon)** — Menyerap air dan elektrolit; membentuk feses; mengandung bakteri flora normal yang menyintesis vitamin K dan beberapa vitamin B.",
+                "**Rektum & Anus** — Penyimpanan sementara dan pengeluaran feses."
+              ]
+            }
+          ]
+        },
+        {
+          "id": "sub-3-2",
+          "title": "Kelenjar Pencernaan Aksesori",
+          "icon": "water_drop",
+          "content": [
+            {
+              "type": "heading",
+              "text": "Organ Aksesori Pencernaan"
+            },
+            {
+              "type": "list",
+              "items": [
+                "**Kelenjar Saliva (Ludah)** — 3 pasang utama: parotis, submandibular, sublingual. Menghasilkan saliva mengandung amilase, lisozim, dan mukus.",
+                "**Hati (Hepar)** — Organ terbesar dalam tubuh (~1,5 kg). Menghasilkan empedu (bile) untuk mengemulsi lemak. Memetabolisme obat dan racun. Menyimpan glikogen.",
+                "**Kantung Empedu (Vesica Fellea)** — Menyimpan dan memekatkan empedu dari hati; melepaskannya ke duodenum saat makanan berlemak masuk.",
+                "**Pankreas** — Organ ganda: (1) Eksokrin — menghasilkan enzim pencernaan (lipase, amilase, tripsinogen, kimotripsinogen) dan NaHCO₃ untuk menetralkan kimus asam dari lambung. (2) Endokrin — Pulau Langerhans menghasilkan insulin dan glukagon."
+              ]
+            },
+            {
+              "type": "keypoint",
+              "text": "Empedu bukan enzim! Empedu mengandung garam empedu yang mengemulsi lemak (memecah gumpalan besar menjadi butiran kecil/misel) sehingga lipase dapat bekerja lebih efisien."
+            }
+          ]
+        },
+        {
+          "id": "sub-3-3",
+          "title": "Enzim-Enzim Pencernaan",
+          "icon": "science",
+          "content": [
+            {
+              "type": "heading",
+              "text": "Enzim di Setiap Lokasi Pencernaan"
+            },
+            {
+              "type": "list",
+              "items": [
+                "**Mulut** — Amilase saliva (ptialin): pati → maltosa. Lipase lingual: lemak → asam lemak (minor).",
+                "**Lambung** — Pepsin (dari pepsinogen + HCl): protein → polipeptida. Renin: menggumpalkan kasein susu (pada bayi).",
+                "**Duodenum (dari Pankreas)** — Tripsin (dari tripsinogen): protein → peptida kecil. Lipase pankreas: lemak → asam lemak + gliserol. Amilase pankreas: pati → maltosa.",
+                "**Usus Halus (Brush Border)** — Maltase: maltosa → 2 glukosa. Laktase: laktosa → glukosa + galaktosa. Sukrase: sukrosa → glukosa + fruktosa. Peptidase: peptida → asam amino."
+              ]
+            },
+            {
+              "type": "highlight",
+              "text": "Intoleransi laktosa terjadi karena tubuh tidak cukup memproduksi enzim laktase di brush border usus halus, sehingga laktosa tidak terurai dan difermentasi oleh bakteri usus besar, menyebabkan kembung dan diare."
+            }
+          ]
+        },
+        {
+          "id": "sub-3-4",
+          "title": "Gangguan & Penyakit Pencernaan",
+          "icon": "health_and_safety",
+          "content": [
+            {
+              "type": "heading",
+              "text": "Kelainan Sistem Pencernaan"
+            },
+            {
+              "type": "list",
+              "items": [
+                "**Maag (Gastritis)** — Peradangan mukosa lambung akibat infeksi Helicobacter pylori, OAINS, atau stres berlebihan.",
+                "**GERD** — Asam lambung naik ke esofagus karena sfingter esofagus bawah (LES) melemah, menyebabkan rasa terbakar (heartburn).",
+                "**Apendisitis** — Peradangan usus buntu (appendix vermiformis); memerlukan tindakan bedah jika akut.",
+                "**Diare** — Frekuensi BAB meningkat dengan konsistensi encer; penyebab utama dehidrasi terutama pada anak.",
+                "**Konstipasi** — Feses keras dan sulit dikeluarkan; sering karena kurang serat dan asupan air.",
+                "**Kanker Kolorektal** — Pertumbuhan sel abnormal di usus besar; faktor risiko: diet tinggi lemak, rendah serat, riwayat keluarga."
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "mod-4",
+      "title": "Ekologi & Keanekaragaman",
+      "icon": "forest",
+      "color": "#16a34a",
+      "gradient": "linear-gradient(135deg, #15803d 0%, #16a34a 100%)",
+      "description": "Mempelajari interaksi makhluk hidup dengan lingkungannya dan tingkat keanekaragaman hayati.",
+      "totalSubtopics": 4,
+      "estimatedHours": 9.5,
+      "subtopics": [
+        {
+          "id": "sub-4-1",
+          "title": "Tingkat Organisasi Kehidupan & Ekosistem",
+          "icon": "eco",
+          "content": [
+            {
+              "type": "heading",
+              "text": "Hierarki Organisasi"
+            },
+            {
+              "type": "list",
+              "items": [
+                "**Individu (Organisme)** — Satu makhluk hidup utuh.",
+                "**Populasi** — Kumpulan individu satu spesies di suatu area pada waktu tertentu.",
+                "**Komunitas** — Seluruh populasi berbagai spesies yang hidup dan berinteraksi di suatu habitat.",
+                "**Ekosistem** — Komunitas biotik + lingkungan abiotik (cahaya, air, tanah, suhu) yang berinteraksi sebagai satu kesatuan fungsional.",
+                "**Bioma** — Kumpulan ekosistem dengan karakteristik iklim dan vegetasi serupa (hutan hujan tropis, sabana, tundra, dll.).",
+                "**Biosfer** — Seluruh zona di Bumi tempat kehidupan dapat ditemukan."
+              ]
+            },
+            {
+              "type": "keypoint",
+              "text": "Ekosistem terdiri dari komponen biotik (produsen, konsumen, dekomposer) dan abiotik (cahaya matahari, air, tanah, mineral, suhu, kelembapan). Keduanya saling mempengaruhi secara dinamis."
+            }
+          ]
+        },
+        {
+          "id": "sub-4-2",
+          "title": "Rantai & Jaring-Jaring Makanan",
+          "icon": "link",
+          "content": [
+            {
+              "type": "heading",
+              "text": "Aliran Energi dalam Ekosistem"
+            },
+            {
+              "type": "paragraph",
+              "text": "Energi mengalir searah: matahari → produsen (tumbuhan) → konsumen I (herbivora) → konsumen II (karnivora kecil) → konsumen III (karnivora puncak) → dekomposer. Di setiap tingkat trofik, ~90% energi hilang sebagai panas metabolisme."
+            },
+            {
+              "type": "list",
+              "items": [
+                "**Rantai Makanan** — Jalur linear transfer energi; contoh: rumput → belalang → katak → ular → elang.",
+                "**Jaring-Jaring Makanan** — Jaringan rantai makanan yang saling berhubungan; lebih merepresentasikan realitas ekosistem.",
+                "**Piramida Ekologi** — Representasi grafis: piramida jumlah, piramida biomassa, piramida energi. Piramida energi selalu tegak (tidak pernah terbalik)."
+              ]
+            },
+            {
+              "type": "highlight",
+              "text": "Hukum 10% (Lindeman): Hanya ~10% energi dari satu tingkat trofik yang ditransfer ke tingkat trofik berikutnya. Oleh karena itu, rantai makanan biasanya hanya terdiri dari 4–5 tingkat trofik."
+            }
+          ]
+        },
+        {
+          "id": "sub-4-3",
+          "title": "Keanekaragaman Hayati Indonesia",
+          "icon": "park",
+          "content": [
+            {
+              "type": "heading",
+              "text": "Tiga Tingkat Keanekaragaman Hayati"
+            },
+            {
+              "type": "list",
+              "items": [
+                "**Keanekaragaman Gen** — Variasi genetik dalam satu spesies. Contoh: warna bunga mawar merah, putih, kuning dalam spesies Rosa sp.",
+                "**Keanekaragaman Jenis (Spesies)** — Variasi antar spesies dalam satu genus atau habitat. Contoh: harimau Sumatera, harimau Bengal, harimau Siberia.",
+                "**Keanekaragaman Ekosistem** — Variasi tipe ekosistem. Contoh: hutan hujan tropis, hutan bakau, terumbu karang, savana."
+              ]
+            },
+            {
+              "type": "keypoint",
+              "text": "Indonesia adalah negara megadiversity — menempati urutan ke-2 dunia setelah Brasil. Memiliki ~17% spesies dunia: 515 spesies mamalia (39% endemik), 1.539 spesies burung, 270.000+ spesies tumbuhan berbunga, dan terumbu karang terkaya di planet ini."
+            },
+            {
+              "type": "paragraph",
+              "text": "Garis Wallace memisahkan fauna tipe Asia (barat) dengan fauna tipe Australasia (timur), sedangkan garis Weber menandai transisi lebih tajam. Wilayah di antara keduanya disebut zona Wallacea dengan fauna transisi unik."
+            }
+          ]
+        },
+        {
+          "id": "sub-4-4",
+          "title": "Pencemaran & Konservasi Lingkungan",
+          "icon": "delete_sweep",
+          "content": [
+            {
+              "type": "heading",
+              "text": "Jenis Pencemaran Lingkungan"
+            },
+            {
+              "type": "list",
+              "items": [
+                "**Pencemaran Air** — Limbah industri, domestik, pertanian (pestisida, pupuk) memasuki badan air → eutrofikasi, bioakumulasi merkuri, menurunnya oksigen terlarut (DO).",
+                "**Pencemaran Udara** — Emisi gas CO, CO₂, SO₂, NOx, partikulat (PM2.5) dari kendaraan dan industri → hujan asam, efek rumah kaca, penipisan ozon.",
+                "**Pencemaran Tanah** — Sampah plastik, limbah B3, pestisida berlebihan → degradasi kesuburan tanah, kontaminasi rantai makanan."
+              ]
+            },
+            {
+              "type": "heading",
+              "text": "Upaya Konservasi"
+            },
+            {
+              "type": "list",
+              "items": [
+                "**Konservasi In-situ** — Pelestarian di habitat asli: Taman Nasional (Komodo, Way Kambas, Ujung Kulon), Cagar Alam, Suaka Margasatwa.",
+                "**Konservasi Ex-situ** — Pelestarian di luar habitat asli: kebun raya (Bogor), bank benih, penangkaran (breeding program).",
+                "**3R** — Reduce (kurangi), Reuse (gunakan kembali), Recycle (daur ulang) untuk mengurangi sampah."
+              ]
+            },
+            {
+              "type": "highlight",
+              "text": "Indonesia memiliki 54 Taman Nasional yang menjadi garda terdepan konservasi keanekaragaman hayati, termasuk perlindungan spesies kritis seperti orangutan Kalimantan, badak Jawa, dan harimau Sumatera."
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

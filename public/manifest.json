@@ -1,0 +1,16 @@
+{
+  "name": "Bio Smart - Belajar Biologi",
+  "short_name": "Bio Smart",
+  "description": "Platform e-learning biologi SMA interaktif dengan 3D anatomi, lab virtual, dan kuis.",
+  "start_url": "./",
+  "display": "standalone",
+  "background_color": "#f8f9ff",
+  "theme_color": "#004331",
+  "icons": [
+    {
+      "src": "favicon.ico",
+      "sizes": "64x64 32x32 24x24 16x16",
+      "type": "image/x-icon"
+    }
+  ]
+}

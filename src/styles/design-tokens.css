@@ -59,3 +59,47 @@
   --shadow-level-2: 0 10px 15px -3px rgba(13, 92, 70, 0.08), 0 4px 6px -4px rgba(13, 92, 70, 0.04);
   --shadow-level-3: 0 20px 25px -5px rgba(6, 64, 48, 0.12), 0 8px 10px -6px rgba(6, 64, 48, 0.08);
 }
+
+/* Dark Mode Tokens */
+[data-theme="dark"] {
+  /* Colors */
+  --color-primary: #8cd2b6;
+  --color-primary-container: #00523e;
+  --color-on-primary-container: #aaf1d4;
+  --color-primary-fixed: #0d5c46;
+  --color-on-primary: #003828;
+
+  --color-secondary: #b5ebd4;
+  --color-secondary-container: #285444;
+  --color-on-secondary-container: #d1f7e5;
+  --color-on-secondary: #003827;
+
+  --color-tertiary: #48d4f3;
+  --color-tertiary-container: #004b5a;
+  --color-on-tertiary-container: #b3ecfa;
+  --color-tertiary-fixed-dim: #005969;
+  --color-on-tertiary: #003641;
+
+  --color-surface: #0f1412;
+  --color-surface-dim: #0c100e;
+  --color-surface-bright: #151c19;
+  --color-surface-container-lowest: #0a0d0b;
+  --color-surface-container-low: #121815;
+  --color-surface-container: #161e1b;
+  --color-surface-container-high: #1d2723;
+  --color-surface-container-highest: #26332e;
+
+  --color-on-surface: #e1e3e0;
+  --color-on-surface-variant: #bfc9c2;
+  --color-outline: #89938c;
+  --color-outline-variant: #3f4944;
+
+  --color-error: #ffb4ab;
+  --color-error-container: #93000a;
+  --color-on-error: #690005;
+
+  /* Elevation Shadows for Dark Mode */
+  --shadow-level-1: 0 1px 3px 0 rgba(0, 0, 0, 0.3), 0 1px 2px -1px rgba(0, 0, 0, 0.2);
+  --shadow-level-2: 0 10px 15px -3px rgba(0, 0, 0, 0.4), 0 4px 6px -4px rgba(0, 0, 0, 0.2);
+  --shadow-level-3: 0 20px 25px -5px rgba(0, 0, 0, 0.5), 0 8px 10px -6px rgba(0, 0, 0, 0.3);
+}

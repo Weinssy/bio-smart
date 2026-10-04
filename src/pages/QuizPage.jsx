@@ -1,7 +1,7 @@
 import Sidebar from '../components/common/Sidebar'
 import Header from '../components/common/Header'
 import Footer from '../components/common/Footer'
-import Toast from '../components/common/Toast'
+
 import QuizEngine from '../components/quiz/QuizEngine'
 
 export default function QuizPage() {
@@ -26,7 +26,7 @@ export default function QuizPage() {
                   Modul Kuis Formatif Biologi
                 </h1>
                 <p className="banner-sub">
-                  Uji pemahamanmu secara berkala. Skor &gt; 75 akan otomatis menuntaskan modul terkait dan memperbarui progres belajarmu.
+                  Uji pemahamanmu secara berkala. Cocokkan jawabanmu dengan kunci jawaban setelah kuis selesai.
                 </p>
               </div>
             </div>
@@ -41,7 +41,7 @@ export default function QuizPage() {
         <Footer />
       </div>
 
-      <Toast />
+
     </div>
   )
 }

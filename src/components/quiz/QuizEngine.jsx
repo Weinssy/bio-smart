@@ -1,10 +1,7 @@
 import { useState, useMemo } from 'react'
-import { useProgress } from '../../context/ProgressContext'
 import quizDataset from '../../data/quizData.json'
 
 export default function QuizEngine({ quizId = 'quiz-sel' }) {
-  const { progress, submitQuizResult } = useProgress()
-
   const currentQuizData = useMemo(() => {
     return quizDataset.quizzes.find((q) => q.id === quizId) || quizDataset.quizzes[0]
   }, [quizId])
@@ -17,11 +14,6 @@ export default function QuizEngine({ quizId = 'quiz-sel' }) {
   const [userAnswers, setUserAnswers] = useState({}) // { [questionId]: optionIndex }
   const [isSubmitted, setIsSubmitted] = useState(false)
   const [submissionResult, setSubmissionResult] = useState(null)
-
-  // Ambil histori pengerjaan dari ProgressContext jika ada
-  const existingQuizRecord = useMemo(() => {
-    return progress?.quizzes?.find((q) => q.id === currentQuizData.id)
-  }, [progress, currentQuizData.id])
 
   const currentQuestion = questions[currentIndex]
   const isLastQuestion = currentIndex === questions.length - 1
@@ -58,19 +50,11 @@ export default function QuizEngine({ quizId = 'quiz-sel' }) {
 
     const score = Math.round((correctCount / questions.length) * 100)
 
-    // Panggil logika penilaian ke ProgressContext (memperbarui localStorage & React state)
-    const result = submitQuizResult({
-      quizId: currentQuizData.id,
-      score,
-      moduleId: currentQuizData.moduleId,
-      passingGrade,
-    })
-
     setSubmissionResult({
       score,
       correctCount,
       totalQuestions: questions.length,
-      isPassed: result.isPassed,
+      isPassed: score >= passingGrade,
     })
     setIsSubmitted(true)
   }
@@ -94,22 +78,6 @@ export default function QuizEngine({ quizId = 'quiz-sel' }) {
             {currentQuizData.title}
           </h2>
         </div>
-
-        {existingQuizRecord && (
-          <div style={{ display: 'flex', alignItems: 'center', gap: '0.6rem', padding: '0.4rem 0.85rem', borderRadius: 'var(--radius-lg)', backgroundColor: 'var(--color-surface-container-low)', border: '1px solid rgba(191,201,194,0.4)', fontSize: '0.75rem' }}>
-            <span className="material-symbols-outlined" style={{ fontSize: '18px', color: existingQuizRecord.is_passed ? '#059669' : '#d97706' }}>
-              {existingQuizRecord.is_passed ? 'check_circle' : 'history'}
-            </span>
-            <div>
-              <span style={{ fontWeight: 600, display: 'block' }}>
-                Nilai Tertinggi: {existingQuizRecord.highest_score ?? existingQuizRecord.score}/100
-              </span>
-              <span style={{ color: 'var(--color-on-surface-variant)' }}>
-                {existingQuizRecord.attempts || 1}x percobaan • Status: {existingQuizRecord.status || 'Tuntas'}
-              </span>
-            </div>
-          </div>
-        )}
       </div>
 
       {!isSubmitted ? (
@@ -311,7 +279,7 @@ export default function QuizEngine({ quizId = 'quiz-sel' }) {
                 marginBottom: '0.75rem',
               }}
             >
-              {submissionResult?.isPassed ? 'LULUS KKM (TUNTAS)' : 'BELUM MEMENUHI KKM'}
+              {submissionResult?.isPassed ? 'LULUS KKM' : 'BELUM MEMENUHI KKM'}
             </span>
 
             <h3 style={{ fontSize: '2.5rem', fontWeight: 800, fontFamily: 'var(--font-display)', color: 'var(--color-on-surface)' }}>
@@ -320,7 +288,7 @@ export default function QuizEngine({ quizId = 'quiz-sel' }) {
 
             <p style={{ fontSize: '0.9rem', color: 'var(--color-on-surface-variant)', maxWidth: '32rem', margin: '0.75rem auto 1.5rem', lineHeight: 1.5 }}>
               {submissionResult?.isPassed
-                ? 'Luar biasa! Skor Anda telah melampaui KKM 75. Modul Biologi Sel pada akun Anda kini berstatus Tuntas.'
+                ? 'Luar biasa! Skor Anda telah melampaui KKM 75. Anda telah menguasai materi ini dengan baik.'
                 : 'Nilai belum mencapai standar ketuntasan minimal (75). Tinjau kembali kunci jawaban di bawah untuk memperdalam pemahaman.'}
             </p>
 
