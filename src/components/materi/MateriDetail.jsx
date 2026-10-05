@@ -166,22 +166,21 @@ export default function MateriDetail() {
 
   return (
     <div className="materi-detail">
-      {/* Unified Material Header Card with Prominent Back Action */}
+      {/* Top Action Bar: Clean, sleek navigation back to catalog */}
+      <div className="materi-top-action-bar">
+        <Link to="/" className="materi-back-btn" title="Kembali ke Katalog Materi">
+          <span className="material-symbols-outlined">arrow_back</span>
+          <span>Katalog Materi</span>
+        </Link>
+        <span className="materi-subtopic-counter-badge">
+          Sub-topik {activeSubtopic + 1} dari {totalSubtopics}
+        </span>
+      </div>
+
+      {/* Module Header Card */}
       <div className="materi-header-card">
-        <div className="materi-header-action-row">
-          <Link to="/" className="materi-back-btn" title="Kembali ke Katalog Materi">
-            <span className="material-symbols-outlined">arrow_back</span>
-            <span>Kembali ke Katalog Materi</span>
-          </Link>
-
-          <div className="materi-progress-badge">
-            <span className="material-symbols-outlined" style={{ fontSize: '16px' }}>menu_book</span>
-            <span>Sub-topik {activeSubtopic + 1} dari {totalSubtopics}</span>
-          </div>
-        </div>
-
         <div className="materi-header-info">
-          <div className="materi-card-icon" style={{ background: `${mod.color}18`, color: mod.color, width: '2.75rem', height: '2.75rem', borderRadius: 'var(--radius-md)', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+          <div className="materi-card-icon" style={{ background: `${mod.color}18`, color: mod.color, width: '2.75rem', height: '2.75rem', borderRadius: 'var(--radius-md)', display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0 }}>
             <span className="material-symbols-outlined" style={{ fontSize: '24px' }}>{mod.icon}</span>
           </div>
           <div className="materi-header-titles">

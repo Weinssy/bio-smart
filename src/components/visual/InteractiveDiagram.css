@@ -5,6 +5,9 @@
   overflow: hidden;
   margin: 1.5rem 0;
   box-shadow: var(--shadow-level-1);
+  width: 100%;
+  max-width: 100%;
+  box-sizing: border-box;
 }
 
 .diagram-header {
@@ -89,6 +92,10 @@
   border-bottom: 1px solid rgba(191, 201, 194, 0.3);
   background-color: #ffffff;
   position: relative;
+  width: 100%;
+  max-width: 100%;
+  overflow: hidden;
+  box-sizing: border-box;
 }
 
 [data-theme="dark"] .diagram-visual-area {
@@ -101,6 +108,8 @@
   max-width: 600px;
   max-height: 600px;
   cursor: grab;
+  overflow: hidden;
+  box-sizing: border-box;
 }
 
 .diagram-transform-wrapper:active {

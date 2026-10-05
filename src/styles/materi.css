@@ -142,7 +142,67 @@
    MATERI DETAIL PAGE
    ============================================================ */
 
-/* Breadcrumb */
+/* Material Detail Page Container */
+.materi-detail {
+  width: 100%;
+  max-width: 100%;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  box-sizing: border-box;
+}
+
+/* Top Action Bar (Compact Back Button + Subtopic Indicator) */
+.materi-top-action-bar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 0.75rem;
+  margin-bottom: 1rem;
+  width: 100%;
+  max-width: 100%;
+  min-width: 0;
+  box-sizing: border-box;
+}
+
+.materi-back-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45rem;
+  padding: 0.45rem 1rem;
+  background-color: var(--color-surface-container-low);
+  border: 1px solid rgba(191, 201, 194, 0.6);
+  border-radius: var(--radius-full);
+  font-size: 0.84rem;
+  font-weight: 600;
+  color: var(--color-on-surface);
+  text-decoration: none;
+  transition: all 0.2s ease;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.04);
+  flex-shrink: 0;
+}
+
+.materi-back-btn:hover {
+  background-color: var(--color-primary-container);
+  color: var(--color-on-primary-container);
+  border-color: var(--color-primary-container);
+  transform: translateX(-3px);
+}
+
+.materi-subtopic-counter-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  padding: 0.35rem 0.75rem;
+  background-color: rgba(13, 92, 70, 0.08);
+  border: 1px solid rgba(13, 92, 70, 0.2);
+  border-radius: var(--radius-full);
+  font-size: 0.78rem;
+  font-weight: 700;
+  color: var(--color-primary);
+  white-space: nowrap;
+}
+
 /* Unified Material Header Card */
 .materi-header-card {
   background: var(--color-surface-container-lowest);
@@ -153,51 +213,11 @@
   margin-bottom: 1.5rem;
   display: flex;
   flex-direction: column;
-  gap: 1.25rem;
-}
-
-.materi-header-action-row {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  flex-wrap: wrap;
-  gap: 0.75rem;
-}
-
-.materi-back-btn {
-  display: inline-flex;
-  align-items: center;
-  gap: 0.5rem;
-  padding: 0.5rem 1.15rem;
-  background-color: var(--color-surface-container-low);
-  border: 1px solid rgba(191, 201, 194, 0.6);
-  border-radius: var(--radius-full);
-  font-size: 0.88rem;
-  font-weight: 600;
-  color: var(--color-on-surface);
-  text-decoration: none;
-  transition: all 0.2s ease;
-  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.04);
-}
-
-.materi-back-btn:hover {
-  background-color: var(--color-primary-container);
-  color: var(--color-on-primary-container);
-  border-color: var(--color-primary-container);
-  transform: translateX(-3px);
-}
-
-.materi-progress-badge {
-  display: inline-flex;
-  align-items: center;
-  gap: 0.4rem;
-  padding: 0.35rem 0.85rem;
-  background-color: rgba(13, 92, 70, 0.08);
-  border: 1px solid rgba(13, 92, 70, 0.2);
-  border-radius: var(--radius-full);
-  font-size: 0.8rem;
-  font-weight: 700;
-  color: var(--color-primary);
+  gap: 1rem;
+  width: 100%;
+  max-width: 100%;
+  min-width: 0;
+  box-sizing: border-box;
 }
 
 .materi-header-info {
@@ -280,9 +300,13 @@
 /* Two-column layout */
 .materi-detail-layout {
   display: grid;
-  grid-template-columns: 260px 1fr;
+  grid-template-columns: 260px minmax(0, 1fr);
   gap: 1.5rem;
   align-items: flex-start;
+  width: 100%;
+  max-width: 100%;
+  min-width: 0;
+  box-sizing: border-box;
 }
 
 /* Subtopic sidebar nav */
@@ -816,10 +840,19 @@
   }
 
   /* Materi detail mobile layout */
+  .materi-top-action-bar {
+    margin-bottom: 0.75rem;
+    gap: 0.5rem;
+  }
+
   .materi-header-card {
-    padding: 1.15rem 1rem;
-    gap: 1rem;
+    padding: 1rem;
+    gap: 0.85rem;
     margin-bottom: 1rem;
+    width: 100%;
+    max-width: 100%;
+    min-width: 0;
+    box-sizing: border-box;
   }
 
   .materi-header-title {
@@ -827,32 +860,57 @@
   }
 
   .materi-detail-layout {
-    grid-template-columns: 1fr;
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    max-width: 100%;
+    min-width: 0;
     gap: 1rem;
+    box-sizing: border-box;
   }
 
   .materi-subtopic-nav {
     position: static;
-    padding: 0.75rem 0.85rem;
+    width: 100%;
+    max-width: 100%;
+    min-width: 0;
+    padding: 0.75rem;
     background-color: var(--color-surface-container-lowest);
     border: 1px solid rgba(191, 201, 194, 0.4);
     border-radius: var(--radius-lg);
+    box-sizing: border-box;
+    overflow: hidden;
+  }
+
+  .materi-subtopic-nav-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 0.5rem;
+    padding-bottom: 0.4rem;
+    border-bottom: 1px solid rgba(191, 201, 194, 0.3);
   }
 
   .materi-subtopic-nav-title {
-    font-size: 0.8rem;
-    margin-bottom: 0.4rem;
+    font-size: 0.78rem;
+    margin-bottom: 0;
+    padding-bottom: 0;
+    border-bottom: none;
   }
 
   .materi-subtopic-list {
     display: flex;
     flex-direction: row;
+    width: 100%;
+    max-width: 100%;
+    min-width: 0;
     overflow-x: auto;
     gap: 0.5rem;
     padding: 0.25rem 0 0.5rem 0;
     -webkit-overflow-scrolling: touch;
     scroll-snap-type: x mandatory;
     scrollbar-width: thin;
+    box-sizing: border-box;
   }
 
   .materi-subtopic-list li {
@@ -862,7 +920,7 @@
 
   .materi-subtopic-btn {
     white-space: nowrap;
-    padding: 0.5rem 0.95rem;
+    padding: 0.45rem 0.85rem;
     gap: 0.5rem;
     font-size: 0.82rem;
     border-radius: var(--radius-full);
@@ -892,8 +950,13 @@
   }
 
   .materi-content-area {
+    width: 100%;
+    max-width: 100%;
+    min-width: 0;
+    box-sizing: border-box;
     max-height: none !important;
     overflow-y: visible !important;
+    overflow-x: hidden;
     padding: 1.25rem 1rem;
     border-radius: var(--radius-lg);
   }
@@ -904,15 +967,34 @@
     gap: 0.5rem;
     padding-left: 0.75rem;
     margin-bottom: 1.25rem;
+    width: 100%;
+    max-width: 100%;
+    box-sizing: border-box;
   }
 
   .materi-content-title {
     font-size: 1.2rem;
+    word-break: break-word;
+    overflow-wrap: break-word;
+  }
+
+  .materi-content-body {
+    width: 100%;
+    max-width: 100%;
+    min-width: 0;
+    overflow-x: hidden;
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
   }
 
   .materi-content-paragraph {
     font-size: 0.92rem;
     line-height: 1.7;
+    word-break: break-word;
+    overflow-wrap: break-word;
+    max-width: 100%;
   }
 
   .materi-content-actions {
@@ -921,6 +1003,10 @@
     gap: 1.25rem;
     margin-top: 1.5rem;
     padding-top: 1.25rem;
+    width: 100%;
+    max-width: 100%;
+    min-width: 0;
+    box-sizing: border-box;
   }
 
   .materi-nav-buttons {
@@ -978,6 +1064,10 @@
 
   .dashboard-main {
     padding: 0.5rem;
+    width: 100%;
+    max-width: 100%;
+    box-sizing: border-box;
+    overflow-x: hidden;
   }
 
   .welcome-banner {
@@ -988,20 +1078,22 @@
     font-size: 1.15rem !important;
   }
 
-  .materi-header-card {
-    padding: 1rem 0.75rem;
+  .materi-top-action-bar {
+    gap: 0.5rem;
   }
 
   .materi-back-btn {
-    width: 100%;
-    justify-content: center;
-    font-size: 0.82rem;
-    padding: 0.55rem 0.85rem;
+    font-size: 0.8rem;
+    padding: 0.4rem 0.8rem;
   }
 
-  .materi-progress-badge {
-    width: 100%;
-    justify-content: center;
+  .materi-subtopic-counter-badge {
+    font-size: 0.75rem;
+    padding: 0.25rem 0.55rem;
+  }
+
+  .materi-header-card {
+    padding: 0.85rem 0.75rem;
   }
 
   .materi-content-area {
@@ -1026,3 +1118,4 @@
     justify-content: center;
     font-size: 0.82rem;
   }
+}
