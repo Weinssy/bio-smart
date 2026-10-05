@@ -66,7 +66,7 @@ export default function MateriDetail() {
         </span>
         <h2>Modul Tidak Ditemukan</h2>
         <p>Modul dengan ID "{moduleId}" tidak tersedia.</p>
-        <Link to="/materi" className="btn-export" style={{ textDecoration: 'none', display: 'inline-flex', alignItems: 'center', gap: '0.4rem', marginTop: '1rem' }}>
+        <Link to="/" className="btn-export" style={{ textDecoration: 'none', display: 'inline-flex', alignItems: 'center', gap: '0.4rem', marginTop: '1rem' }}>
           <span className="material-symbols-outlined" style={{ fontSize: '18px' }}>arrow_back</span>
           Kembali ke Katalog
         </Link>
@@ -164,7 +164,7 @@ export default function MateriDetail() {
     <div className="materi-detail">
       {/* Breadcrumb */}
       <div className="materi-breadcrumb">
-        <Link to="/materi" className="materi-breadcrumb-link">
+        <Link to="/" className="materi-breadcrumb-link">
           <span className="material-symbols-outlined" style={{ fontSize: '18px' }}>arrow_back</span>
           Katalog Materi
         </Link>
