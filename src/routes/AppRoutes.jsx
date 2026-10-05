@@ -8,6 +8,7 @@ const QuizPage = lazy(() => import('../pages/QuizPage.jsx'))
 const LabPage = lazy(() => import('../pages/LabPage.jsx'))
 const MateriPage = lazy(() => import('../pages/MateriPage.jsx'))
 const MateriDetailPage = lazy(() => import('../pages/MateriDetailPage.jsx'))
+const HomePage = lazy(() => import('../pages/HomePage.jsx'))
 
 function LoadingFallback() {
   return (
@@ -22,7 +23,8 @@ export default function AppRoutes() {
   return (
     <Suspense fallback={<LoadingFallback />}>
       <Routes>
-        <Route path="/" element={<MateriPage />} />
+        <Route path="/" element={<HomePage />} />
+        <Route path="/katalog" element={<MateriPage />} />
         <Route path="/materi/:moduleId" element={<MateriDetailPage />} />
         <Route path="/anatomi" element={<AnatomyPage />} />
         <Route path="/anatomi-3d" element={<AnatomyPage />} />
