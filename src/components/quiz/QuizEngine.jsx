@@ -1,21 +1,5 @@
 import { useState, useMemo } from 'react'
 import quizDataset from '../../data/quizData.json'
-import { Card, CardContent, CardHeader, CardTitle, CardDescription, CardFooter } from '../ui/card'
-import { Button } from '../ui/button'
-import { Progress } from '../ui/progress'
-import { Badge } from '../ui/badge'
-import { RadioGroup, RadioGroupItem } from '../ui/radio-group'
-import {
-  Dialog,
-  DialogContent,
-  DialogDescription,
-  DialogFooter,
-  DialogHeader,
-  DialogTitle,
-  DialogTrigger,
-} from '../ui/dialog'
-import { Label } from '../ui/label'
-import { toast } from 'sonner'
 
 export default function QuizEngine({ quizId = 'quiz-sel' }) {
   const currentQuizData = useMemo(() => {
@@ -30,7 +14,6 @@ export default function QuizEngine({ quizId = 'quiz-sel' }) {
   const [userAnswers, setUserAnswers] = useState({}) // { [questionId]: optionIndex }
   const [isSubmitted, setIsSubmitted] = useState(false)
   const [submissionResult, setSubmissionResult] = useState(null)
-  const [isConfirmOpen, setIsConfirmOpen] = useState(false)
 
   const currentQuestion = questions[currentIndex]
   const isLastQuestion = currentIndex === questions.length - 1
@@ -73,24 +56,7 @@ export default function QuizEngine({ quizId = 'quiz-sel' }) {
       totalQuestions: questions.length,
       isPassed: score >= passingGrade,
     })
-    setIsConfirmOpen(false)
     setIsSubmitted(true)
-
-    // Gamification Toast Notification
-    if (score === 100) {
-      toast.success('Luar Biasa! Sempurna 100!', {
-        description: 'Anda mendapatkan +50 XP dan badge "Sel Master"!',
-        duration: 5000,
-      })
-    } else if (score >= passingGrade) {
-      toast.success(`Lulus KKM! Skor Anda ${score}.`, {
-        description: 'Bagus sekali! Anda mendapatkan +20 XP.',
-      })
-    } else {
-      toast.error(`Skor Anda ${score} (Belum Lulus)`, {
-        description: 'Jangan menyerah! Cek pembahasan dan coba lagi nanti.',
-      })
-    }
   }
 
   const handleRetake = () => {
@@ -101,14 +67,14 @@ export default function QuizEngine({ quizId = 'quiz-sel' }) {
   }
 
   return (
-    <div className="w-full max-w-4xl mx-auto flex flex-col gap-6">
+    <div className="quiz-engine-card" style={{ maxWidth: '900px', margin: '0 auto', width: '100%' }}>
       {/* Quiz Top Bar with Title and Status */}
-      <div className="flex justify-between items-center flex-wrap gap-3 mb-2">
+      <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '1.25rem', flexWrap: 'wrap', gap: '0.75rem' }}>
         <div>
-          <span className="text-xs font-semibold text-primary uppercase tracking-wider">
+          <span style={{ fontSize: '0.75rem', fontWeight: 600, color: 'var(--color-primary)', textTransform: 'uppercase', letterSpacing: '0.05em' }}>
             {currentQuizData.topic} • KKM: {passingGrade}
           </span>
-          <h2 className="text-2xl font-extrabold text-foreground mt-1 font-display">
+          <h2 style={{ fontSize: '1.4rem', fontWeight: 800, color: 'var(--color-on-surface)', marginTop: '0.2rem' }}>
             {currentQuizData.title}
           </h2>
         </div>
@@ -116,227 +82,286 @@ export default function QuizEngine({ quizId = 'quiz-sel' }) {
 
       {!isSubmitted ? (
         /* WIZARD VIEW: One Question Per Page */
-        <Card className="shadow-md overflow-hidden">
-          <CardHeader className="bg-muted/30 border-b pb-6">
-            <div className="flex justify-between items-center text-sm text-muted-foreground mb-2">
-              <span className="font-bold text-primary">
+        <div style={{ backgroundColor: 'var(--color-surface-container-lowest)', borderRadius: 'var(--radius-xl)', padding: '2rem', border: '1px solid rgba(191,201,194,0.4)', boxShadow: 'var(--shadow-level-1)' }}>
+          {/* Progress Indicator */}
+          <div style={{ marginBottom: '1.5rem' }}>
+            <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', fontSize: '0.8rem', color: 'var(--color-on-surface-variant)', marginBottom: '0.5rem' }}>
+              <span style={{ fontWeight: 700, color: 'var(--color-primary)' }}>
                 Soal {currentIndex + 1} dari {questions.length}
               </span>
               <span>
                 Terjawab: {answeredCount} / {questions.length}
               </span>
             </div>
-            <Progress value={progressPercent} className="h-2" />
-          </CardHeader>
-          
-          <CardContent className="pt-8 pb-6 px-6 sm:px-10">
-            {/* Question Text */}
-            <div className="mb-8">
-              <h3 className="text-lg sm:text-xl font-semibold text-foreground leading-relaxed">
-                {currentQuestion.question}
-              </h3>
+            <div className="progress-track" style={{ height: '8px' }}>
+              <div
+                className="progress-fill"
+                style={{ width: `${progressPercent}%`, backgroundColor: 'var(--color-primary-container)' }}
+              />
             </div>
+          </div>
 
-            {/* Options using RadioGroup */}
-            <RadioGroup 
-              value={userAnswers[currentQuestion.id]?.toString()} 
-              onValueChange={(val) => handleSelectOption(Number(val))}
-              className="flex flex-col gap-3"
-            >
-              {currentQuestion.options.map((option, optIdx) => {
-                const isSelected = userAnswers[currentQuestion.id] === optIdx
-                const optionLetters = ['A', 'B', 'C', 'D']
+          {/* Question Text */}
+          <div style={{ marginBottom: '2rem' }}>
+            <h3 style={{ fontSize: '1.15rem', fontWeight: 600, color: 'var(--color-on-surface)', lineHeight: 1.6 }}>
+              {currentQuestion.question}
+            </h3>
+          </div>
 
-                return (
-                  <Label
-                    key={optIdx}
-                    htmlFor={`option-${optIdx}`}
-                    className={`
-                      relative flex items-center gap-4 p-4 rounded-xl cursor-pointer transition-all border-2
-                      ${isSelected 
-                        ? 'border-primary bg-primary/5 shadow-[0_2px_10px_rgba(13,92,70,0.1)]' 
-                        : 'border-muted bg-background hover:bg-muted/50 hover:border-primary/30'}
-                    `}
+          {/* Options Grid */}
+          <div style={{ display: 'flex', flexDirection: 'column', gap: '0.75rem', marginBottom: '2.5rem' }}>
+            {currentQuestion.options.map((option, optIdx) => {
+              const isSelected = userAnswers[currentQuestion.id] === optIdx
+              const optionLetters = ['A', 'B', 'C', 'D']
+
+              return (
+                <button
+                  key={optIdx}
+                  type="button"
+                  onClick={() => handleSelectOption(optIdx)}
+                  style={{
+                    display: 'flex',
+                    alignItems: 'center',
+                    gap: '1rem',
+                    padding: '1rem 1.25rem',
+                    borderRadius: 'var(--radius-lg)',
+                    border: isSelected
+                      ? '2px solid var(--color-primary-container)'
+                      : '1px solid rgba(191,201,194,0.4)',
+                    backgroundColor: isSelected
+                      ? 'rgba(181, 235, 212, 0.25)'
+                      : 'var(--color-surface-container-lowest)',
+                    color: 'var(--color-on-surface)',
+                    textAlign: 'left',
+                    cursor: 'pointer',
+                    transition: 'all 0.15s ease',
+                    boxShadow: isSelected ? '0 2px 8px rgba(13,92,70,0.08)' : 'none',
+                  }}
+                >
+                  <span
+                    style={{
+                      width: '2rem',
+                      height: '2rem',
+                      borderRadius: '50%',
+                      display: 'flex',
+                      alignItems: 'center',
+                      justifyContent: 'center',
+                      fontWeight: 700,
+                      fontSize: '0.85rem',
+                      flexShrink: 0,
+                      backgroundColor: isSelected
+                        ? 'var(--color-primary-container)'
+                        : 'var(--color-surface-container-low)',
+                      color: isSelected ? '#ffffff' : 'var(--color-on-surface)',
+                    }}
                   >
-                    <RadioGroupItem value={optIdx.toString()} id={`option-${optIdx}`} className="sr-only" />
-                    
-                    <span
-                      className={`
-                        flex h-8 w-8 shrink-0 items-center justify-center rounded-full text-sm font-bold transition-colors
-                        ${isSelected 
-                          ? 'bg-primary text-primary-foreground' 
-                          : 'bg-muted text-foreground'}
-                      `}
-                    >
-                      {optionLetters[optIdx]}
-                    </span>
-                    <span className="text-base font-normal leading-relaxed flex-1 cursor-pointer">
-                      {option}
-                    </span>
-                  </Label>
-                )
-              })}
-            </RadioGroup>
-          </CardContent>
+                    {optionLetters[optIdx]}
+                  </span>
+                  <span style={{ fontSize: '0.95rem', lineHeight: 1.5, flex: 1 }}>{option}</span>
+                </button>
+              )
+            })}
+          </div>
 
           {/* Wizard Footer Navigation */}
-          <CardFooter className="flex justify-between items-center py-5 px-6 sm:px-10 bg-muted/10 border-t">
-            <Button
-              variant="outline"
+          <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', paddingTop: '1.25rem', borderTop: '1px solid rgba(191,201,194,0.3)' }}>
+            <button
+              type="button"
               onClick={handlePrev}
               disabled={currentIndex === 0}
-              className="gap-2"
+              style={{
+                display: 'inline-flex',
+                alignItems: 'center',
+                gap: '0.4rem',
+                padding: '0.6rem 1.2rem',
+                borderRadius: 'var(--radius-md)',
+                border: '1px solid rgba(191,201,194,0.6)',
+                background: 'transparent',
+                color: currentIndex === 0 ? '#94a3b8' : 'var(--color-on-surface)',
+                fontWeight: 600,
+                fontSize: '0.85rem',
+                cursor: currentIndex === 0 ? 'not-allowed' : 'pointer',
+              }}
             >
-              <span className="material-symbols-outlined text-[18px]">arrow_back</span>
-              <span className="hidden sm:inline">Sebelumnya</span>
-            </Button>
+              <span className="material-symbols-outlined" style={{ fontSize: '18px' }}>arrow_back</span>
+              <span>Sebelumnya</span>
+            </button>
 
             {isLastQuestion ? (
-              <Dialog open={isConfirmOpen} onOpenChange={setIsConfirmOpen}>
-                <DialogTrigger asChild>
-                  <Button
-                    disabled={answeredCount < questions.length}
-                    className="gap-2 bg-emerald-600 hover:bg-emerald-700 text-white shadow-md"
-                  >
-                    <span className="material-symbols-outlined text-[20px]">check_circle</span>
-                    Kirim Jawaban
-                  </Button>
-                </DialogTrigger>
-                <DialogContent>
-                  <DialogHeader>
-                    <DialogTitle>Kirim Jawaban Kuis?</DialogTitle>
-                    <DialogDescription>
-                      Anda telah menjawab semua soal. Apakah Anda yakin ingin mengirim jawaban sekarang? Anda tidak dapat mengubah jawaban setelah dikirim.
-                    </DialogDescription>
-                  </DialogHeader>
-                  <DialogFooter className="mt-4">
-                    <Button variant="outline" onClick={() => setIsConfirmOpen(false)}>
-                      Batal
-                    </Button>
-                    <Button onClick={handleSubmit} className="bg-emerald-600 hover:bg-emerald-700">
-                      Ya, Kirim Sekarang
-                    </Button>
-                  </DialogFooter>
-                </DialogContent>
-              </Dialog>
-            ) : (
-              <Button
-                onClick={handleNext}
-                className="gap-2"
+              <button
+                type="button"
+                onClick={handleSubmit}
+                disabled={answeredCount < questions.length}
+                style={{
+                  display: 'inline-flex',
+                  alignItems: 'center',
+                  gap: '0.5rem',
+                  padding: '0.65rem 1.5rem',
+                  borderRadius: 'var(--radius-md)',
+                  backgroundColor: answeredCount === questions.length ? 'var(--color-primary-container)' : '#cbd5e1',
+                  color: '#ffffff',
+                  border: 'none',
+                  fontWeight: 700,
+                  fontSize: '0.9rem',
+                  cursor: answeredCount === questions.length ? 'pointer' : 'not-allowed',
+                  boxShadow: answeredCount === questions.length ? '0 2px 8px rgba(13,92,70,0.25)' : 'none',
+                }}
               >
-                <span className="hidden sm:inline">Selanjutnya</span>
-                <span className="material-symbols-outlined text-[18px]">arrow_forward</span>
-              </Button>
+                <span className="material-symbols-outlined" style={{ fontSize: '20px' }}>check_circle</span>
+                <span>Kirim Jawaban</span>
+              </button>
+            ) : (
+              <button
+                type="button"
+                onClick={handleNext}
+                style={{
+                  display: 'inline-flex',
+                  alignItems: 'center',
+                  gap: '0.4rem',
+                  padding: '0.6rem 1.25rem',
+                  borderRadius: 'var(--radius-md)',
+                  backgroundColor: 'var(--color-primary-container)',
+                  color: '#ffffff',
+                  border: 'none',
+                  fontWeight: 600,
+                  fontSize: '0.85rem',
+                  cursor: 'pointer',
+                }}
+              >
+                <span>Selanjutnya</span>
+                <span className="material-symbols-outlined" style={{ fontSize: '18px' }}>arrow_forward</span>
+              </button>
             )}
-          </CardFooter>
-        </Card>
+          </div>
+        </div>
       ) : (
         /* RESULTS & REVIEW VIEW */
-        <div className="flex flex-col gap-6">
+        <div style={{ display: 'flex', flexDirection: 'column', gap: '1.5rem' }}>
           {/* Result Card */}
-          <Card className="shadow-lg text-center overflow-hidden">
-            <div className={`h-2 w-full ${submissionResult?.isPassed ? 'bg-emerald-500' : 'bg-rose-500'}`} />
-            <CardContent className="pt-10 pb-10">
-              <div
-                className={`
-                  mx-auto mb-6 flex h-24 w-24 items-center justify-center rounded-full
-                  ${submissionResult?.isPassed ? 'bg-emerald-100 text-emerald-600' : 'bg-rose-100 text-rose-600'}
-                `}
-              >
-                <span className="material-symbols-outlined text-[56px]">
-                  {submissionResult?.isPassed ? 'emoji_events' : 'replay'}
-                </span>
-              </div>
+          <div
+            style={{
+              backgroundColor: 'var(--color-surface-container-lowest)',
+              borderRadius: 'var(--radius-xl)',
+              padding: '2.5rem',
+              textAlign: 'center',
+              border: '1px solid rgba(191,201,194,0.4)',
+              boxShadow: 'var(--shadow-level-2)',
+            }}
+          >
+            <div
+              style={{
+                width: '5rem',
+                height: '5rem',
+                borderRadius: '50%',
+                margin: '0 auto 1.25rem',
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'center',
+                backgroundColor: submissionResult?.isPassed ? '#dcfce7' : '#ffe4e6',
+                color: submissionResult?.isPassed ? '#15803d' : '#be123c',
+              }}
+            >
+              <span className="material-symbols-outlined" style={{ fontSize: '42px' }}>
+                {submissionResult?.isPassed ? 'emoji_events' : 'replay'}
+              </span>
+            </div>
 
-              <Badge
-                variant="outline"
-                className={`
-                  mb-4 px-4 py-1 text-sm font-bold border-2
-                  ${submissionResult?.isPassed 
-                    ? 'bg-emerald-50 text-emerald-700 border-emerald-200' 
-                    : 'bg-rose-50 text-rose-700 border-rose-200'}
-                `}
-              >
-                {submissionResult?.isPassed ? 'LULUS KKM' : 'BELUM MEMENUHI KKM'}
-              </Badge>
+            <span
+              style={{
+                display: 'inline-block',
+                padding: '0.25rem 0.85rem',
+                borderRadius: 'var(--radius-full)',
+                fontSize: '0.8rem',
+                fontWeight: 700,
+                backgroundColor: submissionResult?.isPassed ? '#ecfdf5' : '#fff1f2',
+                color: submissionResult?.isPassed ? '#047857' : '#b91c1c',
+                border: `1px solid ${submissionResult?.isPassed ? '#a7f3d0' : '#fecdd3'}`,
+                marginBottom: '0.75rem',
+              }}
+            >
+              {submissionResult?.isPassed ? 'LULUS KKM' : 'BELUM MEMENUHI KKM'}
+            </span>
 
-              <h3 className="text-5xl font-extrabold font-display text-foreground mb-4">
-                {submissionResult?.score} <span className="text-2xl font-medium text-muted-foreground">/ 100</span>
-              </h3>
+            <h3 style={{ fontSize: '2.5rem', fontWeight: 800, fontFamily: 'var(--font-display)', color: 'var(--color-on-surface)' }}>
+              {submissionResult?.score} <span style={{ fontSize: '1.25rem', fontWeight: 500, color: 'var(--color-on-surface-variant)' }}>/ 100</span>
+            </h3>
 
-              <p className="text-muted-foreground max-w-lg mx-auto mb-8 leading-relaxed">
-                {submissionResult?.isPassed
-                  ? 'Luar biasa! Skor Anda telah melampaui KKM 75. Anda telah menguasai materi ini dengan baik.'
-                  : 'Nilai belum mencapai standar ketuntasan minimal (75). Tinjau kembali kunci jawaban di bawah untuk memperdalam pemahaman.'}
-              </p>
+            <p style={{ fontSize: '0.9rem', color: 'var(--color-on-surface-variant)', maxWidth: '32rem', margin: '0.75rem auto 1.5rem', lineHeight: 1.5 }}>
+              {submissionResult?.isPassed
+                ? 'Luar biasa! Skor Anda telah melampaui KKM 75. Anda telah menguasai materi ini dengan baik.'
+                : 'Nilai belum mencapai standar ketuntasan minimal (75). Tinjau kembali kunci jawaban di bawah untuk memperdalam pemahaman.'}
+            </p>
 
-              <Button
-                onClick={handleRetake}
-                variant="outline"
-                size="lg"
-                className="gap-2 font-bold hover:bg-muted"
-              >
-                <span className="material-symbols-outlined text-[20px]">refresh</span>
-                Ulangi Kuis Formatif
-              </Button>
-            </CardContent>
-          </Card>
+            <button
+              type="button"
+              onClick={handleRetake}
+              className="btn-export"
+              style={{ margin: '0 auto', padding: '0.65rem 1.5rem' }}
+            >
+              <span className="material-symbols-outlined" style={{ fontSize: '18px' }}>refresh</span>
+              <span>Ulangi Kuis Formatif</span>
+            </button>
+          </div>
 
           {/* Detailed Question Review List */}
-          <Card className="shadow-sm">
-            <CardHeader className="bg-muted/20 border-b">
-              <CardTitle className="text-xl">Pembahasan & Kunci Jawaban</CardTitle>
-              <CardDescription>Tinjau kembali jawaban Anda dan pahami konsepnya melalui penjelasan ilmiah di bawah ini.</CardDescription>
-            </CardHeader>
-            <CardContent className="pt-6">
-              <div className="flex flex-col gap-5">
-                {questions.map((q, idx) => {
-                  const userChoice = userAnswers[q.id]
-                  const isCorrect = userChoice === q.correctIndex
+          <div style={{ backgroundColor: 'var(--color-surface-container-lowest)', borderRadius: 'var(--radius-xl)', padding: '2rem', border: '1px solid rgba(191,201,194,0.4)' }}>
+            <h4 style={{ fontSize: '1.1rem', fontWeight: 700, marginBottom: '1.25rem', color: 'var(--color-on-surface)' }}>
+              Pembahasan & Kunci Jawaban
+            </h4>
 
-                  return (
-                    <div
-                      key={q.id}
-                      className={`
-                        p-5 rounded-xl border-2 transition-colors
-                        ${isCorrect ? 'border-emerald-200 bg-emerald-50/50' : 'border-rose-200 bg-rose-50/50'}
-                      `}
-                    >
-                      <div className="flex justify-between items-start gap-4 mb-3">
-                        <p className="font-semibold text-[15px] text-foreground leading-snug">
-                          {idx + 1}. {q.question}
-                        </p>
-                        <Badge
-                          variant="outline"
-                          className={`
-                            shrink-0 border-none font-bold
-                            ${isCorrect ? 'bg-emerald-100 text-emerald-700' : 'bg-rose-100 text-rose-700'}
-                          `}
-                        >
-                          {isCorrect ? 'Benar (+20)' : 'Salah (0)'}
-                        </Badge>
-                      </div>
+            <div style={{ display: 'flex', flexDirection: 'column', gap: '1.25rem' }}>
+              {questions.map((q, idx) => {
+                const userChoice = userAnswers[q.id]
+                const isCorrect = userChoice === q.correctIndex
 
-                      <div className="text-sm space-y-1.5 mb-4">
-                        <p className={isCorrect ? 'text-emerald-700 font-medium' : 'text-rose-700 font-medium'}>
-                          <strong>Jawaban Anda:</strong> {q.options[userChoice] ?? 'Tidak Dijawab'}
-                        </p>
-                        {!isCorrect && (
-                          <p className="text-emerald-700 font-medium">
-                            <strong>Kunci Jawaban yang Benar:</strong> {q.options[q.correctIndex]}
-                          </p>
-                        )}
-                      </div>
-
-                      <div className="p-3.5 rounded-lg bg-white dark:bg-black/20 text-sm text-foreground/80 leading-relaxed border border-border/50">
-                        <strong className="text-foreground">Penjelasan Ilmiah:</strong> {q.explanation}
-                      </div>
+                return (
+                  <div
+                    key={q.id}
+                    style={{
+                      padding: '1.25rem',
+                      borderRadius: 'var(--radius-lg)',
+                      border: `1px solid ${isCorrect ? '#a7f3d0' : '#fecdd3'}`,
+                      backgroundColor: isCorrect ? '#f0fdf4' : '#fff1f2',
+                    }}
+                  >
+                    <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', gap: '1rem', marginBottom: '0.5rem' }}>
+                      <p style={{ fontWeight: 600, fontSize: '0.95rem', color: 'var(--color-on-surface)' }}>
+                        {idx + 1}. {q.question}
+                      </p>
+                      <span
+                        style={{
+                          fontSize: '0.75rem',
+                          fontWeight: 700,
+                          padding: '0.2rem 0.5rem',
+                          borderRadius: 'var(--radius-sm)',
+                          backgroundColor: isCorrect ? '#dcfce7' : '#fee2e2',
+                          color: isCorrect ? '#15803d' : '#b91c1c',
+                          flexShrink: 0,
+                        }}
+                      >
+                        {isCorrect ? 'Benar (+20)' : 'Salah (0)'}
+                      </span>
                     </div>
-                  )
-                })}
-              </div>
-            </CardContent>
-          </Card>
+
+                    <div style={{ fontSize: '0.85rem', marginBottom: '0.5rem' }}>
+                      <p style={{ color: isCorrect ? '#166534' : '#991b1b', marginBottom: '0.25rem' }}>
+                        <strong>Jawaban Anda:</strong> {q.options[userChoice] ?? 'Tidak Dijawab'}
+                      </p>
+                      {!isCorrect && (
+                        <p style={{ color: '#15803d' }}>
+                          <strong>Kunci Jawaban yang Benar:</strong> {q.options[q.correctIndex]}
+                        </p>
+                      )}
+                    </div>
+
+                    <div style={{ padding: '0.65rem 0.85rem', borderRadius: 'var(--radius-md)', backgroundColor: 'rgba(255,255,255,0.7)', fontSize: '0.8rem', color: '#334155', lineHeight: 1.5 }}>
+                      <strong>Penjelasan Ilmiah:</strong> {q.explanation}
+                    </div>
+                  </div>
+                )
+              })}
+            </div>
+          </div>
         </div>
       )}
     </div>

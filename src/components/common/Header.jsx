@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react'
+import { Link } from 'react-router-dom'
 import { useTheme } from '../../context/ThemeContext'
 import CommandPalette from './CommandPalette'
-import { toast } from 'sonner'
 
 export default function Header() {
   const { theme, toggleTheme } = useTheme()
@@ -19,26 +19,27 @@ export default function Header() {
     return () => document.removeEventListener('keydown', handleKeyDown)
   }, [])
 
-  const handleBookmark = () => {
-    toast.success('Materi berhasil disimpan!', {
-      description: 'Ditambahkan ke Koleksi Belajar Anda.',
-      icon: '🔖',
-    })
-  }
-
-  const handleNotifications = () => {
-    toast.info('Pencapaian Baru Terbuka!', {
-      description: 'Anda mendapatkan lencana "Penjelajah Sel". Cek profil Anda.',
-      icon: '🏆',
-    })
-  }
-
   return (
     <>
       <header className="top-header">
         <div className="header-inner">
-          {/* Search Trigger Button & Filter Badges */}
+          {/* Back Button & Search */}
           <div className="search-section">
+            <Link to="/" style={{ textDecoration: 'none' }}>
+              <button 
+                className="icon-btn" 
+                title="Kembali ke Katalog Materi"
+                style={{ 
+                  marginRight: '0.5rem', 
+                  backgroundColor: 'var(--color-primary-container)', 
+                  color: 'var(--color-on-primary-container)',
+                  borderRadius: 'var(--radius-full)'
+                }}
+              >
+                <span className="material-symbols-outlined">arrow_back</span>
+              </button>
+            </Link>
+
             <button 
               className="search-bar" 
               onClick={() => setIsPaletteOpen(true)}
@@ -57,31 +58,24 @@ export default function Header() {
               </div>
               <span style={{ fontSize: '0.75rem', fontWeight: 600, color: 'var(--color-outline)', border: '1px solid var(--color-outline)', borderRadius: '4px', padding: '2px 6px' }}>Ctrl K</span>
             </button>
-            <div className="header-badges">
-              <button className="header-badge active" type="button">Biologi Sel</button>
-              <button className="header-badge" type="button">Sistem Organ</button>
-              <button className="header-badge" type="button">Ekologi</button>
-            </div>
           </div>
 
           {/* Trailing Actions & Profile */}
           <div className="header-actions">
-            {/* Theme Toggle Button */}
             <button 
               className="icon-btn" 
               title={`Ganti ke mode ${theme === 'light' ? 'gelap' : 'terang'}`} 
               aria-label="Toggle Theme" 
-              type="button"
               onClick={toggleTheme}
             >
               <span className="material-symbols-outlined">
                 {theme === 'light' ? 'dark_mode' : 'light_mode'}
               </span>
             </button>
-            <button className="icon-btn" title="Notifikasi" aria-label="Notifikasi" type="button" onClick={handleNotifications}>
+            <button className="icon-btn" title="Notifikasi" aria-label="Notifikasi">
               <span className="material-symbols-outlined">notifications</span>
             </button>
-            <button className="icon-btn" title="Materi Tersimpan" aria-label="Materi Tersimpan" type="button" onClick={handleBookmark}>
+            <button className="icon-btn" title="Materi Tersimpan" aria-label="Materi Tersimpan">
               <span className="material-symbols-outlined">bookmark</span>
             </button>
           </div>

@@ -1,6 +1,7 @@
 import { useState, useEffect, useRef } from 'react'
 import { Link, useParams } from 'react-router-dom'
 import materiDataRaw from '../../data/materiData.json'
+import quizDataRaw from '../../data/quizData.json'
 import InteractiveDiagram from '../visual/InteractiveDiagram'
 import { resolveAsset } from '../../utils/assetResolver'
 
@@ -237,7 +238,21 @@ export default function MateriDetail() {
           </div>
 
           {/* Navigation */}
-          <div className="materi-content-actions">
+          <div className="materi-content-actions" style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+            {/* Quiz Button for this module if it's the last subtopic */}
+            {activeSubtopic === totalSubtopics - 1 ? (
+              <Link 
+                to={`/quiz?quizId=${quizDataRaw.quizzes.find(q => q.moduleId === mod.id)?.id || ''}`} 
+                className="btn-practical"
+                style={{ textDecoration: 'none', display: 'flex', alignItems: 'center', gap: '0.5rem', backgroundColor: '#0d5c46', color: '#fff', padding: '0.75rem 1.5rem', borderRadius: 'var(--radius-md)' }}
+              >
+                <span className="material-symbols-outlined">quiz</span>
+                Kerjakan Kuis Modul
+              </Link>
+            ) : (
+              <div /> /* Empty div for flex spacing */
+            )}
+
             <div className="materi-nav-buttons" style={{ marginLeft: 'auto' }}>
               {activeSubtopic > 0 && (
                 <button

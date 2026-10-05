@@ -1,12 +1,23 @@
+import { useState, useEffect } from 'react'
+import { useSearchParams } from 'react-router-dom'
 import Sidebar from '../components/common/Sidebar'
 import Header from '../components/common/Header'
 import Footer from '../components/common/Footer'
-import { Card, CardContent } from '../components/ui/card'
-import { Badge } from '../components/ui/badge'
+import quizDataset from '../data/quizData.json'
 
 import QuizEngine from '../components/quiz/QuizEngine'
 
 export default function QuizPage() {
+  const [searchParams] = useSearchParams()
+  const initialQuizId = searchParams.get('quizId')
+  const [selectedQuizId, setSelectedQuizId] = useState(initialQuizId)
+
+  useEffect(() => {
+    if (initialQuizId) {
+      setSelectedQuizId(initialQuizId)
+    }
+  }, [initialQuizId])
+
   return (
     <div className="dashboard-layout">
       <Sidebar />
@@ -16,36 +27,97 @@ export default function QuizPage() {
 
         <main className="dashboard-main">
           {/* Welcome Banner */}
-          <Card className="relative overflow-hidden bg-gradient-to-br from-emerald-800 to-teal-700 text-white border-none mb-8">
-            <span className="material-symbols-outlined absolute -right-8 -bottom-8 text-[180px] opacity-10 text-white pointer-events-none">quiz</span>
-            <CardContent className="p-8 relative z-10 flex flex-col justify-center">
-              <div className="max-w-2xl space-y-4">
-                <Badge variant="secondary" className="bg-white/20 hover:bg-white/30 text-white border-none flex w-fit items-center gap-1.5 px-3 py-1">
-                  <span className="material-symbols-outlined text-[16px]">school</span>
-                  Evaluasi Mandiri • Kurikulum Merdeka
-                </Badge>
-                
-                <h1 className="text-3xl md:text-4xl font-bold font-display tracking-tight">
+          <section className="welcome-banner" style={{ padding: '1.5rem 2rem' }}>
+            <span className="material-symbols-outlined banner-bg-motif">quiz</span>
+            <div className="banner-content">
+              <div>
+                <div className="curriculum-tag">
+                  <span className="material-symbols-outlined" style={{ fontSize: '16px' }}>school</span>
+                  <span>Evaluasi Mandiri • Kurikulum Merdeka</span>
+                </div>
+                <h1 className="banner-title" style={{ fontSize: '1.75rem' }}>
                   Modul Kuis Formatif Biologi
                 </h1>
-                
-                <p className="text-emerald-50 text-base md:text-lg max-w-xl">
-                  Uji pemahamanmu secara berkala. Cocokkan jawabanmu dengan kunci jawaban setelah kuis selesai untuk memperdalam materi.
+                <p className="banner-sub">
+                  Uji pemahamanmu secara berkala berdasarkan materi yang telah kamu pelajari.
                 </p>
               </div>
-            </CardContent>
-          </Card>
+            </div>
+          </section>
 
-          {/* Quiz Engine Component */}
+          {/* Quiz Selection or Quiz Engine */}
           <section style={{ margin: '1rem 0 2rem' }}>
-            <QuizEngine quizId="quiz-sel" />
+            {selectedQuizId ? (
+              <div>
+                <button 
+                  onClick={() => setSelectedQuizId(null)}
+                  style={{
+                    display: 'flex',
+                    alignItems: 'center',
+                    gap: '0.5rem',
+                    padding: '0.5rem 1rem',
+                    marginBottom: '1.5rem',
+                    backgroundColor: 'transparent',
+                    border: '1px solid var(--color-outline)',
+                    borderRadius: 'var(--radius-md)',
+                    cursor: 'pointer',
+                    color: 'var(--color-on-surface-variant)',
+                    fontWeight: 600
+                  }}
+                >
+                  <span className="material-symbols-outlined" style={{ fontSize: '18px' }}>arrow_back</span>
+                  Kembali ke Daftar Kuis
+                </button>
+                <QuizEngine quizId={selectedQuizId} />
+              </div>
+            ) : (
+              <div style={{ display: 'flex', flexDirection: 'column', gap: '1.5rem' }}>
+                <h3 style={{ fontSize: '1.25rem', fontWeight: 700, color: 'var(--color-on-surface)' }}>Pilih Kuis Berdasarkan Materi</h3>
+                <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(300px, 1fr))', gap: '1.25rem' }}>
+                  {quizDataset.quizzes.map((quiz) => (
+                    <div 
+                      key={quiz.id}
+                      style={{
+                        backgroundColor: 'var(--color-surface-container-lowest)',
+                        border: '1px solid rgba(191,201,194,0.4)',
+                        borderRadius: 'var(--radius-lg)',
+                        padding: '1.5rem',
+                        boxShadow: 'var(--shadow-level-1)',
+                        display: 'flex',
+                        flexDirection: 'column',
+                        justifyContent: 'space-between',
+                        gap: '1rem'
+                      }}
+                    >
+                      <div>
+                        <div style={{ fontSize: '0.75rem', fontWeight: 700, color: 'var(--color-primary)', textTransform: 'uppercase', marginBottom: '0.5rem' }}>
+                          {quiz.topic}
+                        </div>
+                        <h4 style={{ fontSize: '1.1rem', fontWeight: 700, color: 'var(--color-on-surface)', marginBottom: '0.5rem' }}>
+                          {quiz.title}
+                        </h4>
+                        <p style={{ fontSize: '0.85rem', color: 'var(--color-on-surface-variant)', lineHeight: 1.5 }}>
+                          {quiz.description}
+                        </p>
+                      </div>
+                      <button 
+                        onClick={() => setSelectedQuizId(quiz.id)}
+                        className="btn-practical"
+                        style={{ alignSelf: 'flex-start', padding: '0.5rem 1rem', fontSize: '0.8rem' }}
+                      >
+                        <span className="material-symbols-outlined" style={{ fontSize: '16px' }}>play_circle</span>
+                        Mulai Kuis
+                      </button>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            )}
           </section>
         </main>
 
         <Footer />
       </div>
-
-
     </div>
   )
 }
