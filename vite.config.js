@@ -31,5 +31,5 @@ export default defineConfig({
       }
     })
   ],
-  base: '/biosmart-sma/',
+  base: '/bio-smart/',
 })
