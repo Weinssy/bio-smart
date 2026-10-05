@@ -37,19 +37,19 @@ export default function Sidebar() {
 
   return (
     <>
-      {/* Mobile Hamburger Toggle */}
-      <button
-        type="button"
-        className="mobile-menu-toggle"
-        onClick={toggleMobile}
-        aria-label={mobileOpen ? 'Tutup menu' : 'Buka menu'}
-      >
-        <span className="material-symbols-outlined">
-          {mobileOpen ? 'close' : 'menu'}
-        </span>
-      </button>
+      {/* Mobile Hamburger Toggle (only shown when sidebar is closed so it doesn't overlap logo) */}
+      {!mobileOpen && (
+        <button
+          type="button"
+          className="mobile-menu-toggle"
+          onClick={toggleMobile}
+          aria-label="Buka menu navigasi"
+        >
+          <span className="material-symbols-outlined">menu</span>
+        </button>
+      )}
 
-      {/* Overlay */}
+      {/* Backdrop Overlay */}
       {mobileOpen && (
         <div
           className={`sidebar-overlay ${mobileOpen ? 'visible' : ''}`}
@@ -60,20 +60,40 @@ export default function Sidebar() {
 
       <aside className={`app-sidebar ${mobileOpen ? 'open' : ''}`}>
         <div className="sidebar-header">
-          {/* App Brand Logo */}
-          <div className="sidebar-logo">
-            <div className="logo-icon-box">
-              <span
-                className="material-symbols-outlined"
-                style={{ fontSize: '24px', fontVariationSettings: "'FILL' 1" }}
-              >
-                biotech
-              </span>
-            </div>
-            <div>
-              <div className="logo-brand">Bio Smart</div>
-              <div className="logo-sub">Belajar Biologi Interaktif</div>
-            </div>
+          {/* Brand Row: Logo linked to home + Close Button for mobile */}
+          <div className="sidebar-brand-row">
+            <Link 
+              to="/" 
+              onClick={closeMobile} 
+              className="sidebar-logo-link"
+              title="Bio Smart - Menuju Beranda"
+            >
+              <div className="sidebar-logo">
+                <div className="logo-icon-box">
+                  <span
+                    className="material-symbols-outlined"
+                    style={{ fontSize: '24px', fontVariationSettings: "'FILL' 1" }}
+                  >
+                    biotech
+                  </span>
+                </div>
+                <div className="sidebar-logo-text">
+                  <div className="logo-brand">Bio Smart</div>
+                  <div className="logo-sub">Belajar Biologi Interaktif</div>
+                </div>
+              </div>
+            </Link>
+
+            {/* Close Button on Mobile Drawer */}
+            <button
+              type="button"
+              className="sidebar-close-btn"
+              onClick={closeMobile}
+              aria-label="Tutup menu"
+              title="Tutup menu"
+            >
+              <span className="material-symbols-outlined">close</span>
+            </button>
           </div>
 
           {/* Navigation Tabs */}
@@ -87,6 +107,7 @@ export default function Sidebar() {
                 <Link
                   key={item.label}
                   to={item.path}
+                  onClick={closeMobile}
                   className={`nav-item ${isActive ? 'active' : ''}`}
                 >
                   <span className="material-symbols-outlined">{item.icon}</span>
@@ -98,7 +119,7 @@ export default function Sidebar() {
 
           {/* CTA */}
           <div className="sidebar-cta">
-            <Link to="/laboratorium" style={{ textDecoration: 'none' }}>
+            <Link to="/laboratorium" onClick={closeMobile} style={{ textDecoration: 'none' }}>
               <button className="btn-practical" type="button">
                 <span className="material-symbols-outlined" style={{ fontSize: '18px' }}>play_circle</span>
                 <span>Mulai Praktikum</span>

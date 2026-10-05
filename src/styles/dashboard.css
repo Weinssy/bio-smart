@@ -31,11 +31,61 @@
   gap: 1.5rem;
 }
 
+.sidebar-brand-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+}
+
+.sidebar-logo-link {
+  text-decoration: none;
+  color: inherit;
+  display: flex;
+  align-items: center;
+  flex: 1;
+  border-radius: var(--radius-md);
+  transition: opacity 0.15s ease;
+  min-width: 0;
+}
+
+.sidebar-logo-link:hover {
+  opacity: 0.88;
+}
+
 .sidebar-logo {
   display: flex;
   align-items: center;
   gap: 0.75rem;
-  padding: 0.25rem 0.5rem;
+  padding: 0.25rem 0.25rem;
+  width: 100%;
+  min-width: 0;
+}
+
+.sidebar-logo-text {
+  min-width: 0;
+  overflow: hidden;
+}
+
+.sidebar-close-btn {
+  display: none;
+  width: 2.25rem;
+  height: 2.25rem;
+  border-radius: var(--radius-md);
+  background-color: var(--color-surface-container-low);
+  border: 1px solid rgba(191, 201, 194, 0.4);
+  color: var(--color-on-surface);
+  cursor: pointer;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.15s ease;
+  flex-shrink: 0;
+  margin-left: 0.5rem;
+}
+
+.sidebar-close-btn:hover {
+  background-color: var(--color-surface-container-high);
+  color: var(--color-error, #ba1a1a);
 }
 
 .logo-icon-box {

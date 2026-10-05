@@ -102,11 +102,11 @@ export default function LabSimulation() {
       </div>
 
       {/* Main Simulation Workspace Grid */}
-      <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(320px, 1fr))', gap: '1.5rem' }}>
+      <div className="lab-sim-grid" style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(min(100%, 320px), 1fr))', gap: '1.5rem' }}>
         
         {/* Left Column: 2D Interactive SVG Chamber */}
-        <div style={{ 
-          gridColumn: '1 / span 2', 
+        <div className="lab-sim-chamber" style={{ 
+          gridColumn: '1 / -1', 
           backgroundColor: 'var(--color-surface-container-lowest)', 
           borderRadius: 'var(--radius-lg)', 
           border: '1px solid rgba(191, 201, 194, 0.4)', 

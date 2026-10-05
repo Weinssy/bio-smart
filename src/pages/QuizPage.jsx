@@ -73,7 +73,7 @@ export default function QuizPage() {
             ) : (
               <div style={{ display: 'flex', flexDirection: 'column', gap: '1.5rem' }}>
                 <h3 style={{ fontSize: '1.25rem', fontWeight: 700, color: 'var(--color-on-surface)' }}>Pilih Kuis Berdasarkan Materi</h3>
-                <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(300px, 1fr))', gap: '1.25rem' }}>
+                <div className="quiz-catalog-grid" style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(min(100%, 280px), 1fr))', gap: '1.25rem' }}>
                   {quizDataset.quizzes.map((quiz) => (
                     <div 
                       key={quiz.id}

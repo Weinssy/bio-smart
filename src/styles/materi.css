@@ -604,13 +604,26 @@
 
   /* Sidebar: overlay mode */
   .app-sidebar {
+    width: min(85vw, 300px);
     transform: translateX(-100%);
     transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1);
     z-index: 55;
+    box-shadow: none;
   }
 
   .app-sidebar.open {
     transform: translateX(0);
+    box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.25), 0 10px 10px -5px rgba(0, 0, 0, 0.1);
+  }
+
+  /* Show close button on mobile sidebar */
+  .sidebar-close-btn {
+    display: flex;
+  }
+
+  /* Hide keyboard shortcut badge on touch screens */
+  .search-shortcut-badge {
+    display: none !important;
   }
 
   .sidebar-overlay {
@@ -630,6 +643,7 @@
 
   .search-section {
     max-width: none;
+    width: 100%;
   }
 
   .search-bar {
@@ -640,7 +654,7 @@
     display: none;
   }
 
-  .header-actions .btn-export span:last-child {
+  .header-actions {
     display: none;
   }
 
@@ -720,10 +734,41 @@
   /* Materi detail */
   .materi-detail-layout {
     grid-template-columns: 1fr;
+    gap: 1.25rem;
   }
 
   .materi-subtopic-nav {
     position: static;
+    padding: 0.85rem 1rem;
+    background-color: var(--color-surface-container-lowest);
+    border: 1px solid rgba(191, 201, 194, 0.4);
+    border-radius: var(--radius-lg);
+  }
+
+  .materi-subtopic-nav-title {
+    font-size: 0.85rem;
+    margin-bottom: 0.5rem;
+  }
+
+  .materi-subtopic-list {
+    display: flex;
+    flex-direction: row;
+    overflow-x: auto;
+    gap: 0.5rem;
+    padding-bottom: 0.35rem;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: thin;
+  }
+
+  .materi-subtopic-list li {
+    flex-shrink: 0;
+  }
+
+  .materi-subtopic-btn {
+    white-space: nowrap;
+    padding: 0.5rem 0.85rem;
+    gap: 0.5rem;
+    font-size: 0.85rem;
   }
 
   .materi-content-area {
@@ -739,13 +784,28 @@
 
   .materi-content-actions {
     flex-direction: column;
-    align-items: flex-start;
+    align-items: stretch;
+    gap: 1rem;
   }
 
   .materi-nav-buttons {
     margin-left: 0;
     width: 100%;
+    display: flex;
     justify-content: space-between;
+  }
+
+  /* Quiz & Lab responsive adjustments */
+  .quiz-catalog-grid {
+    grid-template-columns: 1fr !important;
+  }
+
+  .lab-sim-grid {
+    grid-template-columns: 1fr !important;
+  }
+
+  .lab-sim-chamber {
+    grid-column: 1 / -1 !important;
   }
 
   /* Footer */
