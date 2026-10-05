@@ -50,11 +50,26 @@ export default function MateriDetail() {
   
   const [activeSubtopic, setActiveSubtopic] = useState(0)
   const contentRef = useRef(null)
+  const subtopicListRef = useRef(null)
 
   // Scroll content to top when switching subtopics
   useEffect(() => {
     if (contentRef.current) {
       contentRef.current.scrollTo({ top: 0, behavior: 'smooth' })
+    }
+    // Also scroll window to top if on mobile
+    if (window.innerWidth <= 768) {
+      window.scrollTo({ top: 0, behavior: 'smooth' })
+    }
+  }, [activeSubtopic])
+
+  // Auto-scroll active subtopic tab into view on mobile
+  useEffect(() => {
+    if (subtopicListRef.current) {
+      const activeEl = subtopicListRef.current.querySelector('.materi-subtopic-btn.active')
+      if (activeEl) {
+        activeEl.scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'center' })
+      }
     }
   }, [activeSubtopic])
 
@@ -66,9 +81,9 @@ export default function MateriDetail() {
         </span>
         <h2>Modul Tidak Ditemukan</h2>
         <p>Modul dengan ID "{moduleId}" tidak tersedia.</p>
-        <Link to="/" className="btn-export" style={{ textDecoration: 'none', display: 'inline-flex', alignItems: 'center', gap: '0.4rem', marginTop: '1rem' }}>
-          <span className="material-symbols-outlined" style={{ fontSize: '18px' }}>arrow_back</span>
-          Kembali ke Katalog
+        <Link to="/" className="materi-back-btn" style={{ marginTop: '1rem' }}>
+          <span className="material-symbols-outlined">arrow_back</span>
+          Kembali ke Katalog Materi
         </Link>
       </div>
     )
@@ -107,44 +122,33 @@ export default function MateriDetail() {
         return (
           <div key={index} className="materi-highlight">
             <span className="material-symbols-outlined materi-highlight-icon">auto_awesome</span>
-            <p><TooltipText text={contentBlock.text} /></p>
+            <div>
+              <p><TooltipText text={contentBlock.text} /></p>
+            </div>
           </div>
         )
       case 'image':
         return (
           <figure key={index} className="materi-content-image">
-            <div style={{ backgroundColor: '#ffffff', borderRadius: 'var(--radius-lg)', padding: '1rem', margin: '1rem 0' }}>
+            <div style={{ backgroundColor: '#ffffff', borderRadius: 'var(--radius-lg)', padding: '0.75rem', margin: '1rem 0', border: '1px solid rgba(191,201,194,0.3)' }}>
               <img
                 src={resolveAsset(contentBlock.src)}
                 alt={contentBlock.caption || 'Ilustrasi'}
                 loading="lazy"
-                style={{ width: '100%', display: 'block' }}
-                onError={(e) => {
-                  e.currentTarget.style.display = 'none';
-                  if (e.currentTarget.parentElement) {
-                    const fallback = document.createElement('div');
-                    fallback.className = 'diagram-fallback';
-                    fallback.innerHTML = '<span class="material-symbols-outlined fallback-icon">broken_image</span><p>Gambar tidak dapat dimuat</p>';
-                    e.currentTarget.parentElement.appendChild(fallback);
-                  }
-                }}
+                style={{ width: '100%', height: 'auto', display: 'block', borderRadius: 'var(--radius-md)' }}
               />
             </div>
-            {contentBlock.caption && <figcaption style={{ fontSize: '0.85rem', color: 'var(--color-on-surface-variant)', textAlign: 'center', marginTop: '0.5rem' }}>{contentBlock.caption}</figcaption>}
+            {contentBlock.caption && (
+              <figcaption className="materi-content-caption" style={{ textAlign: 'center', fontSize: '0.8rem', color: 'var(--color-on-surface-variant)', marginTop: '0.35rem' }}>
+                {contentBlock.caption}
+              </figcaption>
+            )}
           </figure>
         )
       case 'interactiveImage':
-        return <InteractiveDiagram key={index} diagram={contentBlock} />
-      case 'video':
         return (
-          <div key={index} className="materi-content-video" style={{ position: 'relative', paddingBottom: '56.25%', height: 0, overflow: 'hidden', borderRadius: 'var(--radius-lg)', margin: '1.5rem 0' }}>
-            <iframe
-              src={contentBlock.src}
-              style={{ position: 'absolute', top: 0, left: 0, width: '100%', height: '100%', border: 0 }}
-              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-              allowFullScreen
-              title={contentBlock.caption || 'Video Pembelajaran'}
-            />
+          <div key={index} className="materi-interactive-diagram-wrapper">
+            <InteractiveDiagram diagram={contentBlock} />
           </div>
         )
       case 'list':
@@ -162,37 +166,43 @@ export default function MateriDetail() {
 
   return (
     <div className="materi-detail">
-      {/* Breadcrumb */}
-      <div className="materi-breadcrumb">
-        <Link to="/" className="materi-breadcrumb-link">
-          <span className="material-symbols-outlined" style={{ fontSize: '18px' }}>arrow_back</span>
-          Katalog Materi
-        </Link>
-        <span className="materi-breadcrumb-sep">/</span>
-        <span className="materi-breadcrumb-current">{mod.title}</span>
-      </div>
+      {/* Unified Material Header Card with Prominent Back Action */}
+      <div className="materi-header-card">
+        <div className="materi-header-action-row">
+          <Link to="/" className="materi-back-btn" title="Kembali ke Katalog Materi">
+            <span className="material-symbols-outlined">arrow_back</span>
+            <span>Kembali ke Katalog Materi</span>
+          </Link>
 
-      {/* Module Title Header */}
-      <div className="materi-detail-progress-bar">
-        <div className="materi-detail-progress-info">
-          <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
-            <div className="materi-card-icon" style={{ background: `${mod.color}18`, color: mod.color, width: '2rem', height: '2rem' }}>
-              <span className="material-symbols-outlined" style={{ fontSize: '18px' }}>{mod.icon}</span>
-            </div>
-            <span style={{ fontWeight: 700, fontSize: '1rem' }}>{mod.title}</span>
+          <div className="materi-progress-badge">
+            <span className="material-symbols-outlined" style={{ fontSize: '16px' }}>menu_book</span>
+            <span>Sub-topik {activeSubtopic + 1} dari {totalSubtopics}</span>
           </div>
-          <span style={{ fontSize: '0.85rem', color: 'var(--color-on-surface-variant)' }}>
-            {totalSubtopics} sub-topik tersedia
-          </span>
+        </div>
+
+        <div className="materi-header-info">
+          <div className="materi-card-icon" style={{ background: `${mod.color}18`, color: mod.color, width: '2.75rem', height: '2.75rem', borderRadius: 'var(--radius-md)', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+            <span className="material-symbols-outlined" style={{ fontSize: '24px' }}>{mod.icon}</span>
+          </div>
+          <div className="materi-header-titles">
+            <span className="materi-header-tag">Bahan Ajar Biologi SMA • Fase F</span>
+            <h1 className="materi-header-title">{mod.title}</h1>
+          </div>
         </div>
       </div>
 
-      {/* Two-column layout: Sidebar + Content */}
+      {/* Two-column layout: Sidebar Tabs + Content Area */}
       <div className="materi-detail-layout">
-        {/* Left: Subtopic Navigation */}
+        {/* Subtopic Navigation */}
         <aside className="materi-subtopic-nav">
-          <h4 className="materi-subtopic-nav-title">Daftar Materi</h4>
-          <ul className="materi-subtopic-list">
+          <div className="materi-subtopic-nav-header">
+            <h4 className="materi-subtopic-nav-title">Daftar Sub-Topik</h4>
+            <span className="materi-subtopic-counter">
+              {activeSubtopic + 1}/{totalSubtopics}
+            </span>
+          </div>
+
+          <ul className="materi-subtopic-list" ref={subtopicListRef}>
             {mod.subtopics.map((st, idx) => {
               const isActive = idx === activeSubtopic
               return (
@@ -201,15 +211,12 @@ export default function MateriDetail() {
                     type="button"
                     className={`materi-subtopic-btn ${isActive ? 'active' : ''}`}
                     onClick={() => setActiveSubtopic(idx)}
+                    title={st.title}
                   >
-                    <span
-                      className="materi-subtopic-indicator"
-                    >
-                      <span style={{ fontSize: '0.65rem', fontWeight: 700, color: 'var(--color-outline)' }}>{idx + 1}</span>
+                    <span className="materi-subtopic-indicator">
+                      {idx + 1}
                     </span>
-                    <div className="materi-subtopic-btn-text">
-                      <span className="materi-subtopic-btn-title">{st.title}</span>
-                    </div>
+                    <span className="materi-subtopic-btn-title">{st.title}</span>
                   </button>
                 </li>
               )
@@ -237,24 +244,10 @@ export default function MateriDetail() {
             {(subtopic.content || []).map((block, i) => renderContent(block, i))}
           </div>
 
-          {/* Navigation */}
-          <div className="materi-content-actions" style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-            {/* Quiz Button for this module if it's the last subtopic */}
-            {activeSubtopic === totalSubtopics - 1 ? (
-              <Link 
-                to={`/quiz?quizId=${quizDataRaw.quizzes.find(q => q.moduleId === mod.id)?.id || ''}`} 
-                className="btn-practical"
-                style={{ textDecoration: 'none', display: 'flex', alignItems: 'center', gap: '0.5rem', backgroundColor: '#0d5c46', color: '#fff', padding: '0.75rem 1.5rem', borderRadius: 'var(--radius-md)' }}
-              >
-                <span className="material-symbols-outlined">quiz</span>
-                Kerjakan Kuis Modul
-              </Link>
-            ) : (
-              <div /> /* Empty div for flex spacing */
-            )}
-
-            <div className="materi-nav-buttons" style={{ marginLeft: 'auto' }}>
-              {activeSubtopic > 0 && (
+          {/* Navigation Action Buttons */}
+          <div className="materi-content-actions">
+            <div className="materi-nav-buttons">
+              {activeSubtopic > 0 ? (
                 <button
                   type="button"
                   className="btn-import materi-nav-btn"
@@ -263,8 +256,9 @@ export default function MateriDetail() {
                   <span className="material-symbols-outlined" style={{ fontSize: '18px' }}>chevron_left</span>
                   Sebelumnya
                 </button>
-              )}
-              {activeSubtopic < totalSubtopics - 1 && (
+              ) : <div />}
+
+              {activeSubtopic < totalSubtopics - 1 ? (
                 <button
                   type="button"
                   className="btn-export materi-nav-btn"
@@ -274,7 +268,24 @@ export default function MateriDetail() {
                   Selanjutnya
                   <span className="material-symbols-outlined" style={{ fontSize: '18px' }}>chevron_right</span>
                 </button>
+              ) : (
+                <Link 
+                  to={`/quiz?quizId=${quizDataRaw.quizzes.find(q => q.moduleId === mod.id)?.id || ''}`} 
+                  className="btn-practical"
+                  style={{ textDecoration: 'none', display: 'flex', alignItems: 'center', gap: '0.5rem', backgroundColor: '#0d5c46', color: '#fff', padding: '0.75rem 1.25rem', borderRadius: 'var(--radius-md)', fontWeight: 700 }}
+                >
+                  <span className="material-symbols-outlined">quiz</span>
+                  Kerjakan Kuis Modul
+                </Link>
               )}
+            </div>
+
+            {/* Bottom Quick Return to Catalog */}
+            <div className="materi-bottom-return">
+              <Link to="/" className="materi-bottom-back-link">
+                <span className="material-symbols-outlined" style={{ fontSize: '18px' }}>arrow_back</span>
+                <span>Kembali ke Katalog Materi</span>
+              </Link>
             </div>
           </div>
         </div>
