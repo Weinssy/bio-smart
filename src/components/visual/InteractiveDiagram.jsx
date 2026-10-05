@@ -8,6 +8,8 @@ export default function InteractiveDiagram({ diagram }) {
   const [mode, setMode] = useState('explore') // 'explore' | 'identify'
   const [imageError, setImageError] = useState(false)
 
+  const variant = diagram?.variant || 'anatomy' // 'anatomy' | 'process' | 'layered'
+
   // Validate diagram in development
   useEffect(() => {
     if (diagram) {
@@ -66,7 +68,18 @@ export default function InteractiveDiagram({ diagram }) {
   }
 
   const activePart = parts.find(p => p.id === activePartId)
+  const activePartIndex = parts.findIndex(p => p.id === activePartId)
   const currentTarget = questions[currentQuestionIndex]
+
+  const handleNavigateStep = (delta) => {
+    let nextIndex = 0
+    if (activePartIndex !== -1) {
+      nextIndex = activePartIndex + delta
+    }
+    if (nextIndex >= 0 && nextIndex < parts.length) {
+      setActivePartId(parts[nextIndex].id)
+    }
+  }
 
   const handleHotspotClick = (partId) => {
     if (mode === 'explore') {
@@ -89,13 +102,13 @@ export default function InteractiveDiagram({ diagram }) {
         }
         setFeedback({
           status: 'correct',
-          message: currentTarget.function || currentTarget.description || 'Jawaban kamu tepat!'
+          message: currentTarget.function || currentTarget.process || currentTarget.description || 'Jawaban kamu tepat!'
         })
       } else {
         setHasFailedCurrent(true)
         setFeedback({
           status: 'incorrect',
-          message: 'Coba perhatikan kembali posisi bagian tersebut.'
+          message: 'Coba perhatikan kembali posisi bagian atau urutan tersebut.'
         })
       }
     }
@@ -113,10 +126,29 @@ export default function InteractiveDiagram({ diagram }) {
     }
   }
 
+  const getSubtitle = () => {
+    const idx = activePartIndex >= 0 ? activePartIndex + 1 : 1
+    if (variant === 'process') return `Tahap ${idx} dari ${parts.length}`
+    if (variant === 'layered') return `Tingkat ${idx} dari ${parts.length}`
+    return 'Bagian Terpilih:'
+  }
+
+  const getQuestionInstruction = () => {
+    if (variant === 'process') return 'Manakah tahapan yang disebut:'
+    if (variant === 'layered') return 'Manakah tingkatan lapisan yang disebut:'
+    return 'Bagian manakah yang disebut:'
+  }
+
+  const getLegendTitle = () => {
+    if (variant === 'process') return 'Alur & Urutan Tahapan:'
+    if (variant === 'layered') return 'Tingkatan Piramida:'
+    return 'Daftar Bagian:'
+  }
+
   const imageSrc = resolveAsset(diagram?.src)
 
   return (
-    <div className="interactive-diagram-container">
+    <div className={`interactive-diagram-container variant-${variant}`}>
       <div className="diagram-header">
         <div className="diagram-header-top">
           <div className="diagram-header-text">
@@ -219,7 +251,7 @@ export default function InteractiveDiagram({ diagram }) {
                           onPointerDown={(e) => e.stopPropagation()}
                           aria-label={
                             mode === 'explore'
-                              ? `Pilih bagian ${part.label}`
+                              ? `Pilih ${part.label}`
                               : `Pilih area nomor ${idx + 1}`
                           }
                         >
@@ -251,7 +283,7 @@ export default function InteractiveDiagram({ diagram }) {
             activePart ? (
               <div className="info-panel active-panel">
                 <div className="info-panel-header">
-                  <span className="info-panel-subtitle">Bagian Terpilih:</span>
+                  <span className="info-panel-subtitle">{getSubtitle()}</span>
                   <h4 className="info-panel-title">{activePart.label}</h4>
                 </div>
                 <div className="info-panel-body">
@@ -261,29 +293,73 @@ export default function InteractiveDiagram({ diagram }) {
                       <p>{activePart.description}</p>
                     </div>
                   )}
+                  {activePart.process && (
+                    <div className="info-section">
+                      <strong>Proses / Perubahan:</strong>
+                      <p>{activePart.process}</p>
+                    </div>
+                  )}
+                  {activePart.examples && (
+                    <div className="info-section">
+                      <strong>Contoh Makanan / Elemen:</strong>
+                      <p>{activePart.examples}</p>
+                    </div>
+                  )}
                   {activePart.function && (
                     <div className="info-section">
-                      <strong>Fungsi:</strong>
+                      <strong>Fungsi / Peran:</strong>
                       <p>{activePart.function}</p>
                     </div>
                   )}
                 </div>
-                <button
-                  type="button"
-                  className="btn-reset-selection"
-                  onClick={() => setActivePartId(null)}
-                >
-                  Tutup Detail
-                </button>
+
+                <div className="active-panel-actions">
+                  <button
+                    type="button"
+                    className="btn-reset-selection"
+                    onClick={() => setActivePartId(null)}
+                  >
+                    Tutup Detail
+                  </button>
+
+                  {(variant === 'process' || variant === 'layered') && (
+                    <div className="process-nav-controls">
+                      <button
+                        type="button"
+                        className="btn-step-nav"
+                        disabled={activePartIndex <= 0}
+                        onClick={() => handleNavigateStep(-1)}
+                        aria-label="Tahap Sebelumnya"
+                      >
+                        <span className="material-symbols-outlined">arrow_back</span> Sebelumnya
+                      </button>
+                      <button
+                        type="button"
+                        className="btn-step-nav"
+                        disabled={activePartIndex >= parts.length - 1}
+                        onClick={() => handleNavigateStep(1)}
+                        aria-label="Tahap Berikutnya"
+                      >
+                        Berikutnya <span className="material-symbols-outlined">arrow_forward</span>
+                      </button>
+                    </div>
+                  )}
+                </div>
               </div>
             ) : (
               <div className="info-panel empty-panel">
                 <span className="material-symbols-outlined empty-icon">ads_click</span>
-                <p>Klik salah satu penanda pada diagram untuk melihat detail struktur dan fungsinya.</p>
+                <p>
+                  {variant === 'process'
+                    ? 'Klik salah satu tahap proses pada diagram untuk melihat detail alur biologisnya.'
+                    : variant === 'layered'
+                    ? 'Klik salah satu tingkatan piramida untuk mempelajari proporsi dan fungsi nutrisinya.'
+                    : 'Klik salah satu penanda pada diagram untuk melihat detail struktur dan fungsinya.'}
+                </p>
 
                 {parts.length > 0 && (
                   <div className="legend-list">
-                    <strong>Daftar Bagian:</strong>
+                    <strong>{getLegendTitle()}</strong>
                     <ul>
                       {parts.map((part, idx) => (
                         <li
@@ -349,7 +425,7 @@ export default function InteractiveDiagram({ diagram }) {
                     Soal {currentQuestionIndex + 1} dari {questions.length}
                   </div>
                   <h4 className="question-title">Kenali Bagian</h4>
-                  <p className="question-instruction">Bagian manakah yang disebut:</p>
+                  <p className="question-instruction">{getQuestionInstruction()}</p>
                   <div className="question-target">"{currentTarget?.label}"</div>
 
                   {feedback ? (

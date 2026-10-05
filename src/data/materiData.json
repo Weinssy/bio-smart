@@ -255,9 +255,80 @@
               "text": "Sel memperbanyak diri melalui proses pembelahan. Pembelahan sel sangat penting untuk pertumbuhan, perbaikan jaringan, dan reproduksi."
             },
             {
-              "type": "image",
-              "src": "https://upload.wikimedia.org/wikipedia/commons/thumb/c/ca/Mitosis_diagram.jpg/800px-Mitosis_diagram.jpg",
-              "caption": "Diagram Tahapan Mitosis"
+              "type": "interactiveImage",
+              "src": "/images/diagrams/sel/mitosis.svg",
+              "variant": "process",
+              "title": "Tahapan Pembelahan Sel (Mitosis)",
+              "caption": "Diagram alur 6 tahapan mitosis sel eukariotik",
+              "description": "Mitosis menghasilkan 2 sel anak diploid (2n) yang identik secara genetik. Klik setiap tahapan untuk mempelajari proses dan perubahan kromosomnya.",
+              "parts": [
+                {
+                  "id": "interfase",
+                  "label": "1. Interfase",
+                  "description": "Fase persiapan sebelum pembelahan sel (fase G1, S, dan G2). Membran inti dan nukleolus masih utuh.",
+                  "process": "Materi genetik berupa benang kromatin menduplikasi diri (replikasi DNA) dan sentrosom mengganda.",
+                  "function": "Memastikan sel memiliki massa dan materi genetik ganda yang cukup sebelum membelah.",
+                  "hotspot": {
+                    "x": 16.7,
+                    "y": 26.7
+                  }
+                },
+                {
+                  "id": "profase",
+                  "label": "2. Profase",
+                  "description": "Tahap awal mitosis di mana kromatin mulai memadat menjadi kromosom ganda berbentuk X (kromatid saudara).",
+                  "process": "Membran inti mulai terurai, nukleolus lenyap, dan sentrosom bergerak ke kutub berlawanan sambil membentuk benang spindel.",
+                  "function": "Mempersiapkan kromosom agar kompak dan mudah dipisahkan tanpa kusut.",
+                  "hotspot": {
+                    "x": 50,
+                    "y": 26.7
+                  }
+                },
+                {
+                  "id": "metafase",
+                  "label": "3. Metafase",
+                  "description": "Tahap di mana seluruh kromosom berjejer rapi di bidang ekuator (pelat metafase).",
+                  "process": "Kinetokor pada sentromer setiap kromosom terikat kuat oleh mikrotubulus benang spindel dari kedua kutub.",
+                  "function": "Memastikan kedua kromatid tersambung ke kutub berbeda sebelum dipisahkan (titik pengecekan M-checkpoint).",
+                  "hotspot": {
+                    "x": 83.3,
+                    "y": 26.7
+                  }
+                },
+                {
+                  "id": "anafase",
+                  "label": "4. Anafase",
+                  "description": "Tahap pemisahan kromatid saudara menjadi kromosom anak individual.",
+                  "process": "Benang spindel memendek, menarik kromatid saudara bergerak ke kutub sel yang berlawanan (berbentuk huruf V).",
+                  "function": "Menjamin setiap kutub sel menerima salinan genetik dalam jumlah yang persis sama.",
+                  "hotspot": {
+                    "x": 83.3,
+                    "y": 73.3
+                  }
+                },
+                {
+                  "id": "telofase",
+                  "label": "5. Telofase",
+                  "description": "Tahap akhir pembelahan inti (kariokinesis) di mana kromosom telah berkumpul di kutub masing-masing.",
+                  "process": "Membran inti baru mulai terbentuk kembali di sekitar masing-masing set kromosom, dan kromosom mulai terurai kembali menjadi kromatin.",
+                  "function": "Membentuk kembali dua inti sel anak yang terpisah secara fisik.",
+                  "hotspot": {
+                    "x": 50,
+                    "y": 73.3
+                  }
+                },
+                {
+                  "id": "sitokinesis",
+                  "label": "6. Sitokinesis",
+                  "description": "Pembelahan sitoplasma sel secara tuntas melalui cincin pembelahan (cleavage furrow).",
+                  "process": "Mikrofilamen aktin dan miosin menjepit membran sel hingga terbelah menjadi dua sel anak diploid (2n).",
+                  "function": "Menghasilkan 2 sel anak identik yang siap tumbuh dan menjalankan fungsi jaringan.",
+                  "hotspot": {
+                    "x": 16.7,
+                    "y": 73.3
+                  }
+                }
+              ]
             },
             {
               "type": "list",
@@ -673,9 +744,80 @@
               "text": "Sistem reproduksi berfungsi untuk mempertahankan kelestarian spesies melalui fertilisasi sel gamet jantan dan betina."
             },
             {
-              "type": "image",
-              "src": "https://upload.wikimedia.org/wikipedia/commons/thumb/4/4e/Sperm-egg.jpg/800px-Sperm-egg.jpg",
-              "caption": "Fertilisasi Sperma dan Ovum"
+              "type": "interactiveImage",
+              "src": "/images/diagrams/reproduksi/fertilisasi.svg",
+              "variant": "process",
+              "title": "Proses Perjalanan & Fertilisasi Manusia",
+              "caption": "Diagram proses biologis fertilisasi sel telur oleh sperma hingga implantasi",
+              "description": "Perjalanan sel gamet dari ovulasi di ovarium, pembuahan di tuba fallopi, pembelahan zigot, hingga tertanam di dinding rahim (uterus).",
+              "parts": [
+                {
+                  "id": "ovarium",
+                  "label": "1. Ovarium (Ovulasi)",
+                  "description": "Kelenjar reproduksi wanita yang mematangkan folikel dan melepaskan sel telur matang (oosit sekunder).",
+                  "process": "Lonjakan hormon LH memicu pecahnya folikel de Graaf dan pelepasan ovum ke rongga pelvis.",
+                  "function": "Menghasilkan sel gamet betina (ovum haploid/n) dan hormon reproduksi (estrogen & progesteron).",
+                  "hotspot": {
+                    "x": 18.5,
+                    "y": 72
+                  }
+                },
+                {
+                  "id": "fimbriae",
+                  "label": "2. Fimbriae & Infundibulum",
+                  "description": "Rumbai-rumbai mirip jari di ujung corong saluran tuba yang aktif bergerak saat ovulasi.",
+                  "process": "Menyapu permukaan ovarium dan menangkap ovum yang baru dilepaskan menuju infundibulum.",
+                  "function": "Mengarahkan sel telur masuk ke dalam saluran tuba fallopi agar tidak hilang di rongga abdomen.",
+                  "hotspot": {
+                    "x": 18,
+                    "y": 47
+                  }
+                },
+                {
+                  "id": "tuba-fallopi",
+                  "label": "3. Tuba Fallopi (Oviduk)",
+                  "description": "Saluran berotot yang dilengkapi silia untuk mendorong ovum menuju rahim.",
+                  "process": "Menjadi tempat bertemunya jutaan sperma yang berenang ke atas dengan sel telur yang turun.",
+                  "function": "Saluran transit gamet dan lingkungan biologis pendukung proses fertilisasi.",
+                  "hotspot": {
+                    "x": 36,
+                    "y": 26
+                  }
+                },
+                {
+                  "id": "fertilisasi",
+                  "label": "4. Fertilisasi (Pembuahan)",
+                  "description": "Peristiwa bertemunya sel sperma dan ovum (umumnya terjadi di 1/3 bagian ampula tuba fallopi).",
+                  "process": "Reaksi akrosom melarutkan zona pelusida ovum; satu sperma menyatukan materi genetiknya (n) dengan ovum (n).",
+                  "function": "Peleburan genom haploid menghasilkan sel zigot diploid (2n) dengan 46 kromosom baru.",
+                  "hotspot": {
+                    "x": 54,
+                    "y": 26
+                  }
+                },
+                {
+                  "id": "morula",
+                  "label": "5. Pembelahan Zigot (Morula)",
+                  "description": "Tahap pembelahan mitosis awal (cleavage) zigot menjadi bola sel padat menyerupai buah arbei.",
+                  "process": "Zigot membelah berulang (2, 4, 8, hingga 16+ sel) tanpa bertambah ukuran total sambil menggelinding di tuba.",
+                  "function": "Menggandakan jumlah sel calon embrio sebelum tiba di rongga rahim.",
+                  "hotspot": {
+                    "x": 71,
+                    "y": 38
+                  }
+                },
+                {
+                  "id": "implantasi",
+                  "label": "6. Implantasi di Uterus",
+                  "description": "Tahap di mana embrio berkembang menjadi blastokista berongga dan menempel pada dinding rahim.",
+                  "process": "Lapisan trofoblas blastokista mensekresikan enzim untuk membenamkan diri ke dalam lapisan endometrium rahim.",
+                  "function": "Memulai kehamilan, tempat embrio memperoleh nutrisi darah ibu dan kelak berkembang menjadi plasenta.",
+                  "hotspot": {
+                    "x": 80,
+                    "y": 65
+                  }
+                }
+              ]
             },
             {
               "type": "list",
@@ -701,9 +843,58 @@
               "text": "Tubuh membutuhkan berbagai nutrisi untuk menjalankan metabolisme dan membangun sel-sel baru."
             },
             {
-              "type": "image",
-              "src": "https://upload.wikimedia.org/wikipedia/commons/thumb/e/e6/Food_Pyramid.jpg/600px-Food_Pyramid.jpg",
-              "caption": "Piramida Makanan Seimbang"
+              "type": "interactiveImage",
+              "src": "/images/diagrams/ekologi/piramida-makanan.svg",
+              "variant": "layered",
+              "title": "Piramida Makanan & Gizi Seimbang",
+              "caption": "Diagram berjenjang proporsi makronutrien dan mikronutrien tubuh",
+              "description": "Panduan porsi dan jenis makanan harian manusia. Semakin ke bawah lapisannya, semakin besar porsi yang dibutuhkan tubuh.",
+              "parts": [
+                {
+                  "id": "tier-dasar",
+                  "label": "1. Lapisan Dasar: Makanan Pokok (Karbohidrat)",
+                  "description": "Lapisan paling bawah dan paling luas pada piramida makanan, membutuhkan 3–4 porsi per hari.",
+                  "examples": "Nasi, jagung, roti gandum, singkong, ubi, kentang, dan oatmeal.",
+                  "function": "Sebagai sumber energi utama (glukosa) bagi respirasi seluler, fungsi otak, dan aktivitas fisik.",
+                  "hotspot": {
+                    "x": 50,
+                    "y": 86
+                  }
+                },
+                {
+                  "id": "tier-sayur-buah",
+                  "label": "2. Lapisan Kedua: Sayur & Buah (Serat, Vitamin, Mineral)",
+                  "description": "Lapisan penyedia zat pengatur tubuh, dianjurkan 3–4 porsi sayur dan 2–3 porsi buah per hari.",
+                  "examples": "Bayam, brokoli, wortel, pisang, jeruk, pepaya, dan apel.",
+                  "function": "Menyediakan vitamin (A, C, E), antioksidan, dan serat alami untuk imunitas dan kesehatan saluran pencernaan.",
+                  "hotspot": {
+                    "x": 50,
+                    "y": 63
+                  }
+                },
+                {
+                  "id": "tier-protein",
+                  "label": "3. Lapisan Ketiga: Lauk-Pauk (Protein Hewani & Nabati)",
+                  "description": "Lapisan zat pembangun tubuh, dianjurkan 2–4 porsi per hari secara bergantian.",
+                  "examples": "Ikan, telur, daging ayam/sapi, tempe, tahu, susu, dan kacang-kacangan.",
+                  "function": "Zat pembangun untuk regenerasi sel, pembentukan antibodi, enzim, dan sintesis hemoglobin darah (zat besi Fe).",
+                  "hotspot": {
+                    "x": 50,
+                    "y": 42
+                  }
+                },
+                {
+                  "id": "tier-puncak",
+                  "label": "4. Lapisan Puncak: Gula, Garam & Minyak (Dibatasi)",
+                  "description": "Lapisan teratas dengan volume terkecil, menunjukkan kebutuhan konsumsi yang paling sedikit.",
+                  "examples": "Gula pasir/sirup (< 4 sdm/hari), garam dapur (< 1 sdt/hari), minyak/lemak (< 5 sdm/hari).",
+                  "function": "Pelengkap energi dan cita rasa, namun harus dibatasi guna mencegah risiko obesitas, diabetes, dan hipertensi.",
+                  "hotspot": {
+                    "x": 50,
+                    "y": 24
+                  }
+                }
+              ]
             },
             {
               "type": "list",
