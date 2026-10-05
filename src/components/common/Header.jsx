@@ -11,6 +11,7 @@ import {
   DropdownMenuTrigger,
 } from '../ui/dropdown-menu'
 import { Button } from '../ui/button'
+import { toast } from 'sonner'
 
 export default function Header() {
   const { theme, toggleTheme } = useTheme()
@@ -27,6 +28,20 @@ export default function Header() {
     document.addEventListener('keydown', handleKeyDown)
     return () => document.removeEventListener('keydown', handleKeyDown)
   }, [])
+
+  const handleBookmark = () => {
+    toast.success('Materi berhasil disimpan!', {
+      description: 'Ditambahkan ke Koleksi Belajar Anda.',
+      icon: '🔖',
+    })
+  }
+
+  const handleNotifications = () => {
+    toast.info('Pencapaian Baru Terbuka!', {
+      description: 'Anda mendapatkan lencana "Penjelajah Sel". Cek profil Anda.',
+      icon: '🏆',
+    })
+  }
 
   return (
     <>
@@ -67,9 +82,13 @@ export default function Header() {
             </span>
           </Button>
 
-          <Button variant="ghost" size="icon" className="hidden sm:inline-flex relative">
+          <Button variant="ghost" size="icon" className="hidden sm:inline-flex relative" onClick={handleNotifications}>
             <span className="material-symbols-outlined text-[20px]">notifications</span>
             <span className="absolute top-2 right-2 h-2 w-2 rounded-full bg-destructive"></span>
+          </Button>
+
+          <Button variant="ghost" size="icon" className="hidden sm:inline-flex relative" onClick={handleBookmark} title="Materi Tersimpan">
+            <span className="material-symbols-outlined text-[20px]">bookmark</span>
           </Button>
 
           {/* User Profile Dropdown */}

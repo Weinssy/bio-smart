@@ -15,6 +15,7 @@ import {
   DialogTrigger,
 } from '../ui/dialog'
 import { Label } from '../ui/label'
+import { toast } from 'sonner'
 
 export default function QuizEngine({ quizId = 'quiz-sel' }) {
   const currentQuizData = useMemo(() => {
@@ -74,6 +75,22 @@ export default function QuizEngine({ quizId = 'quiz-sel' }) {
     })
     setIsConfirmOpen(false)
     setIsSubmitted(true)
+
+    // Gamification Toast Notification
+    if (score === 100) {
+      toast.success('Luar Biasa! Sempurna 100!', {
+        description: 'Anda mendapatkan +50 XP dan badge "Sel Master"!',
+        duration: 5000,
+      })
+    } else if (score >= passingGrade) {
+      toast.success(`Lulus KKM! Skor Anda ${score}.`, {
+        description: 'Bagus sekali! Anda mendapatkan +20 XP.',
+      })
+    } else {
+      toast.error(`Skor Anda ${score} (Belum Lulus)`, {
+        description: 'Jangan menyerah! Cek pembahasan dan coba lagi nanti.',
+      })
+    }
   }
 
   const handleRetake = () => {
