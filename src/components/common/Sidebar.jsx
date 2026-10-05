@@ -89,7 +89,7 @@ export default function Sidebar() {
       </div>
 
       {/* Desktop Sidebar */}
-      <aside className="hidden md:flex flex-col w-[260px] h-screen sticky top-0 shrink-0 z-40">
+      <aside className="hidden md:flex flex-col w-64 h-screen fixed left-0 top-0 shrink-0 z-40 bg-background border-r">
         <NavContent />
       </aside>
     </>
