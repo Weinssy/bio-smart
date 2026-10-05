@@ -1,0 +1,93 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 600" width="100%" height="100%">
+  <!-- Background -->
+  <rect width="100%" height="100%" fill="#f0fdf4" rx="20"/>
+  
+  <!-- Title -->
+  <text x="400" y="50" font-family="sans-serif" font-size="24" font-weight="bold" fill="#065f46" text-anchor="middle">Model Mosaik Cair Membran Sel</text>
+  
+  <!-- Phospholipid Heads (Top Layer) -->
+  <g fill="#34d399">
+    <!-- Generating circles for top layer -->
+    <circle cx="100" cy="200" r="15"/><circle cx="140" cy="200" r="15"/><circle cx="180" cy="200" r="15"/>
+    <circle cx="220" cy="200" r="15"/><circle cx="260" cy="200" r="15"/><circle cx="300" cy="200" r="15"/>
+    <!-- Gap for integral protein -->
+    <circle cx="500" cy="200" r="15"/><circle cx="540" cy="200" r="15"/><circle cx="580" cy="200" r="15"/>
+    <circle cx="620" cy="200" r="15"/><circle cx="660" cy="200" r="15"/><circle cx="700" cy="200" r="15"/>
+  </g>
+  
+  <!-- Phospholipid Heads (Bottom Layer) -->
+  <g fill="#34d399">
+    <circle cx="100" cy="350" r="15"/><circle cx="140" cy="350" r="15"/><circle cx="180" cy="350" r="15"/>
+    <circle cx="220" cy="350" r="15"/><circle cx="260" cy="350" r="15"/><circle cx="300" cy="350" r="15"/>
+    <!-- Gap for integral protein -->
+    <circle cx="500" cy="350" r="15"/><circle cx="540" cy="350" r="15"/><circle cx="580" cy="350" r="15"/>
+    <circle cx="620" cy="350" r="15"/><circle cx="660" cy="350" r="15"/><circle cx="700" cy="350" r="15"/>
+  </g>
+
+  <!-- Phospholipid Tails (Top) -->
+  <g stroke="#059669" stroke-width="3" fill="none">
+    <path d="M100 215 L90 260 M100 215 L110 260" />
+    <path d="M140 215 L130 260 M140 215 L150 260" />
+    <path d="M180 215 L170 260 M180 215 L190 260" />
+    <path d="M220 215 L210 260 M220 215 L230 260" />
+    <path d="M260 215 L250 260 M260 215 L270 260" />
+    <path d="M300 215 L290 260 M300 215 L310 260" />
+    
+    <path d="M500 215 L490 260 M500 215 L510 260" />
+    <path d="M540 215 L530 260 M540 215 L550 260" />
+    <path d="M580 215 L570 260 M580 215 L590 260" />
+    <path d="M620 215 L610 260 M620 215 L630 260" />
+    <path d="M660 215 L650 260 M660 215 L670 260" />
+    <path d="M700 215 L690 260 M700 215 L710 260" />
+  </g>
+
+  <!-- Phospholipid Tails (Bottom) -->
+  <g stroke="#059669" stroke-width="3" fill="none">
+    <path d="M100 335 L90 290 M100 335 L110 290" />
+    <path d="M140 335 L130 290 M140 335 L150 290" />
+    <path d="M180 335 L170 290 M180 335 L190 290" />
+    <path d="M220 335 L210 290 M220 335 L230 290" />
+    <path d="M260 335 L250 290 M260 335 L270 290" />
+    <path d="M300 335 L290 290 M300 335 L310 290" />
+
+    <path d="M500 335 L490 290 M500 335 L510 290" />
+    <path d="M540 335 L530 290 M540 335 L550 290" />
+    <path d="M580 335 L570 290 M580 335 L590 290" />
+    <path d="M620 335 L610 290 M620 335 L630 290" />
+    <path d="M660 335 L650 290 M660 335 L670 290" />
+    <path d="M700 335 L690 290 M700 335 L710 290" />
+  </g>
+
+  <!-- Integral Protein (Channel) -->
+  <path d="M360 160 Q340 275 360 390 L390 390 Q380 275 390 160 Z" fill="#6366f1" />
+  <path d="M440 160 Q460 275 440 390 L410 390 Q420 275 410 160 Z" fill="#6366f1" />
+  
+  <!-- Peripheral Protein -->
+  <ellipse cx="220" cy="400" rx="40" ry="20" fill="#f59e0b" />
+  <ellipse cx="600" cy="150" rx="35" ry="18" fill="#f59e0b" />
+
+  <!-- Glycoprotein Chain -->
+  <g stroke="#0284c7" stroke-width="4" fill="none">
+    <path d="M600 132 L600 100 L580 80 M600 100 L620 70 M620 70 L640 50 M620 70 L610 40" />
+    <circle cx="600" cy="100" r="5" fill="#38bdf8" />
+    <circle cx="580" cy="80" r="5" fill="#38bdf8" />
+    <circle cx="620" cy="70" r="5" fill="#38bdf8" />
+    <circle cx="640" cy="50" r="5" fill="#38bdf8" />
+    <circle cx="610" cy="40" r="5" fill="#38bdf8" />
+  </g>
+
+  <!-- Glycolipid Chain -->
+  <g stroke="#0284c7" stroke-width="4" fill="none">
+    <path d="M260 185 L260 140 L280 110 M260 140 L240 100" />
+    <circle cx="260" cy="140" r="5" fill="#38bdf8" />
+    <circle cx="280" cy="110" r="5" fill="#38bdf8" />
+    <circle cx="240" cy="100" r="5" fill="#38bdf8" />
+  </g>
+
+  <!-- Cholesterol -->
+  <g fill="#eab308">
+    <rect x="145" y="270" width="10" height="20" rx="2" />
+    <rect x="525" y="260" width="10" height="20" rx="2" />
+    <rect x="645" y="280" width="10" height="20" rx="2" />
+  </g>
+</svg>

@@ -1,0 +1,156 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 960 600" width="100%" height="100%">
+  <defs>
+    <marker id="arrow" viewBox="0 0 10 10" refX="5" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+      <path d="M 0 1 L 10 5 L 0 9 z" fill="#0d9488"/>
+    </marker>
+    <filter id="shadow" x="-10%" y="-10%" width="120%" height="120%">
+      <feDropShadow dx="0" dy="2" stdDeviation="3" flood-opacity="0.1"/>
+    </filter>
+  </defs>
+
+  <!-- Background -->
+  <rect width="100%" height="100%" fill="#f8fafc" rx="16"/>
+
+  <!-- Title & Subtitle -->
+  <text x="480" y="42" font-family="system-ui, -apple-system, sans-serif" font-size="22" font-weight="bold" fill="#0f172a" text-anchor="middle">Tahapan Pembelahan Sel (Mitosis)</text>
+  <text x="480" y="65" font-family="system-ui, -apple-system, sans-serif" font-size="13" fill="#64748b" text-anchor="middle">Siklus pembelahan sel somatik dari interfase hingga terbentuk 2 sel anak identik</text>
+
+  <!-- Flow Arrows -->
+  <g stroke="#0d9488" stroke-width="3" fill="none">
+    <!-- 1 -> 2 -->
+    <path d="M 245 160 L 390 160" marker-end="url(#arrow)"/>
+    <!-- 2 -> 3 -->
+    <path d="M 570 160 L 710 160" marker-end="url(#arrow)"/>
+    <!-- 3 -> 4 (curve down) -->
+    <path d="M 800 245 C 800 300, 800 300, 800 350" marker-end="url(#arrow)"/>
+    <!-- 4 -> 5 -->
+    <path d="M 715 440 L 570 440" marker-end="url(#arrow)"/>
+    <!-- 5 -> 6 -->
+    <path d="M 390 440 L 245 440" marker-end="url(#arrow)"/>
+  </g>
+
+  <!-- ================= STAGE 1: INTERFASE ================= -->
+  <g transform="translate(160, 160)">
+    <!-- Cell Membrane -->
+    <circle cx="0" cy="0" r="75" fill="#f0fdfa" stroke="#0d9488" stroke-width="3" filter="url(#shadow)"/>
+    <!-- Nuclear Envelope -->
+    <circle cx="0" cy="0" r="48" fill="#e0e7ff" stroke="#6366f1" stroke-width="2" stroke-dasharray="4 2"/>
+    <!-- Chromatin Fibers (Uncoiled DNA) -->
+    <path d="M -20 -15 Q -10 -30 5 -15 T 25 -5 T 10 20 T -15 15 T -5 -5" fill="none" stroke="#4338ca" stroke-width="2.5" stroke-linecap="round"/>
+    <path d="M -15 5 Q 0 -10 20 5 T -5 25" fill="none" stroke="#ec4899" stroke-width="2.5" stroke-linecap="round"/>
+    <!-- Centrioles / Centrosome -->
+    <rect x="-38" y="-38" width="8" height="4" fill="#f59e0b"/>
+    <rect x="-36" y="-40" width="4" height="8" fill="#f59e0b"/>
+    <!-- Label -->
+    <text x="0" y="102" font-family="system-ui, sans-serif" font-size="14" font-weight="bold" fill="#0f766e" text-anchor="middle">1. Interfase</text>
+    <text x="0" y="118" font-family="system-ui, sans-serif" font-size="11" fill="#64748b" text-anchor="middle">Replikasi DNA &amp; Pertumbuhan</text>
+  </g>
+
+  <!-- ================= STAGE 2: PROFASE ================= -->
+  <g transform="translate(480, 160)">
+    <!-- Cell Membrane -->
+    <circle cx="0" cy="0" r="75" fill="#f0fdfa" stroke="#0d9488" stroke-width="3" filter="url(#shadow)"/>
+    <!-- Disintegrating Nuclear Envelope -->
+    <circle cx="0" cy="0" r="48" fill="#f8fafc" stroke="#94a3b8" stroke-width="2" stroke-dasharray="6 6"/>
+    <!-- Spindle Fibers Forming -->
+    <path d="M -50 -20 Q 0 -35 50 -20" stroke="#f59e0b" stroke-width="1.5" stroke-dasharray="2 2" fill="none"/>
+    <path d="M -50 20 Q 0 35 50 20" stroke="#f59e0b" stroke-width="1.5" stroke-dasharray="2 2" fill="none"/>
+    <!-- Centrioles Moving to Poles -->
+    <circle cx="-50" cy="0" r="5" fill="#f59e0b"/>
+    <circle cx="50" cy="0" r="5" fill="#f59e0b"/>
+    <!-- Condensed Chromosomes (X shapes) -->
+    <path d="M -20 -15 L -10 0 L -20 15 M -10 -15 L -20 0 L -10 15" stroke="#4338ca" stroke-width="3.5" stroke-linecap="round"/>
+    <path d="M 12 -15 L 22 0 L 12 15 M 22 -15 L 12 0 L 22 15" stroke="#ec4899" stroke-width="3.5" stroke-linecap="round"/>
+    <!-- Label -->
+    <text x="0" y="102" font-family="system-ui, sans-serif" font-size="14" font-weight="bold" fill="#0f766e" text-anchor="middle">2. Profase</text>
+    <text x="0" y="118" font-family="system-ui, sans-serif" font-size="11" fill="#64748b" text-anchor="middle">Kromosom Memadat, Spindel Muncul</text>
+  </g>
+
+  <!-- ================= STAGE 3: METAFASE ================= -->
+  <g transform="translate(800, 160)">
+    <!-- Cell Membrane -->
+    <circle cx="0" cy="0" r="75" fill="#f0fdfa" stroke="#0d9488" stroke-width="3" filter="url(#shadow)"/>
+    <!-- Centrosomes at Opposite Poles -->
+    <circle cx="0" cy="-60" r="5" fill="#f59e0b"/>
+    <circle cx="0" cy="60" r="5" fill="#f59e0b"/>
+    <!-- Spindle Fibers to Equator -->
+    <line x1="0" y1="-60" x2="-25" y2="0" stroke="#f59e0b" stroke-width="1.5" stroke-dasharray="3 2"/>
+    <line x1="0" y1="-60" x2="0" y2="0" stroke="#f59e0b" stroke-width="1.5" stroke-dasharray="3 2"/>
+    <line x1="0" y1="-60" x2="25" y2="0" stroke="#f59e0b" stroke-width="1.5" stroke-dasharray="3 2"/>
+    <line x1="0" y1="60" x2="-25" y2="0" stroke="#f59e0b" stroke-width="1.5" stroke-dasharray="3 2"/>
+    <line x1="0" y1="60" x2="0" y2="0" stroke="#f59e0b" stroke-width="1.5" stroke-dasharray="3 2"/>
+    <line x1="0" y1="60" x2="25" y2="0" stroke="#f59e0b" stroke-width="1.5" stroke-dasharray="3 2"/>
+    <!-- Equator Plate Guideline -->
+    <line x1="-60" y1="0" x2="60" y2="0" stroke="#cbd5e1" stroke-width="1" stroke-dasharray="4 4"/>
+    <!-- Chromosomes Aligned at Equator -->
+    <path d="M -30 -10 L -20 0 L -30 10 M -20 -10 L -30 0 L -20 10" stroke="#4338ca" stroke-width="3.5" stroke-linecap="round"/>
+    <path d="M -5 -10 L 5 0 L -5 10 M 5 -10 L -5 0 L 5 10" stroke="#ec4899" stroke-width="3.5" stroke-linecap="round"/>
+    <path d="M 20 -10 L 30 0 L 20 10 M 30 -10 L 20 0 L 30 10" stroke="#4338ca" stroke-width="3.5" stroke-linecap="round"/>
+    <!-- Label -->
+    <text x="0" y="102" font-family="system-ui, sans-serif" font-size="14" font-weight="bold" fill="#0f766e" text-anchor="middle">3. Metafase</text>
+    <text x="0" y="118" font-family="system-ui, sans-serif" font-size="11" fill="#64748b" text-anchor="middle">Kromosom Berjajar di Ekuator</text>
+  </g>
+
+  <!-- ================= STAGE 4: ANAFASE ================= -->
+  <g transform="translate(800, 440)">
+    <!-- Elongated Cell Membrane -->
+    <ellipse cx="0" cy="0" rx="65" ry="78" fill="#f0fdfa" stroke="#0d9488" stroke-width="3" filter="url(#shadow)"/>
+    <!-- Centrosomes at Poles -->
+    <circle cx="0" cy="-65" r="5" fill="#f59e0b"/>
+    <circle cx="0" cy="65" r="5" fill="#f59e0b"/>
+    <!-- Spindle Fibers pulling -->
+    <line x1="0" y1="-65" x2="-20" y2="-28" stroke="#f59e0b" stroke-width="1.5" stroke-dasharray="2 2"/>
+    <line x1="0" y1="-65" x2="0" y2="-32" stroke="#f59e0b" stroke-width="1.5" stroke-dasharray="2 2"/>
+    <line x1="0" y1="-65" x2="20" y2="-28" stroke="#f59e0b" stroke-width="1.5" stroke-dasharray="2 2"/>
+    <line x1="0" y1="65" x2="-20" y2="28" stroke="#f59e0b" stroke-width="1.5" stroke-dasharray="2 2"/>
+    <line x1="0" y1="65" x2="0" y2="32" stroke="#f59e0b" stroke-width="1.5" stroke-dasharray="2 2"/>
+    <line x1="0" y1="65" x2="20" y2="28" stroke="#f59e0b" stroke-width="1.5" stroke-dasharray="2 2"/>
+    <!-- Chromatids pulled apart (V shapes pointing toward poles) -->
+    <path d="M -26 -22 L -20 -30 L -14 -22" stroke="#4338ca" stroke-width="3" stroke-linecap="round" fill="none"/>
+    <path d="M -6 -24 L 0 -34 L 6 -24" stroke="#ec4899" stroke-width="3" stroke-linecap="round" fill="none"/>
+    <path d="M 14 -22 L 20 -30 L 26 -22" stroke="#4338ca" stroke-width="3" stroke-linecap="round" fill="none"/>
+    
+    <path d="M -26 22 L -20 30 L -14 22" stroke="#4338ca" stroke-width="3" stroke-linecap="round" fill="none"/>
+    <path d="M -6 24 L 0 34 L 6 24" stroke="#ec4899" stroke-width="3" stroke-linecap="round" fill="none"/>
+    <path d="M 14 22 L 20 30 L 26 22" stroke="#4338ca" stroke-width="3" stroke-linecap="round" fill="none"/>
+    <!-- Label -->
+    <text x="0" y="102" font-family="system-ui, sans-serif" font-size="14" font-weight="bold" fill="#0f766e" text-anchor="middle">4. Anafase</text>
+    <text x="0" y="118" font-family="system-ui, sans-serif" font-size="11" fill="#64748b" text-anchor="middle">Kromatid Memisah ke Kutub</text>
+  </g>
+
+  <!-- ================= STAGE 5: TELOFASE ================= -->
+  <g transform="translate(480, 440)">
+    <!-- Dumbbell-shaped Pinching Cell Membrane -->
+    <path d="M -75 -40 C -75 -65 -30 -75 0 -55 C 30 -75 75 -65 75 -40 C 75 -15 50 -5 20 -2 C 50 1 75 15 75 40 C 75 65 30 75 0 55 C -30 75 -75 65 -75 40 C -75 15 -50 1 -20 -2 C -50 -5 -75 -15 -75 -40 Z" fill="#f0fdfa" stroke="#0d9488" stroke-width="3" filter="url(#shadow)"/>
+    <!-- Two Reforming Nuclei -->
+    <circle cx="-38" cy="0" r="28" fill="#e0e7ff" stroke="#6366f1" stroke-width="2" stroke-dasharray="3 2"/>
+    <circle cx="38" cy="0" r="28" fill="#e0e7ff" stroke="#6366f1" stroke-width="2" stroke-dasharray="3 2"/>
+    <!-- Decondensing Chromatin inside each new nucleus -->
+    <path d="M -48 -8 Q -38 -18 -28 -8 T -38 12" stroke="#4338ca" stroke-width="2" fill="none"/>
+    <path d="M 28 -8 Q 38 -18 48 -8 T 38 12" stroke="#ec4899" stroke-width="2" fill="none"/>
+    <!-- Cleavage Furrow Indication -->
+    <path d="M 0 -35 L 0 -15 M 0 15 L 0 35" stroke="#0d9488" stroke-width="2" stroke-dasharray="2 2"/>
+    <!-- Label -->
+    <text x="0" y="102" font-family="system-ui, sans-serif" font-size="14" font-weight="bold" fill="#0f766e" text-anchor="middle">5. Telofase</text>
+    <text x="0" y="118" font-family="system-ui, sans-serif" font-size="11" fill="#64748b" text-anchor="middle">Membran Inti Baru Terbentuk</text>
+  </g>
+
+  <!-- ================= STAGE 6: SITOKINESIS ================= -->
+  <g transform="translate(160, 440)">
+    <!-- Two Daughter Cells Completely Separated -->
+    <circle cx="-42" cy="0" r="42" fill="#f0fdfa" stroke="#0d9488" stroke-width="3" filter="url(#shadow)"/>
+    <circle cx="42" cy="0" r="42" fill="#f0fdfa" stroke="#0d9488" stroke-width="3" filter="url(#shadow)"/>
+    <!-- Nucleus in Cell 1 -->
+    <circle cx="-42" cy="0" r="24" fill="#e0e7ff" stroke="#6366f1" stroke-width="1.8"/>
+    <path d="M -50 -5 Q -42 -14 -34 -5 T -42 10" stroke="#4338ca" stroke-width="2" fill="none"/>
+    <!-- Nucleus in Cell 2 -->
+    <circle cx="42" cy="0" r="24" fill="#e0e7ff" stroke="#6366f1" stroke-width="1.8"/>
+    <path d="M 34 -5 Q 42 -14 50 -5 T 42 10" stroke="#ec4899" stroke-width="2" fill="none"/>
+    <!-- Centrioles in each -->
+    <circle cx="-60" cy="-20" r="3" fill="#f59e0b"/>
+    <circle cx="60" cy="-20" r="3" fill="#f59e0b"/>
+    <!-- Label -->
+    <text x="0" y="102" font-family="system-ui, sans-serif" font-size="14" font-weight="bold" fill="#0f766e" text-anchor="middle">6. Sitokinesis</text>
+    <text x="0" y="118" font-family="system-ui, sans-serif" font-size="11" fill="#64748b" text-anchor="middle">Terbentuk 2 Sel Anak Identik (2n)</text>
+  </g>
+</svg>

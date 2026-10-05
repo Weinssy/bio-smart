@@ -1,0 +1,40 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 800" width="100%" height="100%">
+  <rect width="100%" height="100%" fill="#fef2f2" rx="20"/>
+  <text x="400" y="60" font-family="sans-serif" font-size="28" font-weight="bold" fill="#991b1b" text-anchor="middle">Anatomi Jantung Manusia</text>
+
+  <g transform="translate(400, 420) scale(1.5)">
+    <!-- Superior Vena Cava -->
+    <path d="M -90 -80 L -90 -180 C -90 -200 -70 -200 -70 -180 L -70 -80 Z" fill="#3b82f6" />
+    
+    <!-- Inferior Vena Cava -->
+    <path d="M -80 120 L -80 200 C -80 220 -60 220 -60 200 L -60 120 Z" fill="#3b82f6" />
+    
+    <!-- Aorta -->
+    <path d="M -30 -120 C -30 -220 70 -220 70 -150 L 50 -150 C 50 -190 -10 -190 -10 -120 Z" fill="#ef4444" />
+    
+    <!-- Pulmonary Artery -->
+    <path d="M -10 -80 L -30 -160 L -10 -160 L 20 -110 Z" fill="#3b82f6" />
+    
+    <!-- Right Atrium -->
+    <path d="M -100 -50 C -120 -20 -120 40 -80 60 C -50 60 -50 0 -80 -50 Z" fill="#93c5fd" stroke="#1e3a8a" stroke-width="2"/>
+    
+    <!-- Right Ventricle -->
+    <path d="M -80 60 C -100 90 -70 180 0 170 C -40 100 -50 80 -20 60 Z" fill="#60a5fa" stroke="#1e3a8a" stroke-width="2"/>
+    
+    <!-- Left Atrium -->
+    <path d="M 20 -60 C 60 -60 90 -20 80 40 C 40 40 10 -20 20 -60 Z" fill="#fca5a5" stroke="#7f1d1d" stroke-width="2"/>
+    
+    <!-- Left Ventricle -->
+    <path d="M 80 40 C 100 90 60 180 0 170 C 30 150 40 100 20 60 Z" fill="#f87171" stroke="#7f1d1d" stroke-width="2"/>
+    
+    <!-- Septum -->
+    <path d="M -20 60 C -40 100 -10 160 0 170 C 20 160 30 100 20 60 Z" fill="#d1d5db" stroke="#4b5563" stroke-width="2"/>
+    
+    <!-- Pulmonary Veins (Left & Right) -->
+    <circle cx="90" cy="-20" r="10" fill="#ef4444" />
+    <circle cx="110" cy="0" r="10" fill="#ef4444" />
+    
+    <circle cx="-100" cy="-10" r="10" fill="#ef4444" />
+    <circle cx="-110" cy="10" r="10" fill="#ef4444" />
+  </g>
+</svg>
