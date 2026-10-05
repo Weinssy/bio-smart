@@ -1,8 +1,5 @@
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useCallback } from 'react'
 import { Link, useLocation } from 'react-router-dom'
-import { Sheet, SheetContent, SheetTrigger, SheetHeader, SheetTitle } from '../ui/sheet'
-import { ScrollArea } from '../ui/scroll-area'
-import { Button } from '../ui/button'
 
 export default function Sidebar() {
   const location = useLocation()
@@ -20,77 +17,95 @@ export default function Sidebar() {
     setMobileOpen(false)
   }, [location.pathname])
 
-  const NavContent = () => (
-    <div className="flex flex-col h-full bg-background border-r">
-      <div className="p-6 pb-2">
-        {/* App Brand Logo */}
-        <div className="flex items-center gap-3">
-          <div className="bg-primary/10 text-primary p-2 rounded-xl flex items-center justify-center">
-            <span className="material-symbols-outlined text-[24px]" style={{ fontVariationSettings: "'FILL' 1" }}>biotech</span>
-          </div>
-          <div>
-            <div className="font-bold text-lg leading-tight">Bio Smart</div>
-            <div className="text-xs text-muted-foreground">Belajar Biologi Interaktif</div>
-          </div>
-        </div>
-      </div>
+  // Lock body scroll when mobile sidebar is open
+  useEffect(() => {
+    if (mobileOpen) {
+      document.body.style.overflow = 'hidden'
+    } else {
+      document.body.style.overflow = ''
+    }
+    return () => { document.body.style.overflow = '' }
+  }, [mobileOpen])
 
-      {/* Navigation Tabs */}
-      <ScrollArea className="flex-1 px-4 py-4">
-        <nav className="space-y-1.5" aria-label="Menu Utama">
-          {navItems.map((item) => {
-            const isActive =
-              location.pathname === item.path ||
-              (item.path === '/' && location.pathname.startsWith('/materi/')) ||
-              (item.path === '/anatomi' && location.pathname === '/anatomi-3d')
-            return (
-              <Link
-                key={item.label}
-                to={item.path}
-                className={`flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-medium transition-colors ${isActive ? 'bg-primary/10 text-primary' : 'text-foreground/80 hover:bg-muted hover:text-foreground'}`}
-              >
-                <span className={`material-symbols-outlined ${isActive ? '' : 'text-muted-foreground'}`}>{item.icon}</span>
-                <span>{item.label}</span>
-              </Link>
-            )
-          })}
-        </nav>
-      </ScrollArea>
+  const toggleMobile = useCallback(() => {
+    setMobileOpen((prev) => !prev)
+  }, [])
 
-      {/* CTA */}
-      <div className="p-4 mt-auto">
-        <Link to="/laboratorium" className="w-full">
-          <Button variant="default" className="w-full flex items-center gap-2 justify-center shadow-md bg-emerald-600 hover:bg-emerald-700 text-white">
-            <span className="material-symbols-outlined text-[18px]">play_circle</span>
-            Mulai Praktikum
-          </Button>
-        </Link>
-      </div>
-    </div>
-  )
+  const closeMobile = useCallback(() => {
+    setMobileOpen(false)
+  }, [])
 
   return (
     <>
-      {/* Mobile Hamburger Toggle via Shadcn Sheet */}
-      <div className="md:hidden fixed bottom-6 right-6 z-50">
-        <Sheet open={mobileOpen} onOpenChange={setMobileOpen}>
-          <SheetTrigger asChild>
-            <Button size="icon" className="h-14 w-14 rounded-full shadow-lg bg-primary text-primary-foreground hover:bg-primary/90">
-              <span className="material-symbols-outlined">menu</span>
-            </Button>
-          </SheetTrigger>
-          <SheetContent side="left" className="p-0 w-[280px]">
-            <SheetHeader className="sr-only">
-              <SheetTitle>Menu Utama</SheetTitle>
-            </SheetHeader>
-            <NavContent />
-          </SheetContent>
-        </Sheet>
-      </div>
+      {/* Mobile Hamburger Toggle */}
+      <button
+        type="button"
+        className="mobile-menu-toggle"
+        onClick={toggleMobile}
+        aria-label={mobileOpen ? 'Tutup menu' : 'Buka menu'}
+      >
+        <span className="material-symbols-outlined">
+          {mobileOpen ? 'close' : 'menu'}
+        </span>
+      </button>
 
-      {/* Desktop Sidebar */}
-      <aside className="hidden md:flex flex-col w-64 h-screen fixed left-0 top-0 shrink-0 z-40 bg-background border-r">
-        <NavContent />
+      {/* Overlay */}
+      {mobileOpen && (
+        <div
+          className={`sidebar-overlay ${mobileOpen ? 'visible' : ''}`}
+          onClick={closeMobile}
+          aria-hidden="true"
+        />
+      )}
+
+      <aside className={`app-sidebar ${mobileOpen ? 'open' : ''}`}>
+        <div className="sidebar-header">
+          {/* App Brand Logo */}
+          <div className="sidebar-logo">
+            <div className="logo-icon-box">
+              <span
+                className="material-symbols-outlined"
+                style={{ fontSize: '24px', fontVariationSettings: "'FILL' 1" }}
+              >
+                biotech
+              </span>
+            </div>
+            <div>
+              <div className="logo-brand">Bio Smart</div>
+              <div className="logo-sub">Belajar Biologi Interaktif</div>
+            </div>
+          </div>
+
+          {/* Navigation Tabs */}
+          <nav className="sidebar-nav" aria-label="Menu Utama">
+            {navItems.map((item) => {
+              const isActive =
+                location.pathname === item.path ||
+                (item.path === '/' && location.pathname.startsWith('/materi/')) ||
+                (item.path === '/anatomi' && location.pathname === '/anatomi-3d')
+              return (
+                <Link
+                  key={item.label}
+                  to={item.path}
+                  className={`nav-item ${isActive ? 'active' : ''}`}
+                >
+                  <span className="material-symbols-outlined">{item.icon}</span>
+                  <span>{item.label}</span>
+                </Link>
+              )
+            })}
+          </nav>
+
+          {/* CTA */}
+          <div className="sidebar-cta">
+            <Link to="/laboratorium" style={{ textDecoration: 'none' }}>
+              <button className="btn-practical" type="button">
+                <span className="material-symbols-outlined" style={{ fontSize: '18px' }}>play_circle</span>
+                <span>Mulai Praktikum</span>
+              </button>
+            </Link>
+          </div>
+        </div>
       </aside>
     </>
   )
