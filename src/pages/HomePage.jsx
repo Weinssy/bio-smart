@@ -30,7 +30,11 @@ export default function HomePage() {
 </div>
 </Link>
 
-<div className="hidden md:flex flex-1 max-w-md mx-6" data-purpose="search-box">
+<form className="hidden md:flex flex-1 max-w-md mx-6" data-purpose="search-box" onSubmit={(e) => {
+  e.preventDefault();
+  const q = new FormData(e.target).get('q');
+  if (q) navigate(`/materi?q=${encodeURIComponent(q)}`);
+}}>
 <div className="relative w-full">
 <div className="absolute inset-y-0 left-0 pl-3.5 flex items-center pointer-events-none text-slate-400">
 <svg className="w-4 h-4" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24">
@@ -38,12 +42,12 @@ export default function HomePage() {
 <path d="M21 21l-4.35-4.35" strokeLinecap="round" />
 </svg>
 </div>
-<input className="w-full pl-10 pr-14 py-2.5 bg-slate-50 hover:bg-slate-100/80 focus:bg-white border border-slate-200 focus:border-pine-800 rounded-xl text-sm transition-all focus:outline-none focus:ring-4 focus:ring-pine-800/10 placeholder-slate-400" placeholder="Cari materi sel, genetika, organ tubuh..." type="text" />
+<input name="q" className="w-full pl-10 pr-14 py-2.5 bg-slate-50 hover:bg-slate-100/80 focus:bg-white border border-slate-200 focus:border-pine-800 rounded-xl text-sm transition-all focus:outline-none focus:ring-4 focus:ring-pine-800/10 placeholder-slate-400" placeholder="Cari materi sel, genetika, organ tubuh..." type="text" />
 <div className="absolute inset-y-0 right-0 pr-3 flex items-center pointer-events-none">
-<kbd className="inline-flex items-center border border-slate-200 px-1.5 py-0.5 rounded-md text-[11px] font-mono text-slate-400 bg-white shadow-xs">Ctrl K</kbd>
+<kbd className="inline-flex items-center border border-slate-200 px-1.5 py-0.5 rounded-md text-[11px] font-mono text-slate-400 bg-white shadow-xs">Enter</kbd>
 </div>
 </div>
-</div>
+</form>
 
 <nav className="hidden lg:flex items-center space-x-1 font-medium text-sm text-slate-600">
 <Link className="px-3.5 py-2 rounded-lg hover:text-pine-900 hover:bg-slate-50 font-semibold text-pine-900 transition" to="/materi">Katalog Modul</Link>
@@ -54,9 +58,9 @@ export default function HomePage() {
 </nav>
 
 <div className="flex items-center gap-3">
-<button className="hidden sm:inline-flex text-sm font-semibold text-slate-700 hover:text-pine-900 px-3 py-2 rounded-lg hover:bg-slate-100 transition">
+<Link to="/login" className="hidden sm:inline-flex text-sm font-semibold text-slate-700 hover:text-pine-900 px-3 py-2 rounded-lg hover:bg-slate-100 transition">
             Masuk Siswa
-          </button>
+          </Link>
 <Link className="inline-flex items-center gap-2 px-4 py-2.5 rounded-xl bg-pine-900 hover:bg-pine-950 text-white text-sm font-medium shadow-md shadow-pine-950/15 hover:shadow-lg transition-all focus:ring-2 focus:ring-pine-800 focus:ring-offset-2" to="/lab">
 
 <svg className="w-4 h-4 fill-current" viewBox="0 0 24 24">
@@ -549,7 +553,7 @@ export default function HomePage() {
 <Link className="px-6 py-3.5 rounded-xl bg-white text-pine-950 font-bold text-sm text-center shadow-lg hover:bg-slate-100 transition" to="/materi">
               Buka Katalog Modul
             </Link>
-<Link className="px-6 py-3.5 rounded-xl bg-white/10 hover:bg-white/20 border border-white/20 text-white font-medium text-sm text-center backdrop-blur-sm transition" to="/">
+<Link className="px-6 py-3.5 rounded-xl bg-white/10 hover:bg-white/20 border border-white/20 text-white font-medium text-sm text-center backdrop-blur-sm transition" to="/kontak">
               Hubungi MGMP Biologi
             </Link>
 </div>
@@ -591,10 +595,10 @@ export default function HomePage() {
 <div>
 <h4 className="text-xs font-bold uppercase tracking-wider text-slate-900 mb-3">Bantuan &amp; Regulasi</h4>
 <ul className="space-y-2 text-sm text-slate-600">
-<li><Link className="hover:text-pine-800 transition" to="/">Panduan Guru Pengampu</Link></li>
-<li><Link className="hover:text-pine-800 transition" to="/">Kebijakan Privasi Siswa</Link></li>
-<li><Link className="hover:text-pine-800 transition" to="/">Ketentuan Layanan</Link></li>
-<li><Link className="hover:text-pine-800 transition" to="/">Kemendikbudristek RI</Link></li>
+<li><Link className="hover:text-pine-800 transition" to="/panduan">Panduan Guru Pengampu</Link></li>
+<li><Link className="hover:text-pine-800 transition" to="/privasi">Kebijakan Privasi Siswa</Link></li>
+<li><Link className="hover:text-pine-800 transition" to="/ketentuan">Ketentuan Layanan</Link></li>
+<li><a className="hover:text-pine-800 transition" href="https://kemdikbud.go.id" target="_blank" rel="noopener noreferrer">Kemendikbudristek RI</a></li>
 </ul>
 </div>
 </div>
@@ -604,9 +608,9 @@ export default function HomePage() {
           © 2024 BioSMA Indonesia • Modul Biologi Digital Berstandar Kurikulum Merdeka Kemendikbudristek RI.
         </div>
 <div className="flex items-center gap-6 font-medium">
-<Link className="hover:text-slate-800 transition" to="/">Kebijakan Privasi</Link>
-<Link className="hover:text-slate-800 transition" to="/">Ketentuan Layanan</Link>
-<Link className="hover:text-slate-800 transition" to="/">Kontak Guru Pengampu</Link>
+<Link className="hover:text-slate-800 transition" to="/privasi">Kebijakan Privasi</Link>
+<Link className="hover:text-slate-800 transition" to="/ketentuan">Ketentuan Layanan</Link>
+<Link className="hover:text-slate-800 transition" to="/kontak">Kontak Guru Pengampu</Link>
 </div>
 </div>
 </div>
