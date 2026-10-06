@@ -1,16 +1,69 @@
-# React + Vite
+# 🔬 Bio Smart - Platform Pembelajaran Biologi Interaktif
 
-This template provides a minimal setup to get React working in Vite with HMR and some Oxlint rules.
+[![Deploy static content to Pages](https://github.com/Weinssy/bio-smart/actions/workflows/deploy.yml/badge.svg)](https://github.com/Weinssy/bio-smart/actions/workflows/deploy.yml)
+[![Live Demo](https://img.shields.io/badge/Demo-Live%20Website-0d5c46?style=flat&logo=github)](https://weinssy.github.io/bio-smart/)
+[![Version](https://img.shields.io/badge/version-1.0.0-blue.svg)](https://github.com/Weinssy/bio-smart/releases)
 
-Currently, two official plugins are available:
+**Bio Smart** adalah platform web pembelajaran biologi interaktif berbasis **Kurikulum Merdeka Fase F (Kelas XI & XII SMA)**. Dirancang untuk memberikan pengalaman belajar yang nyata, intuitif, dan menyenangkan melalui visualisasi 3D, simulasi laboratorium virtual mandiri, dan modul inkuiri sains terpadu.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+🌐 **Akses Aplikasi**: [https://weinssy.github.io/bio-smart/](https://weinssy.github.io/bio-smart/)
 
-## React Compiler
+---
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+## ✨ Fitur Unggulan
 
-## Expanding the Oxlint configuration
+- **🏠 Beranda Interaktif**: Desain dashboard modern dengan preview mikroskop digital interaktif, statistik pembelajaran, dan akses cepat ke seluruh modul.
+- **📚 Katalog Modul Bahan Ajar**: Modul lengkap Kurikulum Merdeka Fase F mencakup:
+  - *Biologi Sel & Organel* (Membran sel, model mosaik cair interaktif, pembelahan mitosis)
+  - *Genetika & Pewarisan Sifat* (Struktur DNA/RNA, sintesis protein, hukum Mendel)
+  - *Sistem Anatomi Tubuh* (Jantung, peredaran darah, sistem respirasi)
+  - *Ekologi & Keanekaragaman Hayati* (Piramida makanan, rantai energi, daur biogeokimia)
+- **🧪 Lab Virtual Mandiri**: Simulasi praktikum mikroskop digital, uji zat makanan, dan fotosintesis langsung dari browser tanpa instalasi tambahan.
+- **🫀 Anatomi Tubuh 3D**: Penjelajahan model organ dan anatomi tubuh interaktif 3D 360° menggunakan Three.js.
+- **📝 Bank Kuis Interaktif**: Kuis berbatas waktu dengan evaluasi skor instan, kunci jawaban, dan pembahasan mendalam.
+- **⚡ Quick Search (Ctrl + K)**: Command palette pencarian cepat untuk mencari materi, organ, istilah genetika, atau uji lab secara instan.
+- **📱 Responsif & PWA**: Dukungan penuh untuk perangkat smartphone/tablet serta instalasi offline sebagai Progressive Web App (PWA).
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and Oxlint's TypeScript related rules in your project.
+---
+
+## 🛠️ Teknologi yang Digunakan
+
+- **Frontend Core**: [React 19](https://react.dev/), [Vite](https://vitejs.dev/)
+- **Routing**: [React Router DOM v7](https://reactrouter.com/) (HashRouter untuk kompatibilitas GitHub Pages)
+- **Styling**: Vanilla CSS Design Tokens, [Tailwind CSS](https://tailwindcss.com/)
+- **3D Graphics**: [Three.js](https://threejs.org/)
+- **PWA Support**: [Vite PWA Plugin](https://vite-pwa-org.netlify.app/) & Workbox
+- **Deployment**: [GitHub Pages](https://pages.github.com/) via GitHub Actions
+
+---
+
+## 🚀 Menjalankan Secara Lokal
+
+1. **Clone repositori**:
+   ```bash
+   git clone https://github.com/Weinssy/bio-smart.git
+   cd bio-smart
+   ```
+
+2. **Pasang dependensi**:
+   ```bash
+   npm install
+   ```
+
+3. **Jalankan development server**:
+   ```bash
+   npm run dev
+   ```
+   Buka `http://localhost:5173/bio-smart/` pada peramban Anda.
+
+4. **Build untuk produksi**:
+   ```bash
+   npm run build
+   ```
+
+---
+
+## 📄 Lisensi & Hak Cipta
+
+© 2024–2026 **BioSMA Indonesia • Weinssy**. Seluruh hak cipta dilindungi undang-undang.
+Modul Bahan Ajar Berstandar Kurikulum Merdeka Kemendikbudristek RI.
