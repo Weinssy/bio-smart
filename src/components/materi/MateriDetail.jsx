@@ -81,7 +81,7 @@ export default function MateriDetail() {
         </span>
         <h2>Modul Tidak Ditemukan</h2>
         <p>Modul dengan ID "{moduleId}" tidak tersedia.</p>
-        <Link to="/" className="materi-back-btn" style={{ marginTop: '1rem' }}>
+        <Link to="/materi" className="materi-back-btn" style={{ marginTop: '1rem' }}>
           <span className="material-symbols-outlined">arrow_back</span>
           Kembali ke Katalog Materi
         </Link>
@@ -168,7 +168,7 @@ export default function MateriDetail() {
     <div className="materi-detail">
       {/* Top Action Bar: Clean, sleek navigation back to catalog */}
       <div className="materi-top-action-bar">
-        <Link to="/" className="materi-back-btn" title="Kembali ke Katalog Materi">
+        <Link to="/materi" className="materi-back-btn" title="Kembali ke Katalog Materi">
           <span className="material-symbols-outlined">arrow_back</span>
           <span>Katalog Materi</span>
         </Link>
@@ -281,7 +281,7 @@ export default function MateriDetail() {
 
             {/* Bottom Quick Return to Catalog */}
             <div className="materi-bottom-return">
-              <Link to="/" className="materi-bottom-back-link">
+              <Link to="/materi" className="materi-bottom-back-link">
                 <span className="material-symbols-outlined" style={{ fontSize: '18px' }}>arrow_back</span>
                 <span>Kembali ke Katalog Materi</span>
               </Link>

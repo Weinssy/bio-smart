@@ -24,8 +24,10 @@ export default function AppRoutes() {
     <Suspense fallback={<LoadingFallback />}>
       <Routes>
         <Route path="/" element={<HomePage />} />
+        <Route path="/materi" element={<MateriPage />} />
         <Route path="/katalog" element={<MateriPage />} />
         <Route path="/materi/:moduleId" element={<MateriDetailPage />} />
+        <Route path="/katalog/:moduleId" element={<MateriDetailPage />} />
         <Route path="/anatomi" element={<AnatomyPage />} />
         <Route path="/anatomi-3d" element={<AnatomyPage />} />
         <Route path="/kuis" element={<QuizPage />} />

@@ -6,7 +6,8 @@ export default function Sidebar() {
   const [mobileOpen, setMobileOpen] = useState(false)
 
   const navItems = [
-    { label: 'Materi', path: '/', icon: 'menu_book' },
+    { label: 'Beranda', path: '/', icon: 'home' },
+    { label: 'Materi', path: '/materi', icon: 'menu_book' },
     { label: 'Laboratorium', path: '/laboratorium', icon: 'science' },
     { label: 'Anatomi 3D', path: '/anatomi', icon: 'view_in_ar' },
     { label: 'Kuis', path: '/kuis', icon: 'quiz' },
@@ -100,9 +101,11 @@ export default function Sidebar() {
           <nav className="sidebar-nav" aria-label="Menu Utama">
             {navItems.map((item) => {
               const isActive =
-                location.pathname === item.path ||
-                (item.path === '/' && location.pathname.startsWith('/materi/')) ||
-                (item.path === '/anatomi' && location.pathname === '/anatomi-3d')
+                (item.path === '/' && location.pathname === '/') ||
+                (item.path === '/materi' && (location.pathname === '/materi' || location.pathname === '/katalog' || location.pathname.startsWith('/materi/') || location.pathname.startsWith('/katalog/'))) ||
+                (item.path === '/laboratorium' && (location.pathname === '/laboratorium' || location.pathname === '/lab' || location.pathname === '/praktikum')) ||
+                (item.path === '/anatomi' && (location.pathname === '/anatomi' || location.pathname === '/anatomi-3d')) ||
+                (item.path === '/kuis' && location.pathname === '/kuis')
               return (
                 <Link
                   key={item.label}
